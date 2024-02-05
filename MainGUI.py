@@ -2,9 +2,9 @@
 
 import tkinter as tk
 import tkinter.font as tkFont
-
-screen_width = 1080
-screen_height = 1920
+scaler = 0.784
+screen_width = int(1920 * scaler)
+screen_height = int(1080 * scaler)
 padding = 10
 
 
@@ -12,7 +12,10 @@ root = tk.Tk()
 # root window title and dimension
 root.title("Sengepost")
 # Set geometry (widthxheight)
-root.geometry(f'{screen_width+110}x{screen_height}')
+root.geometry(f'{screen_width}x{screen_height}')
+root.configure(bg='#2A324B')
+
+
 
 
 #add image file
@@ -25,19 +28,21 @@ def MainMenu():
     for widget in root.winfo_children():
         widget.destroy()
     # Create three big buttons
-    b1 = tk.Button(root, text = "Button 1", bg = "red", fg = "white", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/3))
-    b2 = tk.Button(root, text = "Vann", bg = "blue",fg = "white", image=pixelVirtual ,compound="c", command = Vann, height = 200, width = int(screen_width/3))
-    b3 = tk.Button(root, text = "Button 3", bg = "blue", fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/3)) 
+    b1 = tk.Button(root, text = "Button 1", bg = "#F3A712", fg = "white", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/3)-padding*2)
+    b2 = tk.Button(root, text = "Vann", bg = "#669BBC",fg = "white", image=pixelVirtual ,compound="c", command = Vann, height = 200, width = int(screen_width/3)-padding*2)
+    b3 = tk.Button(root, text = "Button 3", bg = "blue", fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/3)-padding*2) 
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
     b2.grid(row = 1, column = 2, padx=padding, pady=padding)
     b3.grid(row = 1, column = 3, padx=padding, pady=padding)
+    
+    
     # Create return btn
     createReturnBtn()
     return
 def createReturnBtn():
-    returnBtn = tk.Button(root, bg = "white", fg = "black", image=returnIm ,compound="c", command = MainMenu, width = int(screen_width/3))
+    returnBtn = tk.Button(root, bg = "white", fg = "#A8C686", image=returnIm ,compound="c", command = MainMenu, width = int(screen_width/3))
     # Setting the position of the button on the bottom of the screen.
-    returnBtn.place(x = screen_width- int(screen_width/3) +100, y = screen_height-270)
+    returnBtn.place(x = screen_width- int(screen_width/3), y = screen_height-270)
     
     return
 def Vann():
