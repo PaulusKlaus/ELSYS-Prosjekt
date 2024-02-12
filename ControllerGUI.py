@@ -85,37 +85,172 @@ image_path = "romLayout.png"
 image = PhotoImage(file=image_path)
 image_label = Label(rightTop_frame, image=image, bg='grey')
 image_label.pack(fill="x")
-def buttonFunction(i):
-
-    button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
-    for text in button_texts:
-        tk.Button(left_frame,
-                  text=text,
-                  font=("Consolas", 14),
-                  bg="blue").pack(side=tk.LEFT, expand=True, fill=tk.X)
-
+currentButton = 0
+index = 0 
+buttons = []
+romMerking = []
+menubuttons = []
+def buttonFunction(buttonIndex):
+    global currentButton
+    currentButton = buttonIndex+1
+    print(currentButton)
+    # Forget all previously packed buttons and menu buttons
+    for i in menubuttons:
+        i.pack_forget()
+    for i in buttons:
+        i.pack_forget()
+    
+    # Pack the buttons in the left frame
+    for index, i in enumerate(buttons):
+        i.pack(fill=tk.X, side=tk.TOP, expand=False)  # Adjusted parameters
+        if index == buttonIndex:
+            #print(f"index:{index}  Button index: {buttonIndex}")
+            # Pack the menu buttons under the pressed button
+            for button in menubuttons:
+                button.pack(side=tk.TOP, fill=tk.X, expand=False)  # Adjusted parameters
     
 
-    root.mainloop()
-    print("Button pressed")
-    return 
-for i in requests:
-   tk.Button(left_frame,
-              command=lambda:buttonFunction(i),
+    
+    #print("Button pressed")
+    return
+def updateButtons():
+    global buttons
+    global romMerking
+    buttons.clear()
+    romMerking.clear()
+    for index, i in enumerate(requests):
+        buttons.append(tk.Button(left_frame,
+                command=lambda index=index: buttonFunction(index),
+                text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
+                font=("Consolas",18),
+                bg = color(i.get("Hastegrad")),
+                pady=10,
+                padx=10))
+        romMerking.append(tk.Label(rightTop_frame,
+                text="!",
+                font=("Consolas",50),
+                bg="#fbfafa",
+                fg = color(i.get('Hastegrad'))
+                )) 
+def okHastegrad():
+
+    global requests
+    for index,i in enumerate(requests):
+        print(f"id = {i.get('ID')}")
+        print(f"currnetbutton = {currentButton}")
+        if i.get('ID')== currentButton:
+            print(f"hastegrad = {i.get('Hastegrad')}")
+            if i.get('Hastegrad')!= 4:
+                requests[index]['Hastegrad']= i.get('Hastegrad')+1
+                print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
+    for i in menubuttons:
+        i.pack_forget()
+    for i in buttons:
+        i.pack_forget()
+    updateButtons()
+    for i in buttons:
+        i.pack(fill = tk.X)
+    for i in range(len(romMerking)):
+        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
+                            y=romPosition(requests[i].get('Rom'))[1])
+    
+def senkHastegrad():
+    
+    global requests
+    for index,i in enumerate(requests):
+        print(f"id = {i.get('ID')}")
+        print(f"currnetbutton = {currentButton}")
+        if i.get('ID')== currentButton:
+            print(f"hastegrad = {i.get('Hastegrad')}")
+            if i.get('Hastegrad')!= 1:
+                requests[index]['Hastegrad']= i.get('Hastegrad')-1
+                print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
+    for i in menubuttons:
+        i.pack_forget()
+    for i in buttons:
+        i.pack_forget()
+    updateButtons()
+    for i in buttons:
+        i.pack(fill = tk.X)
+    for i in range(len(romMerking)):
+        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
+                            y=romPosition(requests[i].get('Rom'))[1])
+def fjernRequest():
+    global requests
+    global currentButton
+    
+    # Remove the request at the currentButton index
+    requests.pop(currentButton-1)
+    # Reset currentButton to 0 if there are no more requests
+    if not requests:
+        currentButton = 0
+    else:
+        # If currentButton is now out of range, set it to the last index
+        currentButton = min(currentButton, len(requests))
+    
+    # Clear and update buttons and romMerking
+    for i in menubuttons:
+        i.pack_forget()
+    for i in buttons:
+        i.pack_forget()
+    
+    updateButtons()
+    for i in buttons:
+        i.pack(fill=tk.X)
+    for i in range(len(romMerking)):
+        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
+                            y=romPosition(requests[i].get('Rom'))[1])
+        
+button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
+menubuttons.append(tk.Button(left_frame,
+                            text=button_texts[0],
+                            font=("Consolas", 14),
+                            bg="#437EB8",
+                            command = fjernRequest,
+                            padx =5,
+                            pady =5))
+menubuttons.append(tk.Button(left_frame,
+                            text=button_texts[1],
+                            font=("Consolas", 14),
+                            bg="#437EB8",
+                            command = okHastegrad,
+                            padx =5,
+                            pady =5))
+menubuttons.append(tk.Button(left_frame,
+                            text=button_texts[2],
+                            font=("Consolas", 14),
+                            bg="#437EB8",
+                            command = senkHastegrad,
+                            padx =5,
+                            pady =5))
+menubuttons.append(tk.Button(left_frame,
+                            text=button_texts[3],
+                            font=("Consolas", 14),
+                            bg="#437EB8",
+                            padx =5,
+                            pady =5))
+
+for index, i in enumerate(requests):
+    buttons.append(tk.Button(left_frame,
+              command=lambda index=index: buttonFunction(index),
               text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
               font=("Consolas",18),
               bg = color(i.get("Hastegrad")),
               pady=10,
-              padx=10).pack()
-    
-    tk.Label(rightTop_frame,
+              padx=10))
+    romMerking.append(tk.Label(rightTop_frame,
              text="!",
              font=("Consolas",50),
              bg="#fbfafa",
              fg = color(i.get('Hastegrad'))
-             ).place(x=romPosition(i.get('Rom'))[0],
-                     y=romPosition(i.get('Rom'))[1])
+             ))
+for i in buttons:
+    i.pack(fill = tk.X)
+for i in range(len(romMerking)):
+    romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
+                        y=romPosition(requests[i].get('Rom'))[1])
 root.mainloop()
+
 
 
 
