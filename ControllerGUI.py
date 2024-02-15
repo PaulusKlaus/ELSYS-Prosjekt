@@ -127,8 +127,14 @@ def changeOccupancy():
     global currentButton
     if requests[currentButton-1].get('Occupied'):
         requests[currentButton-1]['Occupied']= False
+        #log changes
+        cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Unoccupied",cf.getCurrentTime()))
+        cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Unoccupied",cf.getCurrentTime()))
     else:
         requests[currentButton-1]['Occupied']= True
+        #log changes
+        cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
+        cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
     for i in menubuttons:
         i.pack_forget()
     for i in buttons:
@@ -174,6 +180,10 @@ def okHastegrad():
             print(f"hastegrad = {i.get('Hastegrad')}")
             if i.get('Hastegrad')!= 1:
                 requests[index]['Hastegrad']= i.get('Hastegrad')-1
+                #log changes
+                cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Increase Importance",cf.getCurrentTime()))
+                cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Increase Importance",cf.getCurrentTime()))
+                
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
     cf.sort_Hastegrad_ID_Time(requests)
     for i in menubuttons:
@@ -188,15 +198,19 @@ def okHastegrad():
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
     
 def senkHastegrad():
-    
     global requests
+    
     for index,i in enumerate(requests):
         print(f"id = {i.get('ID')}")
         print(f"currnetbutton = {currentButton}")
         if i.get('ID')== currentButton:
             print(f"hastegrad = {i.get('Hastegrad')}")
             if i.get('Hastegrad')!= 4:
+                #log changes
                 requests[index]['Hastegrad']= i.get('Hastegrad')+1
+                cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Decrease Importance",cf.getCurrentTime()))
+                cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Decrease Importance",cf.getCurrentTime()))
+                
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
     cf.sort_Hastegrad_ID_Time(requests)
     for i in menubuttons:
@@ -214,8 +228,10 @@ def fjernRequest():
     global requests
     global currentButton
     
+    #log changes
+    cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Delete",cf.getCurrentTime()))
+    cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Delete",cf.getCurrentTime()))
     # Remove the request at the currentButton index
-    cf.fileWrite("logFile.txt",cf.logString(requests[currentButton-1], f"Fjernet manuelt av {currentUser}",cf.getCurrentTime()))
     requests.pop(currentButton-1)
     cf.sort_Hastegrad_ID_Time(requests)
     # Reset currentButton to 0 if there are no more requests

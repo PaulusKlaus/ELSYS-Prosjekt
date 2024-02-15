@@ -70,14 +70,28 @@ def timeDifference(startTime, endTime):
     time_diff_str = str(time_diff)
     return time_diff_str
 
-def logString(request, compleationMethod, time):
-    return f"{request['Rom']} , {request['Seng']} , {request['Hva']} , {request['Hastegrad']} , {request['Tid']} , {time} , {timeDifference(request['Tid'],time)} , {compleationMethod}"
+def logStringText(user, request,logEvent,time):
+    if logEvent == "Delete":
+        return f"{time} - {user} slettet forespørsel manuelt av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Increase Importance":
+        return f"{time} - {user} økte hastegraden for forespørsel av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} til hastegrad {request['Hastegrad']}, eter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Decrease Importance":
+        return f"{time} - {user} senket hastegraden for forespørsel av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} til hastegrad {request['Hastegrad']}, eter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Occupied":
+        return f"{time} - {user} markerte rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} som sykepleier tilstede, etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Unoccupied":
+        return f"{time} - {user} markerte rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} som sykepleier ikke tilstede, etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    else:
+        return f"Error: logEvent:{logEvent} does not exist"
+    
+def logStringData(user, request,logEvent,time):
+    return f"{time},{user},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
 
 def getCurrentTime():
     current_time = datetime.datetime.now().strftime("%H:%M:%S")
     return current_time
+
 def fileWrite(fileName, data):
     with open(fileName, 'a') as file:
         file.write(data + "\n")
-
 
