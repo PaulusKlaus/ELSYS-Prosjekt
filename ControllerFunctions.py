@@ -1,5 +1,6 @@
+import datetime
 roomMarkBG_Color = "#fbfafa"
-roomMarkOccupied_Color = "#A2E8A8"
+roomMarkOccupied_Color = "#63CBFF"
 
 def sort_Hastegrad_ID_Time(requests_list):
     requests_list.sort(key=lambda x: (x["Hastegrad"]-4, x["Tid"]))
@@ -18,7 +19,7 @@ def print_requests(requests_list):
 
 def color(hastegrad):
     if hastegrad== 4:
-        return "#006D07"
+        return "#22C22D"
     elif hastegrad == 3:
         return "#F3F041"
     elif hastegrad == 2:
@@ -63,3 +64,11 @@ def occupiedColor(room):
         return roomMarkOccupied_Color
     else:
         return roomMarkBG_Color
+def logString(request, compleationMethod, time):
+    return f"{request['Rom']} , {request['Seng']} , {request['Hva']} , {request['Hastegrad']} , {request['Tid']} , {time} , {compleationMethod}"
+
+
+
+def getCurrentTime():
+    current_time = datetime.datetime.now().strftime("%H:%M:%S")
+    return current_time

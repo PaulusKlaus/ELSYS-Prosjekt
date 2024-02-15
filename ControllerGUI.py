@@ -14,7 +14,8 @@ pageTitle = "Romoversikt" #Defines the title of the window
 button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
-
+logFile = open("logFile.txt", "a")
+logFile.write(getCurrentTime())
 requests = []
 requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
 requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
@@ -27,7 +28,7 @@ requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:2
 requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":True, "ID": 10})
 requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 11})
 requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 12})
-requests.append({"Rom":303,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 13})
+
 #print("UNSORTED:  ")
 #cf.print_requests(requests)
 cf.sort_Hastegrad_ID_Time(requests)
@@ -36,7 +37,7 @@ cf.sort_Hastegrad_ID_Time(requests)
 
 root = tk.Tk()
 root.title(pageTitle)
-#root.maxsize(max_width, max_height)
+root.maxsize(max_width, max_height)
 root.minsize(max_width, max_height)
 root.geometry(str(max_width) + "x" + str(max_height))
 root["background"] = windowBackgroundColor
