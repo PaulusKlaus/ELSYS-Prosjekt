@@ -4,7 +4,7 @@ from tkinter import PhotoImage
 from tkinter import Label
 import time as t
 import ControllerFunctions as cf
-
+from tkinter import Menu
 
 #Defined colors and functions
 
@@ -14,8 +14,15 @@ pageTitle = "Romoversikt" #Defines the title of the window
 button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
-logFile = open("logFile.txt", "a")
-logFile.write(getCurrentTime())
+currentUser = "Default User"
+
+def setUser(userName):
+    global currentUser
+    currentUser = userName
+    root.title(f"Pålogget som {currentUser}")
+    return
+
+
 requests = []
 requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
 requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
@@ -56,6 +63,17 @@ root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
+
+userMenu = Menu(root)
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="Amalie",command=lambda: setUser("Amalie"))
+filemenu.add_command(label="Daniel",command=lambda: setUser("Daniel"))
+filemenu.add_command(label="Eivind",command=lambda: setUser("Eivind"))
+filemenu.add_command(label="Nicole",command=lambda: setUser("Nicole"))
+filemenu.add_command(label="Palina",command=lambda: setUser("Palina"))
+menubar.add_cascade(label="Brukervalg",font=("Arial",18), menu=filemenu)
+root.config(menu=menubar)
 
 image_path = "romLayout.png"  
 image = PhotoImage(file=image_path)
@@ -197,7 +215,7 @@ def fjernRequest():
     global currentButton
     
     # Remove the request at the currentButton index
-    
+    cf.fileWrite("logFile.txt",cf.logString(requests[currentButton-1], f"Fjernet manuelt av {currentUser}",cf.getCurrentTime()))
     requests.pop(currentButton-1)
     cf.sort_Hastegrad_ID_Time(requests)
     # Reset currentButton to 0 if there are no more requests

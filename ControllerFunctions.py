@@ -64,11 +64,20 @@ def occupiedColor(room):
         return roomMarkOccupied_Color
     else:
         return roomMarkBG_Color
+    
+def timeDifference(startTime, endTime):
+    time_diff = datetime.datetime.strptime(endTime, "%H:%M:%S") - datetime.datetime.strptime(startTime, "%H:%M:%S")
+    time_diff_str = str(time_diff)
+    return time_diff_str
+
 def logString(request, compleationMethod, time):
-    return f"{request['Rom']} , {request['Seng']} , {request['Hva']} , {request['Hastegrad']} , {request['Tid']} , {time} , {compleationMethod}"
-
-
+    return f"{request['Rom']} , {request['Seng']} , {request['Hva']} , {request['Hastegrad']} , {request['Tid']} , {time} , {timeDifference(request['Tid'],time)} , {compleationMethod}"
 
 def getCurrentTime():
     current_time = datetime.datetime.now().strftime("%H:%M:%S")
     return current_time
+def fileWrite(fileName, data):
+    with open(fileName, 'a') as file:
+        file.write(data + "\n")
+
+
