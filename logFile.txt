@@ -1,1 +1,16 @@
-Rom , Seng , Oppgave , Hastegrad , Starttid , sluttid , fulføringsmetode
+Rom , Seng , Oppgave , Hastegrad , Starttid , sluttid , totaltid, fulføringsmetode
+308 , 1 , Mat , 1 , 13:35:09 , 19:55:52 , 6:20:43 , Fjernet manuelt
+311 , 2 , Vann , 3 , 12:23:23 , 19:56:09 , 7:32:46 , Fjernet manuelt
+301 , 1 , ALARM , 1 , 10:25:23 , 19:56:11 , 9:30:48 , Fjernet manuelt
+304 , 1 , Sp�rsm�l , 4 , 12:26:27 , 19:56:13 , 7:29:46 , Fjernet manuelt
+305 , 1 , Do , 2 , 12:46:09 , 19:56:15 , 7:10:06 , Fjernet manuelt
+309 , 1 , Sp�rsm�l , 4 , 12:26:25 , 19:56:17 , 7:29:52 , Fjernet manuelt
+307 , 1 , Sp�rsm�l , 4 , 12:26:25 , 19:56:18 , 7:29:53 , Fjernet manuelt
+302 , 1 , Vann , 4 , 12:26:25 , 19:56:20 , 7:29:55 , Fjernet manuelt
+313 , 1 , Sp�rsm�l , 3 , 12:26:25 , 19:56:21 , 7:29:56 , Fjernet manuelt
+306 , 2 , Vann , 2 , 12:16:25 , 19:56:23 , 7:39:58 , Fjernet manuelt
+315 , 1 , Vann , 4 , 12:26:25 , 19:56:25 , 7:30:00 , Fjernet manuelt
+308 , 1 , Mat , 1 , 13:35:09 , 20:23:50 , 6:48:41 , Fjernet manuelt
+309 , 1 , Sp�rsm�l , 4 , 12:26:25 , 20:23:53 , 7:57:28 , Fjernet manuelt
+315 , 1 , Vann , 4 , 12:26:25 , 20:24:00 , 7:57:35 , Fjernet manuelt
+301 , 1 , ALARM , 1 , 10:25:23 , 20:37:13 , 10:11:50 , Fjernet manuelt av Daniel
