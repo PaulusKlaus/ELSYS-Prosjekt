@@ -81,6 +81,7 @@ def buttonFunction(buttonIndex):
                             text=button_texts[3],
                             font=("Consolas", 14),
                             bg=menuButtonColor,
+                            command = changeOccupancy,
                             padx =5,
                             pady =5))
     # Forget all previously packed buttons and menu buttons
@@ -102,6 +103,25 @@ def buttonFunction(buttonIndex):
     
     #print("Button pressed")
     return
+def changeOccupancy():
+    global requests
+    global currentButton
+    if requests[currentButton-1].get('Occupied'):
+        requests[currentButton-1]['Occupied']= False
+    else:
+        requests[currentButton-1]['Occupied']= True
+    for i in menubuttons:
+        i.pack_forget()
+    for i in buttons:
+        i.pack_forget()
+    updateButtons()
+    for i in buttons:
+        i.pack(fill = tk.X)
+    for i in range(len(romMerking)):
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
+    return
+
 def updateButtons():
     global buttons
     global romMerking
@@ -198,7 +218,8 @@ def fjernRequest():
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
-        
+
+
 
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[0],
@@ -225,6 +246,7 @@ menubuttons.append(tk.Button(left_frame,
                             text=button_texts[3],
                             font=("Consolas", 14),
                             bg=menuButtonColor,
+                            command = changeOccupancy,
                             padx =5,
                             pady =5))
 
