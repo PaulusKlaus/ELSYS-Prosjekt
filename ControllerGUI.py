@@ -5,12 +5,13 @@ from tkinter import Label
 import time as t
 import ControllerFunctions as cf
 
+
 #Defined colors and functions
 
 max_width = 1800 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
-button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
+button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
 
@@ -64,10 +65,24 @@ index = 0
 buttons = []
 romMerking = []
 menubuttons = []
+
 def buttonFunction(buttonIndex):
     global currentButton
     currentButton = buttonIndex+1
     print(currentButton)
+    if requests[buttonIndex].get('Occupied'):
+        button_texts[3]= "Fjern tilstedeværelse"
+    else:
+        button_texts[3]= "Legg til tilstedeværelse"
+    menubuttons[-1].pack_forget()
+    menubuttons.pop(-1)
+    
+    menubuttons.append(tk.Button(left_frame,
+                            text=button_texts[3],
+                            font=("Consolas", 14),
+                            bg=menuButtonColor,
+                            padx =5,
+                            pady =5))
     # Forget all previously packed buttons and menu buttons
     for i in menubuttons:
         i.pack_forget()
@@ -90,6 +105,8 @@ def buttonFunction(buttonIndex):
 def updateButtons():
     global buttons
     global romMerking
+    for i, label in enumerate(romMerking):
+        label.place_forget()
     buttons.clear()
     romMerking.clear()
     for index, i in enumerate(requests):
@@ -148,11 +165,12 @@ def senkHastegrad():
     for i in buttons:
         i.pack_forget()
     updateButtons()
-    for i in buttons:
-        i.pack(fill = tk.X)
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
+    for i in buttons:
+        i.pack(fill = tk.X)
+   
 def fjernRequest():
     global requests
     global currentButton

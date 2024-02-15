@@ -1,3 +1,6 @@
+roomMarkBG_Color = "#fbfafa"
+roomMarkOccupied_Color = "#A2E8A8"
+
 def sort_Hastegrad_ID_Time(requests_list):
     requests_list.sort(key=lambda x: (x["Hastegrad"]-4, x["Tid"]))
     for i, request in enumerate(requests_list):
@@ -54,3 +57,9 @@ def roomPosition(rom):
     else:
         print("Rom ikke funnet")
         return (0,0)
+
+def occupiedColor(room):
+    if room.get('Occupied'):
+        return roomMarkOccupied_Color
+    else:
+        return roomMarkBG_Color
