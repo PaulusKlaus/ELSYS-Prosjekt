@@ -6,25 +6,27 @@ import time as t
 import ControllerFunctions as cf
 
 #Defined colors and functions
-roomMarkBG_Color = "#A2E8A8"  ##fbfafa  standar
+
 max_width = 1800 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
 button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
+windowBackgroundColor = "#bfd1e0"
+menuButtonColor = "#437EB8"
 
 requests = []
-requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23", "ID": 1})
-requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" , "ID": 2})
-requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":1, "Tid":"13:35:09", "ID": 3})
-requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:23:23", "ID": 5})
-requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":3, "Tid":"12:26:25", "ID": 6})
-requests.append({"Rom":306,"Seng":2, "Hva":"Vann", "Hastegrad":2, "Tid":"12:16:25", "ID": 7})
-requests.append({"Rom":304,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:27", "ID": 8})
-requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 9})
-requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25", "ID": 10})
-requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 11})
-requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25", "ID": 12})
-requests.append({"Rom":303,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 13})
+requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
+requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
+requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":1, "Tid":"13:35:09","Occupied":False, "ID": 3})
+requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:23:23","Occupied":False, "ID": 5})
+requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":3, "Tid":"12:26:25","Occupied":True, "ID": 6})
+requests.append({"Rom":306,"Seng":2, "Hva":"Vann", "Hastegrad":2, "Tid":"12:16:25","Occupied":False, "ID": 7})
+requests.append({"Rom":304,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:27","Occupied":False, "ID": 8})
+requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 9})
+requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":True, "ID": 10})
+requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 11})
+requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 12})
+requests.append({"Rom":303,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 13})
 #print("UNSORTED:  ")
 #cf.print_requests(requests)
 cf.sort_Hastegrad_ID_Time(requests)
@@ -36,7 +38,7 @@ root.title(pageTitle)
 #root.maxsize(max_width, max_height)
 root.minsize(max_width, max_height)
 root.geometry(str(max_width) + "x" + str(max_height))
-root["background"] = "#bfd1e0"
+root["background"] = windowBackgroundColor
 
 left_frame = Frame(root, width=int(max_width*0.4 - 2*max_height*0.01), height=int(max_height - 2*max_height*0.01), bg='grey')
 left_frame.grid(row=0, column=0, rowspan=2, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
@@ -101,7 +103,7 @@ def updateButtons():
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
                 font=("Consolas",50),
-                bg=roomMarkBG_Color,
+                bg=cf.occupiedColor(i),
                 fg = cf.color(i.get('Hastegrad')),
                 padx=10,
                 pady=5
@@ -183,28 +185,28 @@ def fjernRequest():
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[0],
                             font=("Consolas", 14),
-                            bg="#437EB8",
+                            bg=menuButtonColor,
                             command = fjernRequest,
                             padx =5,
                             pady =5))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[1],
                             font=("Consolas", 14),
-                            bg="#437EB8",
+                            bg=menuButtonColor,
                             command = okHastegrad,
                             padx =5,
                             pady =5))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[2],
                             font=("Consolas", 14),
-                            bg="#437EB8",
+                            bg=menuButtonColor,
                             command = senkHastegrad,
                             padx =5,
                             pady =5))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[3],
                             font=("Consolas", 14),
-                            bg="#437EB8",
+                            bg=menuButtonColor,
                             padx =5,
                             pady =5))
 
@@ -219,7 +221,7 @@ for index, i in enumerate(requests):
     romMerking.append(tk.Label(rightTop_frame,
              text="!",
              font=("Consolas",50),
-             bg=roomMarkBG_Color,
+             bg=cf.occupiedColor(i),
              fg = cf.color(i.get('Hastegrad')),
              padx=10,
              pady=5
