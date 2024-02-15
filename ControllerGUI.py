@@ -3,64 +3,36 @@ from tkinter import Frame
 from tkinter import PhotoImage
 from tkinter import Label
 import time as t
+import ControllerFunctions as cf
 
-def color(hastegrad):
-    if hastegrad== 1:
-        return "#28F936"
-    elif hastegrad == 2:
-        return "#F3F041"
-    elif hastegrad == 3:
-        return "#FF800A"
-    elif hastegrad == 4:
-        return "#FF0000"
-    else:
-        return "#002E5D"
-def romPosition(rom):
-    if rom == 301:
-        return (40,20)
-    elif rom == 303:
-        return (160,20)
-    elif rom == 305:
-        return (260,20)
-    elif rom == 307:
-        return (380,20)
-    elif rom == 309:
-        return (700,20)
-    elif rom == 311:
-        return (810,20)
-    elif rom == 313:
-        return (920,20)
-    elif rom == 315:
-        return (1030,20)
-    elif rom == 302:
-        return (150,350)
-    elif rom == 304:
-        return (260,350)
-    elif rom == 306:
-        return (810,350)
-    elif rom == 308:
-        return (920,350)
-    else:
-        print("Rom ikke funnet")
-        return (0,0)
-
-    
+#Defined colors and functions
+roomMarkBG_Color = "#A2E8A8"  ##fbfafa  standar
+max_width = 1800 #Defines the maximum width of the window
+max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
+pageTitle = "Romoversikt" #Defines the title of the window
+button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
 
 requests = []
-requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":4, "Tid":"10:25:23", "ID": 1})
-requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":3, "Tid":"12:46:09" , "ID": 2})
-requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":3, "Tid":"13:35:09", "ID": 3})
-requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":2, "Tid":"12:26:25", "ID": 4})
-requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":2, "Tid":"12:26:25", "ID": 5})
-requests.append({"Rom":306,"Seng":2, "Hva":"Vann", "Hastegrad":1, "Tid":"12:26:25", "ID": 6})
-requests.append({"Rom":304,"Seng":1, "Hva":"Spørsmål", "Hastegrad":1, "Tid":"12:26:25", "ID": 7})
-requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":1, "Tid":"12:26:25", "ID": 8})
-
-max_width = 1800
-max_height = int((max_width/16)*9)
+requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23", "ID": 1})
+requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" , "ID": 2})
+requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":1, "Tid":"13:35:09", "ID": 3})
+requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:23:23", "ID": 5})
+requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":3, "Tid":"12:26:25", "ID": 6})
+requests.append({"Rom":306,"Seng":2, "Hva":"Vann", "Hastegrad":2, "Tid":"12:16:25", "ID": 7})
+requests.append({"Rom":304,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:27", "ID": 8})
+requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 9})
+requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25", "ID": 10})
+requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 11})
+requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25", "ID": 12})
+requests.append({"Rom":303,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25", "ID": 13})
+#print("UNSORTED:  ")
+#cf.print_requests(requests)
+cf.sort_Hastegrad_ID_Time(requests)
+#print("SORTED:  ")
+#cf.print_requests(requests)
 
 root = tk.Tk()
-root.title("Romoversikt")
+root.title(pageTitle)
 #root.maxsize(max_width, max_height)
 root.minsize(max_width, max_height)
 root.geometry(str(max_width) + "x" + str(max_height))
@@ -123,14 +95,16 @@ def updateButtons():
                 command=lambda index=index: buttonFunction(index),
                 text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
                 font=("Consolas",18),
-                bg = color(i.get("Hastegrad")),
+                bg = cf.color(i.get("Hastegrad")),
                 pady=10,
                 padx=10))
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
                 font=("Consolas",50),
-                bg="#fbfafa",
-                fg = color(i.get('Hastegrad'))
+                bg=roomMarkBG_Color,
+                fg = cf.color(i.get('Hastegrad')),
+                padx=10,
+                pady=5
                 )) 
 def okHastegrad():
 
@@ -140,9 +114,10 @@ def okHastegrad():
         print(f"currnetbutton = {currentButton}")
         if i.get('ID')== currentButton:
             print(f"hastegrad = {i.get('Hastegrad')}")
-            if i.get('Hastegrad')!= 4:
-                requests[index]['Hastegrad']= i.get('Hastegrad')+1
+            if i.get('Hastegrad')!= 1:
+                requests[index]['Hastegrad']= i.get('Hastegrad')-1
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
+    cf.sort_Hastegrad_ID_Time(requests)
     for i in menubuttons:
         i.pack_forget()
     for i in buttons:
@@ -151,8 +126,8 @@ def okHastegrad():
     for i in buttons:
         i.pack(fill = tk.X)
     for i in range(len(romMerking)):
-        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
-                            y=romPosition(requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
     
 def senkHastegrad():
     
@@ -162,9 +137,10 @@ def senkHastegrad():
         print(f"currnetbutton = {currentButton}")
         if i.get('ID')== currentButton:
             print(f"hastegrad = {i.get('Hastegrad')}")
-            if i.get('Hastegrad')!= 1:
-                requests[index]['Hastegrad']= i.get('Hastegrad')-1
+            if i.get('Hastegrad')!= 4:
+                requests[index]['Hastegrad']= i.get('Hastegrad')+1
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
+    cf.sort_Hastegrad_ID_Time(requests)
     for i in menubuttons:
         i.pack_forget()
     for i in buttons:
@@ -173,14 +149,16 @@ def senkHastegrad():
     for i in buttons:
         i.pack(fill = tk.X)
     for i in range(len(romMerking)):
-        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
-                            y=romPosition(requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
 def fjernRequest():
     global requests
     global currentButton
     
     # Remove the request at the currentButton index
+    
     requests.pop(currentButton-1)
+    cf.sort_Hastegrad_ID_Time(requests)
     # Reset currentButton to 0 if there are no more requests
     if not requests:
         currentButton = 0
@@ -198,10 +176,10 @@ def fjernRequest():
     for i in buttons:
         i.pack(fill=tk.X)
     for i in range(len(romMerking)):
-        romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
-                            y=romPosition(requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
         
-button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Test"]
+
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[0],
                             font=("Consolas", 14),
@@ -235,20 +213,22 @@ for index, i in enumerate(requests):
               command=lambda index=index: buttonFunction(index),
               text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
               font=("Consolas",18),
-              bg = color(i.get("Hastegrad")),
+              bg = cf.color(i.get("Hastegrad")),
               pady=10,
               padx=10))
     romMerking.append(tk.Label(rightTop_frame,
              text="!",
              font=("Consolas",50),
-             bg="#fbfafa",
-             fg = color(i.get('Hastegrad'))
+             bg=roomMarkBG_Color,
+             fg = cf.color(i.get('Hastegrad')),
+             padx=10,
+             pady=5
              ))
 for i in buttons:
     i.pack(fill = tk.X)
 for i in range(len(romMerking)):
-    romMerking[i].place(x=romPosition(requests[i].get('Rom'))[0],
-                        y=romPosition(requests[i].get('Rom'))[1])
+    romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                        y=cf.roomPosition(requests[i].get('Rom'))[1])
 root.mainloop()
 
 
