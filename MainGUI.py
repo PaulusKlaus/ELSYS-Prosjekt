@@ -1,5 +1,5 @@
 # Python tkinter hello world program 
-
+import MainFunctions as mf
 import tkinter as tk
 import tkinter.font as tkFont
 scaler = 0.784
@@ -83,21 +83,9 @@ def MainMenu():
     
     
     # Create return btn
-    createReturnBtn()
+    mf.createReturnBtn(root,returnIm,MainMenu,button_width,button_height,padding)
     return
-def createReturnBtn():
-    returnBtn = tk.Button(root,
-                          bg = "#ffffff",
-                          fg = "#A8C686",
-                          image=returnIm ,
-                          compound="c",
-                          command = MainMenu,
-                          height = button_height,
-                          width = button_width)
-    # Setting the position of the button on the bottom of the screen.
-    #returnBtn.place(x = screen_width- int(screen_width/3), y = screen_height-270)
-    returnBtn.grid(row = 2, column = 3, padx=padding, pady=padding)
-    return
+
 def Vann():
     
     for widget in root.winfo_children():
@@ -111,7 +99,7 @@ def Vann():
     vannLav = tk.Button(root, text = "Liten hastegrad", bg = "green",fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/2))
     vannHøy.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
     vannLav.grid(row = 1, column = 3,columnspan=2, padx=padding, pady=padding)
-    createReturnBtn()
+    mf.createReturnBtn(root,returnIm,MainMenu,button_width,button_height,padding)
 # Position buttons with grid layout
     return
 
