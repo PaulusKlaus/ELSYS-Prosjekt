@@ -1,5 +1,4 @@
-# Python tkinter hello world program 
-import MainFunctions as mf
+#import MainFunctions as mf
 import tkinter as tk
 import tkinter.font as tkFont
 scaler = 0.784
@@ -13,7 +12,9 @@ root = tk.Tk()
 root.title("Sengepost")
 # Set geometry (widthxheight)
 root.geometry(f'{screen_width}x{screen_height}')
-root.configure(bg='#2A324B')
+bacground_color = "#2A324B"
+title_font = tkFont.Font("Helvetica", 20)
+root.configure(bg=bacground_color)
 
 
 
@@ -25,53 +26,72 @@ returnIm = tk.PhotoImage(file = r"images/return.png")
 returnIm = returnIm.subsample(2, 2)
 button_height = int(screen_height/2)-padding*2
 button_width = int(screen_width/3)-padding*2
+print(f"Button height: {button_height}, Button width: {button_width}")
+def getButtonSize(col, row):
+    return (int(screen_height/row)-padding*2,int(screen_width/col)-padding*2)
+def sendRequest(request):
+    print(request)
+    return
+
+def createReturnBtn(btn_size = (button_height,button_width),pos = (2,3)):
+    returnBtn = tk.Button(root,
+                          bg = "#ffffff",
+                          fg = "#A8C686",
+                          image=returnIm ,
+                          compound="c",
+                          command = MainMenu,
+                          height = btn_size[0],
+                          width = btn_size[1])
+    returnBtn.grid(row = pos[0], column = pos[1], padx=padding, pady=padding)
+    return
+
 def MainMenu():
     for widget in root.winfo_children():
         widget.destroy()
-    # Create three big buttons
     
     b1 = tk.Button(root,
-                    text = "Button 1",
-                    bg = "#F3A712",
-                    fg = "white", 
+                    text = "Smerte",
+                    bg = "#FF7F50",
+                    fg = "#ffffff", 
                     image=pixelVirtual,
                     compound="c",
+                    command= Smerte,
                     height = button_height,
                     width = button_width)
     b2 = tk.Button(root,
-                   text = "Vann",
-                   bg = "#669BBC",
-                   fg = "white",
+                   text = "Drikke",
+                   bg = "#87CEFA",
+                   fg = "#ffffff",
                    image=pixelVirtual,
                    compound="c",
-                   command = Vann,
+                   command = Drikke,
                    height = button_height,
                    width = button_width)
     b3 = tk.Button(root,
-                   text = "Button 3",
-                   bg = "blue",
-                   fg = "white",
+                   text = "Toalett",
+                   bg = "#9370DB",
+                   fg = "#ffffff",
                    image=pixelVirtual ,
                    compound="c",
-                   command = lambda: print("Hello World"),
+                   command = sendRequest("Toalett"),
                    height = button_height,
                    width = button_width)
     b4 = tk.Button(root,
-                   text = "Button 3",
-                   bg = "blue",
-                   fg = "white",
+                   text = "Betjening",
+                   bg = "#FF69B4",
+                   fg = "#ffffff",
                    image=pixelVirtual ,
                    compound="c",
-                   command = lambda: print("Hello World"),
+                   command = Betjening,
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
-                   text = "Button 3",
-                   bg = "blue",
-                   fg = "white",
+                   text = "Button 5",
+                   bg = "#004A94",
+                   fg = "#ffffff",
                    image=pixelVirtual ,
                    compound="c",
-                   command = lambda: print("Hello World"),
+                   command = lambda: print("Bt5 pressed"),
                    height = button_height,
                    width = button_width) 
     
@@ -83,27 +103,82 @@ def MainMenu():
     
     
     # Create return btn
-    mf.createReturnBtn(root,returnIm,MainMenu,button_width,button_height,padding)
+    createReturnBtn()
     return
 
-def Vann():
-    
+def Drikke():
     for widget in root.winfo_children():
         widget.destroy()
     # Create a title over grid
-    title = tk.Label(root, text="Vann", font=("Helvetica", 16))
+    title = tk.Label(root,
+                     text="Drikke",
+                     font=title_font,bg = bacground_color,fg="#ffffff")
     # Center title
     title.grid(row = 0, column = 1, columnspan = 4)
     # Create two buttons
-    vannHøy = tk.Button(root, text = "Stor hastegrad", bg = "red", fg = "white", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/2))
-    vannLav = tk.Button(root, text = "Liten hastegrad", bg = "green",fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/2))
-    vannHøy.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
-    vannLav.grid(row = 1, column = 3,columnspan=2, padx=padding, pady=padding)
-    mf.createReturnBtn(root,returnIm,MainMenu,button_width,button_height,padding)
-# Position buttons with grid layout
+    Juice = tk.Button(root,
+                    text = "Juice",
+                    bg = "#FFA500",
+                    fg = "#ffffff",
+                    image=pixelVirtual,
+                    compound="c",
+                    command= lambda: sendRequest("Juice"),
+                    height=getButtonSize(2, 2)[0],
+                    width=getButtonSize(2, 2)[1])
+    Vann = tk.Button(root, text = "Vann",
+                    bg = "#008000",
+                    fg = "#ffffff", 
+                    image=pixelVirtual,
+                    compound="c",
+                    command = lambda: sendRequest("Vann"),
+                    height=getButtonSize(2, 2)[0],
+                    width=getButtonSize(2, 2)[1])
+    print(f"Button height: {getButtonSize(2, 2)[0]}, Button width: {getButtonSize(2, 2)[1]}")
+    Juice.grid(row = 1, column = 1, padx=padding, pady=padding)
+    Vann.grid(row = 1, column = 2, padx=padding, pady=padding)
+
+    createReturnBtn(getButtonSize(2,2),(2,2))
+
+def Betjening():
+    for widget in root.winfo_children():
+        widget.destroy()
+    #create title above grid
+    title = tk.Label(root, text="Betjening", font=("Arial", 16))
+    #center title
+    title.grid(row=0, column = 1, columnspan = 4)
+
+    createReturnBtn()
     return
 
-# Create three big buttons 
+def Smerte():
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    title = tk.Label(root, text = "Smerte", font=("Arial", 16))
+    title.grid(row=0, column = 1, columnspan=4)
+
+    myeSmerte = tk.Button(root,
+                        text = "Mye smerte",
+                        bg="SlateBlue2",
+                        fg = "white",
+                        image=pixelVirtual,
+                        compound="c",
+                        command=lambda: print("Mye smerte registrert"),
+                        height= 200,
+                        width= int(screen_width/2))
+    littSmerte = tk.Button(root,
+                           text = "Litt smerte",
+                           bg="aquamarine",
+                           fg = "white",
+                           image=pixelVirtual,
+                           compound="c",
+                           command=lambda: print("Litt smerte registrert"),
+                           height= 200,
+                           width= int(screen_width/2))
+    myeSmerte.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
+    littSmerte.grid(row = 1, column = 3,columnspan= 2, padx=padding, pady=padding)
+    createReturnBtn()
+    return
 MainMenu()
 
 # Start the GUI
