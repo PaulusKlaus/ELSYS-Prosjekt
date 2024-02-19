@@ -14,6 +14,7 @@ root.title("Sengepost")
 root.geometry(f'{screen_width}x{screen_height}')
 bacground_color = "#2A324B"
 title_font = ("Helvetica", 20)
+button_font = ("Helvetica", 15)
 root.configure(bg=bacground_color)
 
 
@@ -66,6 +67,7 @@ def Smerte():
                         fg = "#ffffff",
                         image=pixelVirtual,
                         compound="c",
+                        font=button_font,
                         command=lambda: sendRequest("Mye smerte"),
                         height= getButtonSize(2,2)[0],
                         width=  getButtonSize(2,2)[1])
@@ -75,6 +77,7 @@ def Smerte():
                            fg = "#ffffff",
                            image=pixelVirtual,
                            compound="c",
+                           font=button_font,
                            command=lambda: sendRequest("Litt smerte"),
                            height= getButtonSize(2,2)[0],
                            width= getButtonSize(2,2)[1])
@@ -101,20 +104,34 @@ def Drikke():
                     fg = "#ffffff",
                     image=pixelVirtual,
                     compound="c",
+                    font=button_font,
                     command= lambda: sendRequest("Juice"),
                     height=getButtonSize(2, 2)[0],
                     width=getButtonSize(2, 2)[1])
-    Vann = tk.Button(root, text = "Vann",
+    Vann = tk.Button(root,
+                    text = "Vann",
                     bg = "#008000",
                     fg = "#ffffff", 
                     image=pixelVirtual,
                     compound="c",
+                    font=button_font,
                     command = lambda: sendRequest("Vann"),
+                    height=getButtonSize(2, 2)[0],
+                    width=getButtonSize(2, 2)[1])
+    Melk = tk.Button(root,
+                    text = "Melk",
+                    bg = "#123456",
+                    fg = "#ffffff",
+                    image=pixelVirtual,
+                    compound="c",
+                    font=button_font,
+                    command = lambda: sendRequest("Melk"),
                     height=getButtonSize(2, 2)[0],
                     width=getButtonSize(2, 2)[1])
     
     Juice.grid(row = 1, column = 1, padx=padding, pady=padding)
     Vann.grid(row = 1, column = 2, padx=padding, pady=padding)
+    Melk.grid(row = 2, column = 1, padx=padding, pady=padding)
 
     createReturnBtn(getButtonSize(2,2),(2,2))
 def toalett():
@@ -134,6 +151,7 @@ def toalett():
                         fg = "#ffffff",
                         image=pixelVirtual,
                         compound="c",
+                        font=button_font,
                         command=lambda: sendRequest("Toalett veldig hast"),
                         height= getButtonSize(2,2)[0],
                         width=  getButtonSize(2,2)[1])
@@ -143,6 +161,7 @@ def toalett():
                            fg = "#ffffff",
                            image=pixelVirtual,
                            compound="c",
+                           font=button_font,
                            command=lambda: sendRequest("Toalett litt hast"),
                            height= getButtonSize(2,2)[0],
                            width= getButtonSize(2,2)[1])
@@ -167,6 +186,7 @@ def mat():
                 fg = "#ffffff",
                 image=pixelVirtual,
                 compound="c",
+                font=button_font,
                 command=lambda: sendRequest("Hamburger"),
                 height= getButtonSize(3,2)[0],
                 width=  getButtonSize(3,2)[1])
@@ -176,6 +196,7 @@ def mat():
                 fg = "#ffffff",
                 image=pixelVirtual,
                 compound="c",
+                font=button_font,
                 command=lambda: sendRequest("Pizza"),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
@@ -185,6 +206,7 @@ def mat():
                 fg = "#ffffff",
                 image=pixelVirtual,
                 compound="c",
+                font=button_font,
                 command=lambda: sendRequest("Kylling"),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
@@ -194,6 +216,7 @@ def mat():
                 fg = "#ffffff",
                 image=pixelVirtual,
                 compound="c",
+                font=button_font,
                 command=lambda: sendRequest("Fisk"),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
@@ -203,6 +226,7 @@ def mat():
                 fg = "#ffffff",
                 image=pixelVirtual,
                 compound="c",
+                font=button_font,
                 command=lambda: sendRequest("Pasta"),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
@@ -224,6 +248,7 @@ def MainMenu():
                     fg = "#FFFFFF", 
                     image=pixelVirtual,
                     compound="c",
+                    font=button_font,
                     command= Smerte,
                     height = button_height,
                     width = button_width)
@@ -233,6 +258,7 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual,
                    compound="c",
+                   font=button_font,
                    command = Drikke,
                    height = button_height,
                    width = button_width)
@@ -242,6 +268,7 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
+                   font=button_font,
                    command = toalett,
                    height = button_height,
                    width = button_width)
@@ -251,6 +278,7 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
+                   font=button_font,
                    command = lambda: sendRequest("Betjening"),
                    height = button_height,
                    width = button_width) 
@@ -260,6 +288,7 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
+                   font=button_font,
                    command = mat,
                    height = button_height,
                    width = button_width)
@@ -269,7 +298,8 @@ def MainMenu():
                      fg = "#FFFFFF",
                      image=pixelVirtual ,
                      compound="c",
-                     command = lambda: print("Bt6 pressed"),
+                     font=button_font,
+                     command = lambda: print("Bt5 pressed"),
                      height = button_height,
                      width = button_width) 
     
