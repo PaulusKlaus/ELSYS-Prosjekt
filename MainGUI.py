@@ -52,30 +52,35 @@ def Smerte():
     for widget in root.winfo_children():
         widget.destroy()
 
-    title = tk.Label(root, text = "Smerte", font=("Arial", 16))
+    title = tk.Label(root,
+                     text = "Smerte",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    
     title.grid(row=0, column = 1, columnspan=4)
 
     myeSmerte = tk.Button(root,
                         text = "Mye smerte",
-                        bg="SlateBlue2",
-                        fg = "white",
+                        bg="#123456",
+                        fg = "#ffffff",
                         image=pixelVirtual,
                         compound="c",
-                        command=lambda: print("Mye smerte registrert"),
-                        height= 200,
-                        width= int(screen_width/2))
+                        command=lambda: sendRequest("Mye smerte"),
+                        height= getButtonSize(2,2)[0],
+                        width=  getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Litt smerte",
-                           bg="aquamarine",
-                           fg = "white",
+                           bg="#046FDB",
+                           fg = "#ffffff",
                            image=pixelVirtual,
                            compound="c",
-                           command=lambda: print("Litt smerte registrert"),
-                           height= 200,
-                           width= int(screen_width/2))
-    myeSmerte.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
-    littSmerte.grid(row = 1, column = 3,columnspan= 2, padx=padding, pady=padding)
-    createReturnBtn()
+                           command=lambda: sendRequest("Litt smerte"),
+                           height= getButtonSize(2,2)[0],
+                           width= getButtonSize(2,2)[1])
+    myeSmerte.grid(row = 1, column = 1, padx=padding, pady=padding)
+    littSmerte.grid(row = 1, column = 2, padx=padding, pady=padding)
+    createReturnBtn(getButtonSize(2,2),(2,2))
     return
 
 def Drikke():
@@ -107,23 +112,108 @@ def Drikke():
                     command = lambda: sendRequest("Vann"),
                     height=getButtonSize(2, 2)[0],
                     width=getButtonSize(2, 2)[1])
-    print(f"Button height: {getButtonSize(2, 2)[0]}, Button width: {getButtonSize(2, 2)[1]}")
+    
     Juice.grid(row = 1, column = 1, padx=padding, pady=padding)
     Vann.grid(row = 1, column = 2, padx=padding, pady=padding)
 
     createReturnBtn(getButtonSize(2,2),(2,2))
-
-def Betjening():
+def toalett():
     for widget in root.winfo_children():
         widget.destroy()
-    #create title above grid
-    title = tk.Label(root, text="Betjening", font=("Arial", 16))
-    #center title
-    title.grid(row=0, column = 1, columnspan = 4)
 
-    createReturnBtn()
+    title = tk.Label(root,
+                     text = "Toalett",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    title.grid(row=0, column = 1, columnspan=4)
+
+    myeSmerte = tk.Button(root,
+                        text = "Haster veldig",
+                        bg="#123456",
+                        fg = "#ffffff",
+                        image=pixelVirtual,
+                        compound="c",
+                        command=lambda: sendRequest("Toalett veldig hast"),
+                        height= getButtonSize(2,2)[0],
+                        width=  getButtonSize(2,2)[1])
+    littSmerte = tk.Button(root,
+                           text = "Haster litt",
+                           bg="#046FDB",
+                           fg = "#ffffff",
+                           image=pixelVirtual,
+                           compound="c",
+                           command=lambda: sendRequest("Toalett litt hast"),
+                           height= getButtonSize(2,2)[0],
+                           width= getButtonSize(2,2)[1])
+    myeSmerte.grid(row = 1, column = 1, padx=padding, pady=padding)
+    littSmerte.grid(row = 1, column = 2, padx=padding, pady=padding)
+    createReturnBtn(getButtonSize(2,2),(2,2))
     return
+def mat():
+    for widget in root.winfo_children():
+        widget.destroy()
 
+    title = tk.Label(root,
+                     text = "Matbestilling",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    title.grid(row=0, column = 1, columnspan=4)
+
+    m1 = tk.Button(root,
+                text = "Hamburger",
+                bg="#123456",
+                fg = "#ffffff",
+                image=pixelVirtual,
+                compound="c",
+                command=lambda: sendRequest("Hamburger"),
+                height= getButtonSize(3,2)[0],
+                width=  getButtonSize(3,2)[1])
+    m2 = tk.Button(root,
+                text = "Pizza",
+                bg="#046FDB",
+                fg = "#ffffff",
+                image=pixelVirtual,
+                compound="c",
+                command=lambda: sendRequest("Pizza"),
+                height= getButtonSize(3,2)[0],
+                width= getButtonSize(3,2)[1])
+    m3 = tk.Button(root,
+                text = "Kylling",
+                bg="#046FDB",
+                fg = "#ffffff",
+                image=pixelVirtual,
+                compound="c",
+                command=lambda: sendRequest("Kylling"),
+                height= getButtonSize(3,2)[0],
+                width= getButtonSize(3,2)[1])
+    m4 = tk.Button(root,
+                text = "Fisk",
+                bg="#046FDB",
+                fg = "#ffffff",
+                image=pixelVirtual,
+                compound="c",
+                command=lambda: sendRequest("Fisk"),
+                height= getButtonSize(3,2)[0],
+                width= getButtonSize(3,2)[1])
+    m5 = tk.Button(root,
+                text = "Pasta",
+                bg="#046FDB",
+                fg = "#ffffff",
+                image=pixelVirtual,
+                compound="c",
+                command=lambda: sendRequest("Pasta"),
+                height= getButtonSize(3,2)[0],
+                width= getButtonSize(3,2)[1])
+    
+    m1.grid(row = 1, column = 1, padx=padding, pady=padding)
+    m2.grid(row = 1, column = 2, padx=padding, pady=padding)
+    m3.grid(row = 1, column = 3, padx=padding, pady=padding)
+    m4.grid(row = 2, column = 1, padx=padding, pady=padding)
+    m5.grid(row = 2, column = 2, padx=padding, pady=padding)
+    createReturnBtn(getButtonSize(3,2),(2,3))
+    return
 def MainMenu():
     for widget in root.winfo_children():
         widget.destroy()
@@ -152,7 +242,7 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
-                   command = sendRequest("Toalett"),
+                   command = toalett,
                    height = button_height,
                    width = button_width)
     b4 = tk.Button(root,
@@ -161,25 +251,34 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
-                   command = Betjening,
+                   command = lambda: sendRequest("Betjening"),
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
                    text = "Mat",
-                   bg = "blue",
+                   bg = "#123456",
                    fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
-                   command = lambda: print("Bt5 pressed"),
+                   command = mat,
                    height = button_height,
-                   width = button_width) 
+                   width = button_width)
+    b6 = tk.Button(root,
+                     text = "BT5",
+                     bg = "#75A6CE",
+                     fg = "#FFFFFF",
+                     image=pixelVirtual ,
+                     compound="c",
+                     command = lambda: print("Bt6 pressed"),
+                     height = button_height,
+                     width = button_width) 
     
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
     b2.grid(row = 1, column = 2, padx=padding, pady=padding)
     b3.grid(row = 1, column = 3, padx=padding, pady=padding)
     b4.grid(row = 2, column = 1, padx=padding, pady=padding)
     b5.grid(row = 2, column = 2, padx=padding, pady=padding)
-    
+    b6.grid(row = 2, column = 3, padx=padding, pady=padding)
     
     # Create return btn
     #createReturnBtn()
