@@ -3,7 +3,7 @@ import MainFunctions as mf
 import tkinter as tk
 import tkinter.font as tkFont
 scaler = 0.784
-screen_width = int(1920 * scaler)
+screen_width = int(1800 * scaler)
 screen_height = int(1080 * scaler)
 padding = 10
 
