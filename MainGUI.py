@@ -31,44 +31,44 @@ def MainMenu():
     # Create three big buttons
     
     b1 = tk.Button(root,
-                    text = "Button 1",
+                    text = "Smerte",
                     bg = "#F3A712",
-                    fg = "white", 
+                    fg = "#FFFFFF", 
                     image=pixelVirtual,
                     compound="c",
                     height = button_height,
                     width = button_width)
     b2 = tk.Button(root,
-                   text = "Vann",
+                   text = "Drikke",
                    bg = "#669BBC",
-                   fg = "white",
+                   fg = "#FFFFFF",
                    image=pixelVirtual,
                    compound="c",
                    command = Vann,
                    height = button_height,
                    width = button_width)
     b3 = tk.Button(root,
-                   text = "Button 3",
-                   bg = "blue",
-                   fg = "white",
+                   text = "Toalett",
+                   bg = "#8BF2E3",
+                   fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
                    command = lambda: print("Hello World"),
                    height = button_height,
                    width = button_width)
     b4 = tk.Button(root,
-                   text = "Button 3",
-                   bg = "blue",
-                   fg = "white",
+                   text = "Betjening",
+                   bg = "#9AF1B0",
+                   fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
                    command = lambda: print("Hello World"),
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
-                   text = "Button 3",
+                   text = "Mat",
                    bg = "blue",
-                   fg = "white",
+                   fg = "#FFFFFF",
                    image=pixelVirtual ,
                    compound="c",
                    command = lambda: print("Hello World"),
@@ -95,8 +95,8 @@ def Vann():
     # Center title
     title.grid(row = 0, column = 1, columnspan = 4)
     # Create two buttons
-    vannHøy = tk.Button(root, text = "Stor hastegrad", bg = "red", fg = "white", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/2))
-    vannLav = tk.Button(root, text = "Liten hastegrad", bg = "green",fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/2))
+    vannHøy = tk.Button(root, text = "Stor hastegrad", bg = "red", fg = "#FFFFFF", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/2))
+    vannLav = tk.Button(root, text = "Liten hastegrad", bg = "green",fg = "#FFFFFF", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/2))
     vannHøy.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
     vannLav.grid(row = 1, column = 3,columnspan=2, padx=padding, pady=padding)
     mf.createReturnBtn(root,returnIm,MainMenu,button_width,button_height,padding)

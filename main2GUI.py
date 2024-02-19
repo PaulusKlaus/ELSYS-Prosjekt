@@ -28,10 +28,10 @@ def MainMenu():
     for widget in root.winfo_children():
         widget.destroy()
     # Create three big buttons
-    b1 = tk.Button(root, text = "Smerte", bg = "coral", fg = "white", image=pixelVirtual ,compound="c", command= Smerte, height = 200, width = int(screen_width/3)-padding*2)
-    b2 = tk.Button(root, text = "Drikke", bg = "lightskyblue",fg = "white", image=pixelVirtual ,compound="c", command = Drikke, height = 200, width = int(screen_width/3)-padding*2)
-    b3 = tk.Button(root, text = "Toalett", bg = "mediumpurple", fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/3)-padding*2) 
-    b4 = tk.Button(root, text = "Betjening", bg= "hotpink", fg = "white", image = pixelVirtual, compound= "c", command= lambda: print("Betjening kommer"), height= 200, width = int(screen_width/3) - padding*2)
+    b1 = tk.Button(root, text = "Smerte", bg = '#CF9FF3', fg = "white", image=pixelVirtual ,compound="c", command= Smerte, height = 200, width = int(screen_width/3)-padding*2)
+    b2 = tk.Button(root, text = "Drikke", bg = '#A6C48D',fg = "white", image=pixelVirtual ,compound="c", command = Drikke, height = 200, width = int(screen_width/3)-padding*2)
+    b3 = tk.Button(root, text = "Toalett", bg = '#91D8ED', fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/3)-padding*2) 
+    b4 = tk.Button(root, text = "Betjening", bg= '#F19BD8', fg = "white", image = pixelVirtual, compound= "c", command= lambda: print("Betjening kommer"), height= 200, width = int(screen_width/3) - padding*2)
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
     b2.grid(row = 1, column = 2, padx=padding, pady=padding)
     b3.grid(row = 1, column = 3, padx=padding, pady=padding)
