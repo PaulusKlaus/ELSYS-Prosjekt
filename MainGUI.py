@@ -23,27 +23,80 @@ pixelVirtual = tk.PhotoImage(width=1, height=1)
 returnIm = tk.PhotoImage(file = r"images/return.png")
 # Changes the size of the image
 returnIm = returnIm.subsample(2, 2)
-
+button_height = int(screen_height/2)-padding*2
+button_width = int(screen_width/3)-padding*2
 def MainMenu():
     for widget in root.winfo_children():
         widget.destroy()
     # Create three big buttons
-    b1 = tk.Button(root, text = "Button 1", bg = "#F3A712", fg = "white", image=pixelVirtual ,compound="c", height = 200, width = int(screen_width/3)-padding*2)
-    b2 = tk.Button(root, text = "Vann", bg = "#669BBC",fg = "white", image=pixelVirtual ,compound="c", command = Vann, height = 200, width = int(screen_width/3)-padding*2)
-    b3 = tk.Button(root, text = "Button 3", bg = "blue", fg = "white", image=pixelVirtual ,compound="c", command = lambda: print("Hello World"), height = 200, width = int(screen_width/3)-padding*2) 
+    
+    b1 = tk.Button(root,
+                    text = "Button 1",
+                    bg = "#F3A712",
+                    fg = "white", 
+                    image=pixelVirtual,
+                    compound="c",
+                    height = button_height,
+                    width = button_width)
+    b2 = tk.Button(root,
+                   text = "Vann",
+                   bg = "#669BBC",
+                   fg = "white",
+                   image=pixelVirtual,
+                   compound="c",
+                   command = Vann,
+                   height = button_height,
+                   width = button_width)
+    b3 = tk.Button(root,
+                   text = "Button 3",
+                   bg = "blue",
+                   fg = "white",
+                   image=pixelVirtual ,
+                   compound="c",
+                   command = lambda: print("Hello World"),
+                   height = button_height,
+                   width = button_width)
+    b4 = tk.Button(root,
+                   text = "Button 3",
+                   bg = "blue",
+                   fg = "white",
+                   image=pixelVirtual ,
+                   compound="c",
+                   command = lambda: print("Hello World"),
+                   height = button_height,
+                   width = button_width) 
+    b5 = tk.Button(root,
+                   text = "Button 3",
+                   bg = "blue",
+                   fg = "white",
+                   image=pixelVirtual ,
+                   compound="c",
+                   command = lambda: print("Hello World"),
+                   height = button_height,
+                   width = button_width) 
+    
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
     b2.grid(row = 1, column = 2, padx=padding, pady=padding)
     b3.grid(row = 1, column = 3, padx=padding, pady=padding)
+    b4.grid(row = 2, column = 1, padx=padding, pady=padding)
+    b5.grid(row = 2, column = 2, padx=padding, pady=padding)
     
     
     # Create return btn
     createReturnBtn()
     return
 def createReturnBtn():
-    returnBtn = tk.Button(root, bg = "white", fg = "#A8C686", image=returnIm ,compound="c", command = MainMenu, width = int(screen_width/3))
+    returnBtn = tk.Button(root,
+                          bg = "#ffffff",
+                          fg = "#A8C686",
+                          image=returnIm ,
+                          compound="c",
+                          command = MainMenu,
+                          height = button_height,
+                          width = button_width)
     # Setting the position of the button on the bottom of the screen.
-    returnBtn.place(x = screen_width- int(screen_width/3), y = screen_height-270)
-    
+    #returnBtn.place(x = screen_width- int(screen_width/3), y = screen_height-270)
+    returnBtn.grid(row = 2, column = 3, padx=padding, pady=padding)
     return
 def Vann():
     
