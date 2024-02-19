@@ -248,9 +248,8 @@ def MainMenu():
                     fg = "#FFFFFF", 
                     image=pixelVirtual,
                     compound="c",
-                    font=button_font,
                     command= Smerte,
-                    font = ("Arial", 30),
+                    font = button_font,
                     height = button_height,
                     width = button_width)
     b2 = tk.Button(root,
@@ -259,9 +258,8 @@ def MainMenu():
                    fg = "#FFFFFF",
                    image=pixelVirtual,
                    compound="c",
-                   font=button_font,
                    command = Drikke,
-                   font = ("Arial", 30),
+                   font = button_font,
                    height = button_height,
                    width = button_width)
     b3 = tk.Button(root,
