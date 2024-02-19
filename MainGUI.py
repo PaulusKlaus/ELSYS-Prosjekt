@@ -92,7 +92,7 @@ def Drikke():
     # Create a title over grid
     title = tk.Label(root,
                      text="Drikke",
-                     font=title_font,
+                     font= title_font,
                      bg = bacground_color,
                      fg="#ffffff")
     # Center title
@@ -100,7 +100,7 @@ def Drikke():
     # Create two buttons
     Juice = tk.Button(root,
                     text = "Juice",
-                    bg = "#FFA500",
+                    bg = "#FFC75F",
                     fg = "#ffffff",
                     image=pixelVirtual,
                     compound="c",
@@ -250,6 +250,7 @@ def MainMenu():
                     compound="c",
                     font=button_font,
                     command= Smerte,
+                    font = ("Arial", 30),
                     height = button_height,
                     width = button_width)
     b2 = tk.Button(root,
@@ -260,6 +261,7 @@ def MainMenu():
                    compound="c",
                    font=button_font,
                    command = Drikke,
+                   font = ("Arial", 30),
                    height = button_height,
                    width = button_width)
     b3 = tk.Button(root,
