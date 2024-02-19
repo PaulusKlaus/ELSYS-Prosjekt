@@ -62,8 +62,9 @@ def Smerte():
                         image=pixelVirtual,
                         compound="c",
                         command=lambda: print("Mye smerte registrert"),
-                        height= 200,
-                        width= int(screen_width/2))
+                        font=("Arial", 20),
+                        height= getButtonSize(2,2)[0],
+                        width= getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Litt smerte",
                            bg="aquamarine",
@@ -71,11 +72,12 @@ def Smerte():
                            image=pixelVirtual,
                            compound="c",
                            command=lambda: print("Litt smerte registrert"),
-                           height= 200,
-                           width= int(screen_width/2))
+                           font=("Arial", 25),
+                           height= getButtonSize(2,2)[0],
+                           width= getButtonSize(2,2)[1])
     myeSmerte.grid(row = 1, column = 1,columnspan= 2, padx=padding, pady=padding)
     littSmerte.grid(row = 1, column = 3,columnspan= 2, padx=padding, pady=padding)
-    createReturnBtn()
+    createReturnBtn(getButtonSize(2,2),(2,2))
     return
 
 def Drikke():
@@ -84,7 +86,7 @@ def Drikke():
     # Create a title over grid
     title = tk.Label(root,
                      text="Drikke",
-                     font=title_font,
+                     font= title_font,
                      bg = bacground_color,
                      fg="#ffffff")
     # Center title
@@ -92,7 +94,7 @@ def Drikke():
     # Create two buttons
     Juice = tk.Button(root,
                     text = "Juice",
-                    bg = "#FFA500",
+                    bg = "#FFC75F",
                     fg = "#ffffff",
                     image=pixelVirtual,
                     compound="c",
@@ -100,7 +102,7 @@ def Drikke():
                     height=getButtonSize(2, 2)[0],
                     width=getButtonSize(2, 2)[1])
     Vann = tk.Button(root, text = "Vann",
-                    bg = "#008000",
+                    bg = "#8DE98D",
                     fg = "#ffffff", 
                     image=pixelVirtual,
                     compound="c",
@@ -135,6 +137,7 @@ def MainMenu():
                     image=pixelVirtual,
                     compound="c",
                     command= Smerte,
+                    font = ("Arial", 30),
                     height = button_height,
                     width = button_width)
     b2 = tk.Button(root,
@@ -144,6 +147,7 @@ def MainMenu():
                    image=pixelVirtual,
                    compound="c",
                    command = Drikke,
+                   font = ("Arial", 30),
                    height = button_height,
                    width = button_width)
     b3 = tk.Button(root,
@@ -153,6 +157,7 @@ def MainMenu():
                    image=pixelVirtual ,
                    compound="c",
                    command = sendRequest("Toalett"),
+                   font = ("Arial", 30),
                    height = button_height,
                    width = button_width)
     b4 = tk.Button(root,
@@ -162,6 +167,7 @@ def MainMenu():
                    image=pixelVirtual ,
                    compound="c",
                    command = Betjening,
+                   font = ("Arial", 30),
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
@@ -171,6 +177,7 @@ def MainMenu():
                    image=pixelVirtual ,
                    compound="c",
                    command = lambda: print("Bt5 pressed"),
+                   font = ("Arial", 30),
                    height = button_height,
                    width = button_width) 
     
