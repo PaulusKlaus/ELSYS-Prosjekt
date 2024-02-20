@@ -1,1 +1,30 @@
 Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
+18:16:46,Default User,ALARM,301,1,7:51:23,Delete,1
+18:16:47,Default User,Mat,308,1,4:41:38,Delete,1
+18:40:24,Default User,ALARM,301,1,8:15:01,Delete,1
+18:42:20,Default User,Vann,305,2,0:00:19,Delete,3
+19:13:49,Default User,ALARM,301,1,8:48:26,Delete,1
+19:14:18,Default User,Mat,308,1,5:39:09,Delete,1
+19:14:20,Default User,ALARM,301,1,0:00:28,Delete,1
+19:14:21,Default User,Vann,306,2,6:57:56,Increase Importance,1
+19:14:22,Default User,Vann,306,2,6:57:57,Delete,1
+19:14:24,Default User,Do,305,1,6:28:15,Delete,2
+19:14:25,Default User,Smerte,301,1,0:00:23,Delete,2
+19:14:26,Default User,Vann,311,2,6:51:03,Delete,3
+19:14:27,Default User,Spørsmål,313,1,6:48:02,Delete,3
+19:14:28,Default User,Vann,302,1,6:48:03,Delete,4
+19:14:29,Default User,Spørsmål,309,1,6:48:04,Delete,4
+19:14:31,Default User,Vann,315,1,6:48:06,Delete,4
+19:14:32,Default User,Spørsmål,307,1,6:48:07,Delete,4
+19:14:33,Default User,Spørsmål,304,1,6:48:06,Delete,4
+19:14:34,Default User,Juice,301,1,0:00:36,Delete,4
+19:14:36,Default User,Betjening,301,1,0:00:35,Delete,4
+19:14:58,Default User,Saft,301,1,0:00:04,Delete,4
+19:16:15,Default User,ALARM,301,1,0:01:07,Delete,1
+19:16:16,Default User,Toalett,301,1,0:01:14,Delete,4
+19:16:18,Default User,Betjening,301,1,0:00:35,Delete,4
+19:16:19,Default User,Betjening,301,1,0:00:34,Delete,4
+19:16:20,Default User,Betjening,301,1,0:00:34,Delete,4
+19:16:21,Default User,Betjening,301,1,0:00:35,Delete,4
+19:16:22,Default User,Betjening,301,1,0:00:36,Delete,4
+19:16:23,Default User,Betjening,301,1,0:00:37,Delete,4

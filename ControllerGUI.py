@@ -5,6 +5,8 @@ from tkinter import Label
 import time as t
 import ControllerFunctions as cf
 from tkinter import Menu
+import socket
+import threading
 
 #Defined colors and functions
 
@@ -15,6 +17,53 @@ button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
 currentUser = "Default User"
+def useData(recievedData):
+    try:
+        recievedData = recievedData.split(",")
+        
+        requests.append({"Rom":int(recievedData[0]),
+                        "Seng":int(recievedData[1]),
+                        "Hva":recievedData[2],
+                        "Hastegrad":int(recievedData[3]),
+                        "Tid":cf.getCurrentTime(),
+                        "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
+                        "ID": 99})
+        cf.sort_Hastegrad_ID_Time(requests)
+        for i in menubuttons:
+            i.pack_forget()
+        for i in buttons:
+            i.pack_forget()
+        
+        updateButtons()
+        for i in buttons:
+            i.pack(fill=tk.X)
+        for i in range(len(romMerking)):
+            romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                y=cf.roomPosition(requests[i].get('Rom'))[1])
+    except:
+        print("Data could not be used")
+        pass
+def receive_data():
+    server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    server.bind(("38:d5:7a:7d:5d:2e", 4))
+
+    server.listen(1)
+
+    client, address = server.accept()
+
+    try:
+        while True:
+            data = client.recv(1024)
+            if not data:
+                break
+            data = data.decode('utf-8')
+            useData(data)
+    except OSError as e:
+        pass
+    client.close()
+    server.close()
+
+# Create a new thread to run the receive_data function
 
 def setUser(userName):
     global currentUser
@@ -64,7 +113,7 @@ root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-userMenu = Menu(root)
+
 menubar = Menu(root)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="Amalie",command=lambda: setUser("Amalie"))
@@ -306,6 +355,8 @@ for i in buttons:
 for i in range(len(romMerking)):
     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                         y=cf.roomPosition(requests[i].get('Rom'))[1])
+receive_thread = threading.Thread(target=receive_data)
+receive_thread.start()
 root.mainloop()
 
 
