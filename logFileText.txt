@@ -111,3 +111,4 @@
 21:17:09 - Default User markerte rom 301 seng 1 med hastegrad 4 som sykepleier ikke tilstede, etter tid: 0:00:07(T:M:S)
 21:17:12 - Default User markerte rom 301 seng 1 med hastegrad 4 som sykepleier tilstede, etter tid: 0:00:10(T:M:S)
 21:26:12 - Default User markerte rom 301 seng 1 med hastegrad 4 som sykepleier tilstede, etter tid: 0:00:10(T:M:S)
+21:36:11 - Default User slettet forespørsel manuelt av type Smerte for rom 301 seng 1 med hastegrad 2 etter tid: 0:00:25(T:M:S)

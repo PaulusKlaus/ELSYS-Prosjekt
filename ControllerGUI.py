@@ -20,6 +20,7 @@ currentUser = "Default User"
 def useData(recievedData):
     try:
         isEqual = False
+        update = True
         recievedData = recievedData.split(",")
         recivedDict ={"Rom":int(recievedData[0]),
                         "Seng":int(recievedData[1]),
@@ -30,27 +31,31 @@ def useData(recievedData):
                         "ID": 99}
         for i in requests:
             if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
+                update = False
                 if recivedDict.get('Hastegrad') < i.get('Hastegrad'):
                     print("Hastegrad endret")
                     i['Hastegrad'] = recivedDict.get('Hastegrad')
+                    update = True
                 isEqual = True
+                
         if not isEqual:
             requests.append(recivedDict)
         else:
             print("Request already in list")
-        cf.sort_Hastegrad_ID_Time(requests)
-        for i in menubuttons:
-            i.pack_forget()
-        for i in buttons:
-            i.pack_forget()
-        
-        updateButtons()
-        for i in buttons:
-            i.pack(fill=tk.X)
-        for i in range(len(romMerking)):
-            romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                                y=cf.roomPosition(requests[i].get('Rom'))[1])
-        cf.print_requests(requests)
+        if update:
+            cf.sort_Hastegrad_ID_Time(requests)
+            for i in menubuttons:
+                i.pack_forget()
+            for i in buttons:
+                i.pack_forget()
+            
+            updateButtons()
+            for i in buttons:
+                i.pack(fill=tk.X)
+            for i in range(len(romMerking)):
+                romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                    y=cf.roomPosition(requests[i].get('Rom'))[1])
+            cf.print_requests(requests)
     except:
         print("Data could not be used")
         pass

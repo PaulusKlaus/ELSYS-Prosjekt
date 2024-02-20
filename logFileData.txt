@@ -112,3 +112,4 @@ Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
 21:17:09,Default User,Pizza,301,1,0:00:07,Unoccupied,4
 21:17:12,Default User,Pizza,301,1,0:00:10,Occupied,4
 21:26:12,Default User,Juice,301,1,0:00:10,Occupied,4
+21:36:11,Default User,Smerte,301,1,0:00:25,Delete,2
