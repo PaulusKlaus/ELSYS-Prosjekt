@@ -329,7 +329,7 @@ def MainMenu():
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
-                   command = lambda: sendRequest("Betjening",4),
+                   command = lambda: sendRequest("Betjening",3),
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
