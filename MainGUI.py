@@ -37,7 +37,8 @@ root.title("Sengepost")
 root.geometry(f'{screen_width}x{screen_height}')
 bacground_color = "#2A324B"
 title_font = ("Helvetica", 20)
-button_font = ("Helvetica", 15)
+button_font = ("Helvetica", 40)
+buttonTextColor = "#000000"
 root.configure(bg=bacground_color)
 
 setRoom(301)
@@ -112,8 +113,8 @@ def Smerte():
 
     myeSmerte = tk.Button(root,
                         text = "Mye smerte",
-                        bg="#123456",
-                        fg = "#ffffff",
+                        bg="#F46A00",
+                        fg = buttonTextColor,
                         image=pixelVirtual,
                         compound="c",
                         font=button_font,
@@ -122,8 +123,8 @@ def Smerte():
                         width=  getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Litt smerte",
-                           bg="#046FDB",
-                           fg = "#ffffff",
+                           bg="#FFDD00",
+                           fg = buttonTextColor,
                            image=pixelVirtual,
                            compound="c",
                            font=button_font,
@@ -150,7 +151,7 @@ def Drikke():
     Juice = tk.Button(root,
                     text = "Juice",
                     bg = "#FFC75F",
-                    fg = "#ffffff",
+                    fg = buttonTextColor,
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
@@ -159,8 +160,8 @@ def Drikke():
                     width=getButtonSize(2, 2)[1])
     Vann = tk.Button(root,
                     text = "Vann",
-                    bg = "#008000",
-                    fg = "#ffffff", 
+                    bg = "#00E1FF",
+                    fg = buttonTextColor, 
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
@@ -169,8 +170,8 @@ def Drikke():
                     width=getButtonSize(2, 2)[1])
     Melk = tk.Button(root,
                     text = "Saft",
-                    bg = "#C75656",
-                    fg = "#ffffff",
+                    bg = "#F66F6F",
+                    fg = buttonTextColor,
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
@@ -196,8 +197,8 @@ def toalett():
 
     myeSmerte = tk.Button(root,
                         text = "Haster veldig",
-                        bg="#123456",
-                        fg = "#ffffff",
+                        bg="#EAA940",
+                        fg = buttonTextColor,
                         image=pixelVirtual,
                         compound="c",
                         font=button_font,
@@ -206,8 +207,8 @@ def toalett():
                         width=  getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Haster litt",
-                           bg="#046FDB",
-                           fg = "#ffffff",
+                           bg="#D5CF5C",
+                           fg = buttonTextColor,
                            image=pixelVirtual,
                            compound="c",
                            font=button_font,
@@ -231,8 +232,8 @@ def mat():
 
     m1 = tk.Button(root,
                 text = "Hamburger",
-                bg="#123456",
-                fg = "#ffffff",
+                bg="#7A3B39",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
@@ -241,8 +242,8 @@ def mat():
                 width=  getButtonSize(3,2)[1])
     m2 = tk.Button(root,
                 text = "Pizza",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#F8B422",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
@@ -251,8 +252,8 @@ def mat():
                 width= getButtonSize(3,2)[1])
     m3 = tk.Button(root,
                 text = "Kylling",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#E2A156",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
@@ -261,8 +262,8 @@ def mat():
                 width= getButtonSize(3,2)[1])
     m4 = tk.Button(root,
                 text = "Fisk",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#3A86F7",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
@@ -271,8 +272,8 @@ def mat():
                 width= getButtonSize(3,2)[1])
     m5 = tk.Button(root,
                 text = "Pasta",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#E8DC9D",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
@@ -293,8 +294,8 @@ def MainMenu():
     
     b1 = tk.Button(root,
                     text = "Smerte",
-                    bg = "#F3A712",
-                    fg = "#FFFFFF", 
+                    bg = "#CD6A1F",
+                    fg = buttonTextColor, 
                     image=pixelVirtual,
                     compound="c",
                     command= Smerte,
@@ -304,7 +305,7 @@ def MainMenu():
     b2 = tk.Button(root,
                    text = "Drikke",
                    bg = "#669BBC",
-                   fg = "#FFFFFF",
+                   fg = buttonTextColor,
                    image=pixelVirtual,
                    compound="c",
                    command = Drikke,
@@ -313,8 +314,8 @@ def MainMenu():
                    width = button_width)
     b3 = tk.Button(root,
                    text = "Toalett",
-                   bg = "#8BF2E3",
-                   fg = "#FFFFFF",
+                   bg = "#BEBEBE",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
@@ -323,8 +324,8 @@ def MainMenu():
                    width = button_width)
     b4 = tk.Button(root,
                    text = "Betjening",
-                   bg = "#9AF1B0",
-                   fg = "#FFFFFF",
+                   bg = "#A7C88A",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
@@ -333,8 +334,8 @@ def MainMenu():
                    width = button_width) 
     b5 = tk.Button(root,
                    text = "Mat",
-                   bg = "#123456",
-                   fg = "#FFFFFF",
+                   bg = "#EABD79",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
@@ -344,7 +345,7 @@ def MainMenu():
     b6 = tk.Button(root,
                      text = "ALARM",
                      bg = "#FF0000",
-                     fg = "#FFFFFF",
+                     fg = buttonTextColor,
                      image=pixelVirtual ,
                      compound="c",
                      font=button_font,
