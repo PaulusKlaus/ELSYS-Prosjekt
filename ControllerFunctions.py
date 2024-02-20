@@ -20,6 +20,7 @@ def print_requests(requests_list):
         print("Bed:", request["Seng"])
         print("Request Type:", request["Hva"])
         print("Priority:", request["Hastegrad"])
+        print("Occupied:", request["Occupied"])
         print("Time:", request["Tid"])
         print("")
 
