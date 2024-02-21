@@ -113,3 +113,18 @@ Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
 21:17:12,Default User,Pizza,301,1,0:00:10,Occupied,4
 21:26:12,Default User,Juice,301,1,0:00:10,Occupied,4
 21:36:11,Default User,Smerte,301,1,0:00:25,Delete,2
+21:56:11,Default User,ALARM,301,1,0:00:50,Occupied,1
+21:56:15,Default User,ALARM,301,1,0:00:54,Delete,1
+21:56:21,Default User,Smerte,301,1,0:00:38,Delete,2
+21:58:51,Default User,Fisk,301,1,0:03:39,Unoccupied,4
+22:07:16,Default User,ALARM,305,1,0:03:02,Delete,1
+22:07:20,Default User,Toalett,305,1,0:00:23,Increase Importance,2
+22:07:22,Default User,Toalett,305,1,0:00:25,Increase Importance,1
+22:07:25,Default User,Toalett,305,1,0:00:28,Decrease Importance,2
+22:07:28,Default User,Smerte,305,1,0:00:38,Decrease Importance,3
+22:17:37,Default User,Kylling,305,1,0:00:32,Delete,4
+22:17:38,Default User,Hamburger,305,1,0:00:18,Delete,4
+22:17:39,Default User,Pasta,305,1,0:00:17,Delete,4
+22:17:40,Default User,Fisk,305,1,0:00:23,Delete,4
+22:17:41,Default User,Pizza,305,1,0:00:16,Delete,4
+22:17:44,Default User,Vin,305,1,0:00:57,Delete,1

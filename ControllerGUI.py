@@ -63,7 +63,7 @@ def receive_data():
     server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
     server.bind(("38:d5:7a:7d:5d:2e", 4))
 
-    server.listen(1)
+    server.listen(99)
 
     client, address = server.accept()
 
