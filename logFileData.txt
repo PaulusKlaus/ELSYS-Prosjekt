@@ -128,3 +128,14 @@ Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
 22:17:40,Default User,Fisk,305,1,0:00:23,Delete,4
 22:17:41,Default User,Pizza,305,1,0:00:16,Delete,4
 22:17:44,Default User,Vin,305,1,0:00:57,Delete,1
+12:19:18,Default User,ALARM,301,1,0:00:10,Occupied,1
+12:19:19,Default User,ALARM,301,1,0:00:11,Delete,1
+12:19:21,Default User,Toalett,301,1,0:00:21,Delete,4
+12:19:23,Default User,Betjening,301,1,0:00:10,Delete,3
+12:19:25,Default User,Juice,301,1,0:00:21,Delete,4
+12:20:46,Default User,Betjening,301,1,0:01:16,Delete,3
+12:23:02,Default User,ALARM,301,1,0:00:19,Decrease Importance,2
+12:23:03,Default User,ALARM,301,1,0:00:20,Delete,2
+12:23:04,Default User,Betjening,301,1,0:00:28,Delete,3
+12:23:05,Default User,Toalett,301,1,0:00:24,Delete,3
+12:23:06,Default User,Pizza,301,1,0:00:27,Delete,4
