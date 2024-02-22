@@ -21,8 +21,8 @@ def setBed(sengNumber):
     root.title(f"Inlogget som rom {rom} seng {seng}")
     return
 
-#client = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-#client.connect(("38:d5:7a:7d:5d:2e", 4))
+client = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+client.connect(("38:d5:7a:7d:5d:2e", 4))
 def sendData(data):
     try:
         client.send(data.encode('utf-8'))
