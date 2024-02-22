@@ -10,7 +10,7 @@ import threading
 
 #Defined colors and functions
 
-max_width = 1800 #Defines the maximum width of the window
+max_width = 1600 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
 button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
