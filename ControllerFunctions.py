@@ -1,4 +1,10 @@
 import datetime
+
+
+
+
+
+
 roomMarkBG_Color = "#fbfafa"
 roomMarkOccupied_Color = "#63CBFF"
 
@@ -14,6 +20,7 @@ def print_requests(requests_list):
         print("Bed:", request["Seng"])
         print("Request Type:", request["Hva"])
         print("Priority:", request["Hastegrad"])
+        print("Occupied:", request["Occupied"])
         print("Time:", request["Tid"])
         print("")
 
@@ -69,6 +76,12 @@ def timeDifference(startTime, endTime):
     time_diff = datetime.datetime.strptime(endTime, "%H:%M:%S") - datetime.datetime.strptime(startTime, "%H:%M:%S")
     time_diff_str = str(time_diff)
     return time_diff_str
+
+def is_room_occupied(requests_list, room_number):
+    for request in requests_list:
+        if request["Rom"] == room_number and request.get("Occupied"):
+            return True
+    return False
 
 def logStringText(user, request,logEvent,time):
     if logEvent == "Delete":

@@ -1,11 +1,35 @@
 #import MainFunctions as mf
 import tkinter as tk
 import tkinter.font as tkFont
+import socket
+from tkinter import Menu
 scaler = 0.784
 screen_width = int(1800 * scaler)
-screen_height = int(980 * scaler)
-padding = 10
+screen_height = int(1080 * scaler)
+padding = 0
 
+rom = 301
+seng = 1
+def setRoom(romNumber):
+    global rom
+    rom = romNumber
+    root.title(f"Inlogget som rom {rom} seng {seng}")
+    return
+def setBed(sengNumber):
+    global seng
+    seng = sengNumber
+    root.title(f"Inlogget som rom {rom} seng {seng}")
+    return
+
+client = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+client.connect(("38:d5:7a:7d:5d:2e", 4))
+def sendData(data):
+    try:
+        client.send(data.encode('utf-8'))
+    except OSError as e:
+        print("Error sending data")
+        pass
+    return
 
 root = tk.Tk() 
 # root window title and dimension
@@ -14,8 +38,35 @@ root.title("Sengepost")
 root.geometry(f'{screen_width}x{screen_height}')
 bacground_color = "#2A324B"
 title_font = ("Helvetica", 20)
-button_font = ("Helvetica", 15)
-root.configure(bg=bacground_color)
+button_font = ("Helvetica", 40)
+buttonTextColor = "#000000"
+
+
+setRoom(301)
+setBed(1)
+
+menubar = Menu(root)
+romMenu = Menu(menubar, tearoff=0)
+romMenu.add_command(label="301",command=lambda: setRoom(301))
+romMenu.add_command(label="302",command=lambda: setRoom(302))
+romMenu.add_command(label="303",command=lambda: setRoom(303))
+romMenu.add_command(label="304",command=lambda: setRoom(304))
+romMenu.add_command(label="305",command=lambda: setRoom(305))
+romMenu.add_command(label="306",command=lambda: setRoom(306))
+romMenu.add_command(label="307",command=lambda: setRoom(307))
+romMenu.add_command(label="308",command=lambda: setRoom(308))
+romMenu.add_command(label="309",command=lambda: setRoom(309))
+romMenu.add_command(label="311",command=lambda: setRoom(311))
+romMenu.add_command(label="313",command=lambda: setRoom(313))
+romMenu.add_command(label="315",command=lambda: setRoom(315))
+
+sengMenu = Menu(menubar, tearoff=1)
+sengMenu.add_command(label="1",command=lambda: setBed(1))
+sengMenu.add_command(label="2",command=lambda: setBed(2))
+
+menubar.add_cascade(label="Romvalg",font=("Arial",18), menu=romMenu)
+menubar.add_cascade(label="Sengevalg",font=("Arial",18), menu=sengMenu)
+root.configure(menu=menubar,bg=bacground_color)
 
 
 
@@ -33,9 +84,9 @@ print(f"Button height: {button_height}, Button width: {button_width}")
 def getButtonSize(col, row):
     return (int(screen_height/row)-padding*2,int(screen_width/col)-padding*2)
 
-def sendRequest(request):
-    print(request)
-    return
+def sendRequest(request,hastegrad):
+    message = f"{rom},{seng},{request},{hastegrad}"
+    sendData(message)
 
 def createReturnBtn(btn_size = (button_height,button_width),pos = (2,3)):
     returnBtn = tk.Button(root,
@@ -63,22 +114,22 @@ def Smerte():
 
     myeSmerte = tk.Button(root,
                         text = "Mye smerte",
-                        bg="#123456",
-                        fg = "#ffffff",
+                        bg="#F46A00",
+                        fg = buttonTextColor,
                         image=pixelVirtual,
                         compound="c",
                         font=button_font,
-                        command=lambda: sendRequest("Mye smerte"),
+                        command=lambda: sendRequest("Smerte",2),
                         height= getButtonSize(2,2)[0],
                         width=  getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Litt smerte",
-                           bg="#046FDB",
-                           fg = "#ffffff",
+                           bg="#FFDD00",
+                           fg = buttonTextColor,
                            image=pixelVirtual,
                            compound="c",
                            font=button_font,
-                           command=lambda: sendRequest("Litt smerte"),
+                           command=lambda: sendRequest("Smerte",3),
                            height= getButtonSize(2,2)[0],
                            width= getButtonSize(2,2)[1])
     myeSmerte.grid(row = 1, column = 1, padx=padding, pady=padding)
@@ -101,39 +152,61 @@ def Drikke():
     Juice = tk.Button(root,
                     text = "Juice",
                     bg = "#FFC75F",
-                    fg = "#ffffff",
+                    fg = buttonTextColor,
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
-                    command= lambda: sendRequest("Juice"),
-                    height=getButtonSize(2, 2)[0],
-                    width=getButtonSize(2, 2)[1])
+                    command= lambda: sendRequest("Juice",4),
+                    height=getButtonSize(3, 2)[0],
+                    width=getButtonSize(3, 2)[1])
     Vann = tk.Button(root,
                     text = "Vann",
-                    bg = "#008000",
-                    fg = "#ffffff", 
+                    bg = "#00E1FF",
+                    fg = buttonTextColor, 
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
-                    command = lambda: sendRequest("Vann"),
-                    height=getButtonSize(2, 2)[0],
-                    width=getButtonSize(2, 2)[1])
-    Melk = tk.Button(root,
-                    text = "Melk",
-                    bg = "#123456",
-                    fg = "#ffffff",
+                    command = lambda: sendRequest("Vann",4),
+                    height=getButtonSize(3, 2)[0],
+                    width=getButtonSize(3, 2)[1])
+    Saft = tk.Button(root,
+                    text = "Saft",
+                    bg = "#F66F6F",
+                    fg = buttonTextColor,
                     image=pixelVirtual,
                     compound="c",
                     font=button_font,
-                    command = lambda: sendRequest("Melk"),
-                    height=getButtonSize(2, 2)[0],
-                    width=getButtonSize(2, 2)[1])
+                    command = lambda: sendRequest("Saft",4),
+                    height=getButtonSize(3, 2)[0],
+                    width=getButtonSize(3, 2)[1])
+    Kaffe = tk.Button(root,
+                    text = "Kaffe",
+                    bg = "#814B2E",
+                    fg = buttonTextColor,
+                    image=pixelVirtual,
+                    compound="c",
+                    font=button_font,
+                    command = lambda: sendRequest("Kaffe",4),
+                    height=getButtonSize(3, 2)[0],
+                    width=getButtonSize(3, 2)[1])
+    Te = tk.Button(root,
+                    text = "Te",
+                    bg = "#ED9F5F",
+                    fg = buttonTextColor,
+                    image=pixelVirtual,
+                    compound="c",
+                    font=button_font,
+                    command = lambda: sendRequest("Te",4),
+                    height=getButtonSize(3, 2)[0],
+                    width=getButtonSize(3, 2)[1])
     
     Juice.grid(row = 1, column = 1, padx=padding, pady=padding)
     Vann.grid(row = 1, column = 2, padx=padding, pady=padding)
-    Melk.grid(row = 2, column = 1, padx=padding, pady=padding)
+    Saft.grid(row = 1, column = 3, padx=padding, pady=padding)
+    Kaffe.grid(row = 2, column = 1, padx=padding, pady=padding)
+    Te.grid(row = 2, column = 2, padx=padding, pady=padding)
 
-    createReturnBtn(getButtonSize(2,2),(2,2))
+    createReturnBtn(getButtonSize(3,2),(2,3))
 def toalett():
     for widget in root.winfo_children():
         widget.destroy()
@@ -147,22 +220,22 @@ def toalett():
 
     myeSmerte = tk.Button(root,
                         text = "Haster veldig",
-                        bg="#123456",
-                        fg = "#ffffff",
+                        bg="#EAA940",
+                        fg = buttonTextColor,
                         image=pixelVirtual,
                         compound="c",
                         font=button_font,
-                        command=lambda: sendRequest("Toalett veldig hast"),
+                        command=lambda: sendRequest("Toalett",3),
                         height= getButtonSize(2,2)[0],
                         width=  getButtonSize(2,2)[1])
     littSmerte = tk.Button(root,
                            text = "Haster litt",
-                           bg="#046FDB",
-                           fg = "#ffffff",
+                           bg="#D5CF5C",
+                           fg = buttonTextColor,
                            image=pixelVirtual,
                            compound="c",
                            font=button_font,
-                           command=lambda: sendRequest("Toalett litt hast"),
+                           command=lambda: sendRequest("Toalett",4),
                            height= getButtonSize(2,2)[0],
                            width= getButtonSize(2,2)[1])
     myeSmerte.grid(row = 1, column = 1, padx=padding, pady=padding)
@@ -182,52 +255,52 @@ def mat():
 
     m1 = tk.Button(root,
                 text = "Hamburger",
-                bg="#123456",
-                fg = "#ffffff",
+                bg="#7A3B39",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Hamburger"),
+                command=lambda: sendRequest("Hamburger",4),
                 height= getButtonSize(3,2)[0],
                 width=  getButtonSize(3,2)[1])
     m2 = tk.Button(root,
                 text = "Pizza",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#F8B422",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Pizza"),
+                command=lambda: sendRequest("Pizza",4),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
     m3 = tk.Button(root,
                 text = "Kylling",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#E2A156",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Kylling"),
+                command=lambda: sendRequest("Kylling",4),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
     m4 = tk.Button(root,
                 text = "Fisk",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#3A86F7",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Fisk"),
+                command=lambda: sendRequest("Fisk",4),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
     m5 = tk.Button(root,
                 text = "Pasta",
-                bg="#046FDB",
-                fg = "#ffffff",
+                bg="#E8DC9D",
+                fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Pasta"),
+                command=lambda: sendRequest("Pasta",4),
                 height= getButtonSize(3,2)[0],
                 width= getButtonSize(3,2)[1])
     
@@ -244,8 +317,8 @@ def MainMenu():
     
     b1 = tk.Button(root,
                     text = "Smerte",
-                    bg = "#F3A712",
-                    fg = "#FFFFFF", 
+                    bg = "#CD6A1F",
+                    fg = buttonTextColor, 
                     image=pixelVirtual,
                     compound="c",
                     command= Smerte,
@@ -255,7 +328,7 @@ def MainMenu():
     b2 = tk.Button(root,
                    text = "Drikke",
                    bg = "#669BBC",
-                   fg = "#FFFFFF",
+                   fg = buttonTextColor,
                    image=pixelVirtual,
                    compound="c",
                    command = Drikke,
@@ -264,8 +337,8 @@ def MainMenu():
                    width = button_width)
     b3 = tk.Button(root,
                    text = "Toalett",
-                   bg = "#8BF2E3",
-                   fg = "#FFFFFF",
+                   bg = "#BEBEBE",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
@@ -274,18 +347,18 @@ def MainMenu():
                    width = button_width)
     b4 = tk.Button(root,
                    text = "Betjening",
-                   bg = "#9AF1B0",
-                   fg = "#FFFFFF",
+                   bg = "#A7C88A",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
-                   command = lambda: sendRequest("Betjening"),
+                   command = lambda: sendRequest("Betjening",3),
                    height = button_height,
                    width = button_width) 
     b5 = tk.Button(root,
                    text = "Mat",
-                   bg = "#123456",
-                   fg = "#FFFFFF",
+                   bg = "#EABD79",
+                   fg = buttonTextColor,
                    image=pixelVirtual ,
                    compound="c",
                    font=button_font,
@@ -293,13 +366,13 @@ def MainMenu():
                    height = button_height,
                    width = button_width)
     b6 = tk.Button(root,
-                     text = "BT5",
-                     bg = "#75A6CE",
-                     fg = "#FFFFFF",
+                     text = "ALARM",
+                     bg = "#FF0000",
+                     fg = buttonTextColor,
                      image=pixelVirtual ,
                      compound="c",
                      font=button_font,
-                     command = lambda: print("Bt5 pressed"),
+                     command = lambda: sendRequest("ALARM",1),
                      height = button_height,
                      width = button_width) 
     
@@ -322,3 +395,4 @@ MainMenu()
 
 
 root.mainloop() 
+client.close()

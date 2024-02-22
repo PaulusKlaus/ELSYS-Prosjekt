@@ -5,6 +5,8 @@ from tkinter import Label
 import time as t
 import ControllerFunctions as cf
 from tkinter import Menu
+import socket
+import threading
 
 #Defined colors and functions
 
@@ -15,6 +17,69 @@ button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
 currentUser = "Default User"
+def useData(recievedData):
+    try:
+        isEqual = False
+        update = True
+        recievedData = recievedData.split(",")
+        recivedDict ={"Rom":int(recievedData[0]),
+                        "Seng":int(recievedData[1]),
+                        "Hva":recievedData[2],
+                        "Hastegrad":int(recievedData[3]),
+                        "Tid":cf.getCurrentTime(),
+                        "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
+                        "ID": 99}
+        for i in requests:
+            if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
+                update = False
+                if recivedDict.get('Hastegrad') < i.get('Hastegrad'):
+                    print("Hastegrad endret")
+                    i['Hastegrad'] = recivedDict.get('Hastegrad')
+                    update = True
+                isEqual = True
+                
+        if not isEqual:
+            requests.append(recivedDict)
+        else:
+            print("Request already in list")
+        if update:
+            cf.sort_Hastegrad_ID_Time(requests)
+            for i in menubuttons:
+                i.pack_forget()
+            for i in buttons:
+                i.pack_forget()
+            
+            updateButtons()
+            for i in buttons:
+                i.pack(fill=tk.X)
+            for i in range(len(romMerking)):
+                romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                    y=cf.roomPosition(requests[i].get('Rom'))[1])
+            cf.print_requests(requests)
+    except:
+        print("Data could not be used")
+        pass
+def receive_data():
+    server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    server.bind(("38:d5:7a:7d:5d:2e", 4))
+
+    server.listen(99)
+
+    client, address = server.accept()
+
+    try:
+        while True:
+            data = client.recv(1024)
+            if not data:
+                break
+            data = data.decode('utf-8')
+            useData(data)
+    except OSError as e:
+        pass
+    client.close()
+    server.close()
+
+# Create a new thread to run the receive_data function
 
 def setUser(userName):
     global currentUser
@@ -24,7 +89,7 @@ def setUser(userName):
 
 
 requests = []
-requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
+"""requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
 requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
 requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":1, "Tid":"13:35:09","Occupied":False, "ID": 3})
 requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:23:23","Occupied":False, "ID": 5})
@@ -35,7 +100,7 @@ requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:2
 requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":True, "ID": 10})
 requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 11})
 requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 12})
-
+"""
 #print("UNSORTED:  ")
 #cf.print_requests(requests)
 cf.sort_Hastegrad_ID_Time(requests)
@@ -64,7 +129,7 @@ root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-userMenu = Menu(root)
+
 menubar = Menu(root)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="Amalie",command=lambda: setUser("Amalie"))
@@ -127,11 +192,17 @@ def changeOccupancy():
     global currentButton
     if requests[currentButton-1].get('Occupied'):
         requests[currentButton-1]['Occupied']= False
+        for index,i in enumerate(requests):
+            if i.get('Rom')== requests[currentButton-1].get('Rom'):
+                requests[index]['Occupied']= False
         #log changes
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Unoccupied",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Unoccupied",cf.getCurrentTime()))
     else:
         requests[currentButton-1]['Occupied']= True
+        for index,i in enumerate(requests):
+            if i.get('Rom')== requests[currentButton-1].get('Rom'):
+                requests[index]['Occupied']= True
         #log changes
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
@@ -146,6 +217,25 @@ def changeOccupancy():
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
     return
+def get_lowest_hastegrad_requests(requests):
+    lowest_hastegrad_requests = []
+    room_hastegrad_map = {}
+    for request in requests:
+        room = request.get('Rom')
+        hastegrad = request.get('Hastegrad')
+        if room not in room_hastegrad_map:
+            room_hastegrad_map[room] = hastegrad
+        else:
+            if hastegrad < room_hastegrad_map[room]:
+                room_hastegrad_map[room] = hastegrad
+    
+    for request in requests:
+        room = request.get('Rom')
+        hastegrad = request.get('Hastegrad')
+        if hastegrad == room_hastegrad_map[room]:
+            lowest_hastegrad_requests.append(request)
+    
+    return lowest_hastegrad_requests
 
 def updateButtons():
     global buttons
@@ -162,6 +252,8 @@ def updateButtons():
                 bg = cf.color(i.get("Hastegrad")),
                 pady=10,
                 padx=10))
+    
+    for i in get_lowest_hastegrad_requests(requests):
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
                 font=("Consolas",50),
@@ -306,6 +398,8 @@ for i in buttons:
 for i in range(len(romMerking)):
     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                         y=cf.roomPosition(requests[i].get('Rom'))[1])
+receive_thread = threading.Thread(target=receive_data)
+receive_thread.start()
 root.mainloop()
 
 
