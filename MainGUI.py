@@ -66,7 +66,7 @@ sengMenu.add_command(label="2",command=lambda: setBed(2))
 
 menubar.add_cascade(label="Romvalg",font=("Arial",18), menu=romMenu)
 menubar.add_cascade(label="Sengevalg",font=("Arial",18), menu=sengMenu)
-root.config(menu=menubar,bg=bacground_color)
+root.configure(menu=menubar,bg=bacground_color)
 
 
 
