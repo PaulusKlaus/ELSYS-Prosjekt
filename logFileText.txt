@@ -1,0 +1,5 @@
+19:17:01 - Default User slettet forespørsel manuelt av type Vann for rom 302 seng 1 med hastegrad 4 etter tid: 6:50:36(T:M:S)
+19:17:11 - Default User slettet forespørsel manuelt av type ALARM for rom 301 seng 1 med hastegrad 1 etter tid: 8:51:48(T:M:S)
+19:17:14 - Default User senket hastegraden for forespørsel av type Mat for rom 308 seng 1 til hastegrad 2, eter tid: 5:42:05(T:M:S)
+19:17:19 - Default User senket hastegraden for forespørsel av type Vann for rom 306 seng 2 til hastegrad 3, eter tid: 7:00:54(T:M:S)
+19:17:22 - Default User slettet forespørsel manuelt av type Do for rom 305 seng 1 med hastegrad 2 etter tid: 6:31:13(T:M:S)

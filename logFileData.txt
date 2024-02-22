@@ -1,1 +1,6 @@
 Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
+19:17:01,Default User,Vann,302,1,6:50:36,Delete,4
+19:17:11,Default User,ALARM,301,1,8:51:48,Delete,1
+19:17:14,Default User,Mat,308,1,5:42:05,Decrease Importance,2
+19:17:19,Default User,Vann,306,2,7:00:54,Decrease Importance,3
+19:17:22,Default User,Do,305,1,6:31:13,Delete,2
