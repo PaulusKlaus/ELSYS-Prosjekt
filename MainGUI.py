@@ -131,20 +131,21 @@ def sendRequest(request,hastegrad):
                 if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
                     if recivedDict.get('Hastegrad') < i.get('Hastegrad'):
                         print("Hastegrad endret")
+                        retrurnButton()
                         i['Hastegrad'] = recivedDict.get('Hastegrad')
                     isEqual = True
                     
             if not isEqual:
                 requestsRoom.append(recivedDict)
+                retrurnButton()
             else:
                 print("Request already in list")
         except:
             print("Data could not be used")
             pass
     else:
-        print(f"Remove,{rom},{seng}")
-        useData(f"Remove,{rom},{seng}")
-        retrurnButton()
+        print(f"{request},{rom},{seng}")
+        useData(f"{request},{rom},{seng}")
     if clientEnable:
         sendData(message)
     print(requestsRoom)
