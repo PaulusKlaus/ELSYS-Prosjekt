@@ -41,29 +41,29 @@ def color(hastegrad):
         return "#002E5D"
 def roomPosition(rom):
     if rom == 301:
-        return (20,20)
+        return (25,20)
     elif rom == 303:
-        return (150,20)
+        return (195,20)
     elif rom == 305:
-        return (240,20)
+        return (285,20)
     elif rom == 307:
-        return (370,20)
+        return (455,20)
     elif rom == 309:
-        return (680,20)
+        return (807,20)
     elif rom == 311:
-        return (810,20)
+        return (975,20)
     elif rom == 313:
-        return (900,20)
+        return (1067,20)
     elif rom == 315:
-        return (1020,20)
+        return (1235,20)
     elif rom == 302:
-        return (130,350)
+        return (160,400)
     elif rom == 304:
-        return (260,350)
+        return (320,400)
     elif rom == 306:
-        return (790,350)
+        return (940,400)
     elif rom == 308:
-        return (920,350)
+        return (1100,400)
     else:
         print("Rom ikke funnet")
         return (0,0)

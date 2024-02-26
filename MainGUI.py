@@ -63,28 +63,7 @@ title_font = ("Helvetica", 20)
 button_font = ("Helvetica", 40)
 buttonTextColor = "#000000"
 
-menubar = Menu(root)
-romMenu = Menu(menubar, tearoff=0)
-romMenu.add_command(label="301",command=lambda: setRoom(301))
-romMenu.add_command(label="302",command=lambda: setRoom(302))
-romMenu.add_command(label="303",command=lambda: setRoom(303))
-romMenu.add_command(label="304",command=lambda: setRoom(304))
-romMenu.add_command(label="305",command=lambda: setRoom(305))
-romMenu.add_command(label="306",command=lambda: setRoom(306))
-romMenu.add_command(label="307",command=lambda: setRoom(307))
-romMenu.add_command(label="308",command=lambda: setRoom(308))
-romMenu.add_command(label="309",command=lambda: setRoom(309))
-romMenu.add_command(label="311",command=lambda: setRoom(311))
-romMenu.add_command(label="313",command=lambda: setRoom(313))
-romMenu.add_command(label="315",command=lambda: setRoom(315))
-
-sengMenu = Menu(menubar, tearoff=1)
-sengMenu.add_command(label="1",command=lambda: setBed(1))
-sengMenu.add_command(label="2",command=lambda: setBed(2))
-
-menubar.add_cascade(label="Romvalg",font=("Arial",18), menu=romMenu)
-menubar.add_cascade(label="Sengevalg",font=("Arial",18), menu=sengMenu)
-root.configure(menu=menubar,bg=bacground_color)
+root.configure(bg=bacground_color)
 
 rom = 301
 seng = 1
@@ -582,7 +561,7 @@ def mainAdminMenu():
 
     changeRoomButton = tk.Button(root,
                 text = "Endre rom",
-                bg="#7A3B39",
+                bg="#7BCAE4",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
@@ -592,7 +571,7 @@ def mainAdminMenu():
                 width=  getButtonSize(2,2)[1])
     changeBedButton = tk.Button(root,
                 text = "Endre Seng",
-                bg="#7A3B39",
+                bg="#DE817D",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
@@ -602,7 +581,7 @@ def mainAdminMenu():
                 width=  getButtonSize(2,2)[1])
     changeDifficultyButton = tk.Button(root,
                 text = "Endre Vanskelighetsgrad",
-                bg="#F8B422",
+                bg="#EAC471",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",

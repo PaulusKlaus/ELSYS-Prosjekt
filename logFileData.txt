@@ -13,3 +13,27 @@ Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
 13:17:54,Rom 301,Betjening,301,1,0:00:00,Added,3
 13:20:00,Daniel,Betjening,301,1,0:02:06,Delete,3
 13:20:02,Daniel,Vann,301,1,0:08:09,Delete,4
+16:10:53,Default User,ALARM,301,1,5:45:30,Delete,1
+16:10:55,Default User,ALARM,303,2,5:45:32,Decrease Importance,2
+16:10:57,Default User,Mat,308,1,2:35:48,Decrease Importance,2
+16:10:59,Default User,ALARM,303,2,5:45:36,Unoccupied,2
+16:11:02,Default User,Spørsmål,313,1,3:44:37,Unoccupied,3
+16:11:05,Default User,Vann,306,2,3:54:40,Delete,2
+16:11:06,Default User,Vann,315,1,3:44:41,Delete,4
+16:11:08,Default User,Spørsmål,309,1,3:44:43,Delete,4
+16:11:09,Default User,Spørsmål,307,1,3:44:44,Delete,4
+16:11:10,Default User,Vann,311,2,3:47:47,Delete,3
+16:11:12,Default User,Mat,308,1,2:36:03,Delete,2
+16:11:14,Default User,Do,305,1,3:25:05,Unoccupied,2
+16:11:16,Default User,ALARM,303,2,5:45:53,Delete,2
+16:11:18,Default User,Do,305,1,3:25:09,Decrease Importance,3
+16:11:20,Default User,Do,305,1,3:25:11,Decrease Importance,4
+16:11:23,Default User,Do,305,1,3:25:14,Delete,4
+16:11:24,Default User,Spørsmål,304,1,3:44:57,Delete,4
+16:11:25,Default User,Vann,302,1,3:45:00,Increase Importance,3
+16:11:27,Default User,Vann,302,1,3:45:02,Delete,3
+16:11:28,Default User,Spørsmål,313,1,3:45:03,Delete,3
+16:11:29,Default User,Vann,302,2,3:48:06,Delete,3
+16:12:18,Default User,Mat,308,1,2:37:09,Decrease Importance,3
+16:12:23,Default User,ALARM,301,1,5:47:00,Increase Importance,1
+16:12:37,Default User,ALARM,301,1,5:47:14,Unoccupied,1

@@ -9,7 +9,9 @@ import socket
 import threading
 
 #Defined colors and functions
-
+romMerkingPadx = 20
+romMerkingPady = 2
+romMerkingFont = ("Impact",80)
 max_width = 1800 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
@@ -131,7 +133,7 @@ def setUser(userName):
 
 requests = []
 """requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":1, "Tid":"10:25:23","Occupied":True, "ID": 1})
-requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
+requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":2, "Tid":"12:46:09" ,"Occupied":True,"ID": 2})
 requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":1, "Tid":"13:35:09","Occupied":False, "ID": 3})
 requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:23:23","Occupied":False, "ID": 5})
 requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":3, "Tid":"12:26:25","Occupied":True, "ID": 6})
@@ -142,6 +144,19 @@ requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"1
 requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 11})
 requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":False, "ID": 12})
 """
+requests.append({"Rom":301,"Seng":1, "Hva":"ALARM", "Hastegrad":2, "Tid":"10:25:23","Occupied":True, "ID": 1})
+requests.append({"Rom":305,"Seng":1, "Hva":"Do", "Hastegrad":3, "Tid":"12:46:09" ,"Occupied":True,"ID": 2})
+requests.append({"Rom":308,"Seng":1, "Hva":"Mat", "Hastegrad":2, "Tid":"13:35:09","Occupied":True, "ID": 3})
+requests.append({"Rom":302,"Seng":2, "Hva":"Vann", "Hastegrad":4, "Tid":"12:23:23","Occupied":True, "ID": 4})
+requests.append({"Rom":311,"Seng":2, "Hva":"Vann", "Hastegrad":4, "Tid":"12:23:23","Occupied":True, "ID": 5})
+requests.append({"Rom":313,"Seng":1, "Hva":"Spørsmål", "Hastegrad":4, "Tid":"12:26:25","Occupied":True, "ID": 6})
+requests.append({"Rom":306,"Seng":2, "Hva":"Vann", "Hastegrad":3, "Tid":"12:16:25","Occupied":True, "ID": 7})
+requests.append({"Rom":304,"Seng":1, "Hva":"Spørsmål", "Hastegrad":5, "Tid":"12:26:27","Occupied":True, "ID": 8})
+requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 9})
+requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 10})
+requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 11})
+requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 12})
+requests.append({"Rom":303,"Seng":2, "Hva":"ALARM", "Hastegrad":2, "Tid":"10:25:23","Occupied":True, "ID": 13})
 #print("UNSORTED:  ")
 #cf.print_requests(requests)
 cf.sort_Hastegrad_ID_Time(requests)
@@ -150,8 +165,9 @@ cf.sort_Hastegrad_ID_Time(requests)
 
 root = tk.Tk()
 root.title(pageTitle)
-root.maxsize(max_width, max_height)
-root.minsize(max_width, max_height)
+root.attributes('-fullscreen',True)
+#root.maxsize(max_width, max_height)
+#root.minsize(max_width, max_height)
 root.geometry(str(max_width) + "x" + str(max_height))
 root["background"] = windowBackgroundColor
 
@@ -184,7 +200,8 @@ root.config(menu=menubar)
 image_path = "romLayout.png"  
 image = PhotoImage(file=image_path)
 image_label = Label(rightTop_frame, image=image, bg='grey')
-image_label.pack(fill="x")
+
+image_label.pack(fill=tk.BOTH, expand=True)
 currentButton = 0
 index = 0 
 buttons = []
@@ -297,11 +314,11 @@ def updateButtons():
     for i in get_lowest_hastegrad_requests(requests):
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
-                font=("Consolas",50),
+                font=romMerkingFont,
                 bg=cf.occupiedColor(i),
                 fg = cf.color(i.get('Hastegrad')),
-                padx=10,
-                pady=5
+                padx=romMerkingPadx,
+                pady=romMerkingPady
                 )) 
 def okHastegrad():
 
@@ -429,11 +446,11 @@ for index, i in enumerate(requests):
               padx=10))
     romMerking.append(tk.Label(rightTop_frame,
              text="!",
-             font=("Consolas",50),
+             font=romMerkingFont,
              bg=cf.occupiedColor(i),
              fg = cf.color(i.get('Hastegrad')),
-             padx=10,
-             pady=5
+             padx=romMerkingPadx,
+             pady=romMerkingPady
              ))
 for i in buttons:
     i.pack(fill = tk.X)
