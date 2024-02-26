@@ -10,45 +10,84 @@ import threading
 
 #Defined colors and functions
 
-max_width = 1600 #Defines the maximum width of the window
+max_width = 1800 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
 button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
 menuButtonColor = "#437EB8"
 currentUser = "Default User"
+def sendData(data):
+    try:
+        client.send(data.encode('utf-8'))
+    except OSError as e:
+        print("Error sending data")
+        pass
+    return
+def sendRequestBT(request,function):
+    message = f"{function},{request.get('Rom')},{request.get('Seng')},{request.get('Hva')},{request.get('Hastegrad'),}"
+    sendData(message)
 def useData(recievedData):
     try:
         isEqual = False
         update = True
         recievedData = recievedData.split(",")
         recivedDict ={"Rom":int(recievedData[0]),
-                        "Seng":int(recievedData[1]),
-                        "Hva":recievedData[2],
-                        "Hastegrad":int(recievedData[3]),
-                        "Tid":cf.getCurrentTime(),
-                        "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
-                        "ID": 99}
-        for i in requests:
-            if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
-                update = False
-                if recivedDict.get('Hastegrad') < i.get('Hastegrad'):
-                    print("Hastegrad endret")
-                    i['Hastegrad'] = recivedDict.get('Hastegrad')
-                    update = True
-                isEqual = True
+                            "Seng":int(recievedData[1]),
+                            "Hva":recievedData[2],
+                            "Hastegrad":int(recievedData[3]),
+                            "Tid":cf.getCurrentTime(),
+                            "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
+                            "ID": 99}
+        if recievedData[3] != "0":         
+            for i in requests:
+                if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
+                    update = False
+                    if recivedDict.get('Hastegrad') < i.get('Hastegrad'):
+                        print("Hastegrad endret")
+                        cf.fileWrite("logFileText.txt",cf.logStringText(f"Rom {recivedDict.get('Rom')}",recivedDict,"Increase Importance",cf.getCurrentTime()))
+                        cf.fileWrite("logFileData.txt",cf.logStringData(f"Rom {recivedDict.get('Rom')}",recivedDict,"Increase Importance",cf.getCurrentTime()))
+                        i['Hastegrad'] = recivedDict.get('Hastegrad')
+                        update = True
+                    isEqual = True
+                    
+            if not isEqual:
+                requests.append(recivedDict)
+                cf.fileWrite("logFileData.txt",cf.logStringData(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
+                cf.fileWrite("logFileText.txt",cf.logStringText(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
+            else:
+                print("Request already in list")
+            if update:
+                cf.sort_Hastegrad_ID_Time(requests)
+                for i in menubuttons:
+                    i.pack_forget()
+                for i in buttons:
+                    i.pack_forget()
                 
-        if not isEqual:
-            requests.append(recivedDict)
+                updateButtons()
+                for i in buttons:
+                    i.pack(fill=tk.X)
+                for i in range(len(romMerking)):
+                    romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                        y=cf.roomPosition(requests[i].get('Rom'))[1])
+                cf.print_requests(requests)
         else:
-            print("Request already in list")
-        if update:
+            indexlist = []
+            for index,i in enumerate(requests):
+                print(f"{recievedData[2] == 'Remove'} {i.get('Rom') == int(recievedData[0])} { i.get('Seng') == int(recievedData[1])}")
+                if recievedData[2] == 'Remove' and i.get('Rom') == int(recievedData[0]) and i.get('Seng') == int(recievedData[1]):
+                    print(f"added {index} to indexlist")
+                    indexlist.append(index)
+            for i in range(len(indexlist)-1,-1,-1):
+                cf.fileWrite("logFileData.txt",cf.logStringData(recievedData[4],requests[indexlist[i]],"Remote Delete",cf.getCurrentTime()))
+                cf.fileWrite("logFileText.txt",cf.logStringText(recievedData[4],requests[indexlist[i]],"Remote Delete",cf.getCurrentTime()))
+                print(f"Removing:{requests.pop(indexlist[i])}")
             cf.sort_Hastegrad_ID_Time(requests)
             for i in menubuttons:
                 i.pack_forget()
             for i in buttons:
                 i.pack_forget()
-            
+                
             updateButtons()
             for i in buttons:
                 i.pack(fill=tk.X)
@@ -56,10 +95,12 @@ def useData(recievedData):
                 romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                     y=cf.roomPosition(requests[i].get('Rom'))[1])
             cf.print_requests(requests)
+
     except:
         print("Data could not be used")
         pass
 def receive_data():
+    global client
     server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
     server.bind(("38:d5:7a:7d:5d:2e", 4))
 
@@ -315,7 +356,8 @@ def senkHastegrad():
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
     for i in buttons:
         i.pack(fill = tk.X)
-   
+
+     
 def fjernRequest():
     global requests
     global currentButton

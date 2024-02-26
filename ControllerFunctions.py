@@ -25,16 +25,18 @@ def print_requests(requests_list):
         print("")
 
 def color(hastegrad):
-    if hastegrad== 4:
+    if hastegrad== 5:
         return "#22C22D"
-    elif hastegrad == 3:
+    elif hastegrad == 4:
         return "#F3F041"
-    elif hastegrad == 2:
+    elif hastegrad == 3:
         return "#FF800A"
-    elif hastegrad == 1:
+    elif hastegrad == 2:
         return "#FF0000"
     elif hastegrad == 99:
         return "#fbfafa"
+    elif hastegrad == 1:
+        return "#800000"
     else:
         return "#002E5D"
 def roomPosition(rom):
@@ -94,6 +96,10 @@ def logStringText(user, request,logEvent,time):
         return f"{time} - {user} markerte rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} som sykepleier tilstede, etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     elif logEvent == "Unoccupied":
         return f"{time} - {user} markerte rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} som sykepleier ikke tilstede, etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Added":
+        return f"{time} - {user} la til forespørsel av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Remote Delete":
+        return f"{time} - {user} slettet forespørsel med kort av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     else:
         return f"Error: logEvent:{logEvent} does not exist"
     
