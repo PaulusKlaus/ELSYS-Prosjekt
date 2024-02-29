@@ -4,9 +4,10 @@ import tkinter.font as tkFont
 import socket
 from tkinter import Menu
 import threading
-scaler = 0.784
-screen_width = int(1800 * scaler)
-screen_height = int(1080 * scaler)
+scaler = 480/800
+screen_width = 715
+screen_height = 450
+titleHeight = 30
 padding = 0
 clientEnable = False
 currentMenu = "MainMenu"
@@ -57,10 +58,11 @@ root = tk.Tk()
 # root window title and dimension
 root.title("Sengepost")
 # Set geometry (widthxheight)
-root.geometry(f'{screen_width}x{screen_height}')
+#root.geometry(f'{screen_width}x{screen_height}')
+root.attributes('-fullscreen',True)
 bacground_color = "#2A324B"
 title_font = ("Helvetica", 20)
-button_font = ("Helvetica", 40)
+button_font = ("Helvetica", 25)
 buttonTextColor = "#000000"
 
 root.configure(bg=bacground_color)
@@ -92,8 +94,11 @@ button_width = int(screen_width/3)-padding*4
 
 print(f"Button height: {button_height}, Button width: {button_width}")
 
-def getButtonSize(col, row):
-    return (int(screen_height/row)-padding*2,int(screen_width/col)-padding*2)
+def getButtonSize(col, row, tiltle = False):
+    if tiltle:
+        return (int(screen_height/row)-padding*2-int(titleHeight/row),int(screen_width/col)+int(titleHeight/col)-padding*2)
+    else:
+        return (int(screen_height/row)-padding*2,int(screen_width/col)-padding*2)
 
 def sendRequest(request,hastegrad):
     message = f"{rom},{seng},{request},{hastegrad},{user}"
@@ -567,8 +572,8 @@ def mainAdminMenu():
                 compound="c",
                 font=button_font,
                 command=changeRoom,
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     changeBedButton = tk.Button(root,
                 text = "Endre Seng",
                 bg="#DE817D",
@@ -577,8 +582,8 @@ def mainAdminMenu():
                 compound="c",
                 font=button_font,
                 command=changeBed,
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     changeDifficultyButton = tk.Button(root,
                 text = "Endre Vanskelighetsgrad",
                 bg="#EAC471",
@@ -587,13 +592,13 @@ def mainAdminMenu():
                 compound="c",
                 font=button_font,
                 command=changeDifficulty,
-                height= getButtonSize(2,2)[0],
-                width= getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width= getButtonSize(2,2,True)[1])
     
     changeRoomButton.grid(row = 1, column = 1, padx=padding, pady=padding)
     changeBedButton.grid(row = 1, column = 2, padx=padding, pady=padding)
     changeDifficultyButton.grid(row = 2, column = 1, padx=padding, pady=padding)
-    createReturnBtn(getButtonSize(2,2),(2,2))
+    createReturnBtn(getButtonSize(2,2,True),(2,2))
     return
 def changeDifficulty():
     for widget in root.winfo_children():
@@ -722,7 +727,7 @@ def mainNurseMenu():
                 compound="c",
                 font=button_font,
                 command=lambda: sendRequest("Remove",0),
-                height= getButtonSize(2,2)[0],
+                height= getButtonSize(2,2,True)[0],
                 width=  getButtonSize(2,2)[1])
     otherRoom = tk.Button(root,
                 text = "Annet",
@@ -732,7 +737,7 @@ def mainNurseMenu():
                 compound="c",
                 font=button_font,
                 command=mainAdminMenu,
-                height= getButtonSize(2,2)[0],
+                height= getButtonSize(2,2,True)[0],
                 width= getButtonSize(2,2)[1])
     stansAlarm = tk.Button(root,
                 text = "Stans alarm",
@@ -742,14 +747,14 @@ def mainNurseMenu():
                 compound="c",
                 font=button_font,
                 command=lambda: sendRequest("StansAlarm",1),
-                height= getButtonSize(2,2)[0],
+                height= getButtonSize(2,2,True)[0],
                 width= getButtonSize(2,2)[1])
     
     
     editRequestRoom.grid(row = 1, column = 1, padx=padding, pady=padding)
     otherRoom.grid(row = 1, column = 2, padx=padding, pady=padding)
     stansAlarm.grid(row = 2, column = 1, padx=padding, pady=padding)
-    createReturnBtn(getButtonSize(2,2),(2,2))
+    createReturnBtn(getButtonSize(2,2,True),(2,2))
     return
 
 def mainEasyMenu():

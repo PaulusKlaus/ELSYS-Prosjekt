@@ -1,39 +1,197 @@
 Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
-
-13:10:59,Rom 301,ALARM,301,1,0:00:00,Added,1
-13:11:08,Rom 301,Toalett,301,1,0:00:00,Added,4
-13:11:12,Rom 301,Toalett,301,1,0:00:00,Increase Importance,3
-13:11:17,Rom 301,Smerte,301,1,0:00:00,Added,3
-13:11:53,Rom 301,Vann,301,1,0:00:00,Added,4
-13:11:56,Rom 301,ALARM,301,1,0:00:00,Added,1
-13:11:58,Rom 301,Toalett,301,1,0:00:00,Added,3
-13:12:13,Default User,ALARM,301,1,0:00:17,Occupied,1
-13:17:19,Default User,Toalett,301,1,0:05:21,Decrease Importance,4
-13:17:42,Rom 301,Toalett,301,1,0:00:00,Increase Importance,3
-13:17:54,Rom 301,Betjening,301,1,0:00:00,Added,3
-13:20:00,Daniel,Betjening,301,1,0:02:06,Delete,3
-13:20:02,Daniel,Vann,301,1,0:08:09,Delete,4
-16:10:53,Default User,ALARM,301,1,5:45:30,Delete,1
-16:10:55,Default User,ALARM,303,2,5:45:32,Decrease Importance,2
-16:10:57,Default User,Mat,308,1,2:35:48,Decrease Importance,2
-16:10:59,Default User,ALARM,303,2,5:45:36,Unoccupied,2
-16:11:02,Default User,Spørsmål,313,1,3:44:37,Unoccupied,3
-16:11:05,Default User,Vann,306,2,3:54:40,Delete,2
-16:11:06,Default User,Vann,315,1,3:44:41,Delete,4
-16:11:08,Default User,Spørsmål,309,1,3:44:43,Delete,4
-16:11:09,Default User,Spørsmål,307,1,3:44:44,Delete,4
-16:11:10,Default User,Vann,311,2,3:47:47,Delete,3
-16:11:12,Default User,Mat,308,1,2:36:03,Delete,2
-16:11:14,Default User,Do,305,1,3:25:05,Unoccupied,2
-16:11:16,Default User,ALARM,303,2,5:45:53,Delete,2
-16:11:18,Default User,Do,305,1,3:25:09,Decrease Importance,3
-16:11:20,Default User,Do,305,1,3:25:11,Decrease Importance,4
-16:11:23,Default User,Do,305,1,3:25:14,Delete,4
-16:11:24,Default User,Spørsmål,304,1,3:44:57,Delete,4
-16:11:25,Default User,Vann,302,1,3:45:00,Increase Importance,3
-16:11:27,Default User,Vann,302,1,3:45:02,Delete,3
-16:11:28,Default User,Spørsmål,313,1,3:45:03,Delete,3
-16:11:29,Default User,Vann,302,2,3:48:06,Delete,3
-16:12:18,Default User,Mat,308,1,2:37:09,Decrease Importance,3
-16:12:23,Default User,ALARM,301,1,5:47:00,Increase Importance,1
-16:12:37,Default User,ALARM,301,1,5:47:14,Unoccupied,1
+20:17:42,Rom 301,Hamburger,301,1,0:00:00,Added,5
+20:17:50,Daniel,Hamburger,301,1,0:00:08,Remote Delete,5
+20:18:02,Rom 301,Saft,301,1,0:00:00,Added,5
+20:18:15,Rom 303,Saft,303,1,0:00:00,Added,5
+20:18:26,Rom 305,Saft,305,1,0:00:00,Added,5
+20:18:32,Rom 305,Hamburger,305,1,0:00:00,Added,5
+20:18:33,Rom 305,Pizza,305,1,0:00:00,Added,5
+20:18:34,Rom 305,Kylling,305,1,0:00:00,Added,5
+20:18:35,Rom 305,Fisk,305,1,0:00:00,Added,5
+20:18:36,Rom 305,Pasta,305,1,0:00:00,Added,5
+20:18:40,Daniel,Pasta,305,1,0:00:04,Remote Delete,5
+20:18:40,Daniel,Fisk,305,1,0:00:05,Remote Delete,5
+20:18:40,Daniel,Kylling,305,1,0:00:06,Remote Delete,5
+20:18:40,Daniel,Pizza,305,1,0:00:07,Remote Delete,5
+20:18:40,Daniel,Hamburger,305,1,0:00:08,Remote Delete,5
+20:18:40,Daniel,Saft,305,1,0:00:14,Remote Delete,5
+20:18:49,Daniel,Saft,303,1,0:00:34,Remote Delete,5
+20:18:57,Daniel,Saft,301,1,0:00:55,Remote Delete,5
+20:19:04,Rom 301,Smerte,301,1,0:00:00,Added,4
+20:19:05,Rom 301,Smerte,301,1,0:00:00,Increase Importance,3
+20:19:07,Rom 301,Juice,301,1,0:00:00,Added,5
+20:19:08,Rom 301,Vann,301,1,0:00:00,Added,5
+20:19:09,Rom 301,Toalett,301,1,0:00:00,Added,5
+20:19:11,Rom 301,Saft,301,1,0:00:00,Added,5
+20:19:13,Rom 301,Kaffe,301,1,0:00:00,Added,5
+20:19:14,Rom 301,Te,301,1,0:00:00,Added,5
+20:19:18,Rom 301,Toalett,301,1,0:00:00,Increase Importance,4
+20:19:19,Rom 301,Betjening,301,1,0:00:00,Added,4
+20:19:20,Rom 301,Hamburger,301,1,0:00:00,Added,5
+20:19:21,Rom 301,Pizza,301,1,0:00:00,Added,5
+20:19:22,Rom 301,Kylling,301,1,0:00:00,Added,5
+20:19:23,Daniel,Kylling,301,1,0:00:01,Remote Delete,5
+20:19:23,Daniel,Pizza,301,1,0:00:02,Remote Delete,5
+20:19:23,Daniel,Hamburger,301,1,0:00:03,Remote Delete,5
+20:19:23,Daniel,Te,301,1,0:00:09,Remote Delete,5
+20:19:23,Daniel,Kaffe,301,1,0:00:10,Remote Delete,5
+20:19:23,Daniel,Saft,301,1,0:00:12,Remote Delete,5
+20:19:23,Daniel,Vann,301,1,0:00:15,Remote Delete,5
+20:19:23,Daniel,Juice,301,1,0:00:16,Remote Delete,5
+20:19:23,Daniel,Betjening,301,1,0:00:04,Remote Delete,4
+20:19:23,Daniel,Toalett,301,1,0:00:14,Remote Delete,4
+20:19:23,Daniel,Smerte,301,1,0:00:19,Remote Delete,3
+20:19:28,Rom 301,StansAlarm,301,1,0:00:00,Added,1
+20:19:33,Daniel,StansAlarm,301,1,0:00:05,Remote Delete,1
+20:19:47,Rom 301,Hjelp,301,1,0:00:00,Added,5
+20:19:53,Rom 301,Hjelp,301,1,0:00:00,Increase Importance,3
+20:19:58,Daniel,Hjelp,301,1,0:00:11,Remote Delete,3
+20:20:24,Rom 301,StansAlarm,301,1,0:00:00,Added,1
+20:20:28,Daniel,StansAlarm,301,1,0:00:04,Remote Delete,1
+20:20:42,Rom 307,Saft,307,2,0:00:00,Added,5
+20:20:47,Rom 307,Smerte,307,2,0:00:00,Added,3
+20:20:50,Rom 307,Pasta,307,2,0:00:00,Added,5
+20:21:01,Rom 304,Betjening,304,2,0:00:00,Added,4
+20:21:06,Rom 304,Smerte,304,2,0:00:00,Added,4
+20:21:10,Rom 304,Te,304,2,0:00:00,Added,5
+20:21:12,Rom 304,Kaffe,304,2,0:00:00,Added,5
+20:21:14,Rom 304,Saft,304,2,0:00:00,Added,5
+20:21:19,Daniel,Saft,304,2,0:00:05,Remote Delete,5
+20:21:19,Daniel,Kaffe,304,2,0:00:07,Remote Delete,5
+20:21:19,Daniel,Te,304,2,0:00:09,Remote Delete,5
+20:21:19,Daniel,Smerte,304,2,0:00:13,Remote Delete,4
+20:21:19,Daniel,Betjening,304,2,0:00:18,Remote Delete,4
+20:21:33,Daniel,Pasta,307,2,0:00:43,Remote Delete,5
+20:21:33,Daniel,Saft,307,2,0:00:51,Remote Delete,5
+20:21:33,Daniel,Smerte,307,2,0:00:46,Remote Delete,3
+20:21:48,Rom 307,Smerte,307,2,0:00:00,Added,3
+20:22:07,Rom 307,Hjelp,307,2,0:00:00,Added,3
+20:22:16,Daniel,Hjelp,307,2,0:00:09,Remote Delete,3
+20:22:16,Daniel,Smerte,307,2,0:00:28,Remote Delete,3
+20:22:25,Rom 307,Hjelp,307,2,0:00:00,Added,5
+20:22:27,Rom 307,Hjelp,307,2,0:00:00,Increase Importance,3
+20:22:28,Rom 307,Drikke,307,2,0:00:00,Added,5
+20:23:00,Rom 307,Pizza,307,2,0:00:00,Added,5
+20:25:22,Default User,Hjelp,307,2,0:02:57,Delete,3
+20:25:23,Default User,Drikke,307,2,0:02:55,Delete,5
+20:25:45,Daniel,Pizza,307,2,0:02:45,Remote Delete,5
+20:26:50,Rom 307,StansAlarm,307,2,0:00:00,Added,1
+20:26:52,Daniel,StansAlarm,307,2,0:00:02,Remote Delete,1
+20:26:56,Rom 307,StansAlarm,307,2,0:00:00,Added,1
+20:27:03,Daniel,StansAlarm,307,2,0:00:07,Remote Delete,1
+20:27:41,Rom 307,Hjelp,307,1,0:00:00,Added,5
+20:27:42,Rom 307,Hjelp,307,1,0:00:00,Increase Importance,3
+20:27:47,Daniel,Hjelp,307,1,0:00:06,Remote Delete,3
+13:40:17,Rom 301,Smerte,301,1,0:00:00,Added,3
+13:45:36,Rom 301,Toalett,301,1,0:00:00,Added,5
+13:45:37,Rom 301,Vann,301,1,0:00:00,Added,5
+13:45:38,Rom 301,Smerte,301,1,0:00:00,Added,3
+13:45:46,Daniel,Vann,301,1,0:00:09,Remote Delete,5
+13:45:46,Daniel,Toalett,301,1,0:00:10,Remote Delete,5
+13:45:46,Daniel,Smerte,301,1,0:00:08,Remote Delete,3
+13:45:58,Rom 301,Vann,301,1,0:00:00,Added,5
+13:46:01,Rom 301,Juice,301,1,0:00:00,Added,5
+13:46:02,Rom 301,Smerte,301,1,0:00:00,Added,3
+13:46:08,Daniel,Juice,301,1,0:00:07,Remote Delete,5
+13:46:08,Daniel,Vann,301,1,0:00:10,Remote Delete,5
+13:46:08,Daniel,Smerte,301,1,0:00:06,Remote Delete,3
+13:46:12,Rom 301,Smerte,301,1,0:00:00,Added,4
+13:46:14,Rom 301,Smerte,301,1,0:00:00,Increase Importance,3
+13:46:22,Rom 301,Toalett,301,1,0:00:00,Added,5
+13:46:24,Rom 301,Toalett,301,1,0:00:00,Increase Importance,4
+13:46:26,Rom 301,Pasta,301,1,0:00:00,Added,5
+13:46:28,Rom 301,Pizza,301,1,0:00:00,Added,5
+13:46:29,Rom 301,Kylling,301,1,0:00:00,Added,5
+13:46:30,Rom 301,Hamburger,301,1,0:00:00,Added,5
+13:46:40,Rom 307,Vann,307,1,0:00:00,Added,5
+13:46:42,Daniel,Vann,307,1,0:00:02,Remote Delete,5
+13:46:55,Rom 307,Juice,307,1,0:00:00,Added,5
+13:47:08,Rom 302,Vann,302,1,0:00:00,Added,5
+13:47:22,Default User,Toalett,301,1,0:01:00,Occupied,4
+13:47:24,Default User,Toalett,301,1,0:01:02,Delete,4
+13:47:32,Daniel,Smerte,301,1,0:01:20,Delete,3
+13:47:34,Daniel,Pasta,301,1,0:01:08,Delete,5
+13:47:35,Daniel,Pizza,301,1,0:01:07,Delete,5
+13:47:45,Rom 308,Pizza,308,1,0:00:00,Added,5
+13:47:47,Rom 308,Betjening,308,1,0:00:00,Added,4
+13:47:49,Rom 308,Smerte,308,1,0:00:00,Added,3
+13:48:01,Daniel,Pizza,308,1,0:00:16,Remote Delete,5
+13:48:01,Daniel,Betjening,308,1,0:00:14,Remote Delete,4
+13:48:01,Daniel,Smerte,308,1,0:00:12,Remote Delete,3
+22:15:50,Rom 301,Juice,301,1,0:00:00,Added,5
+22:15:55,Rom 301,Pasta,301,1,0:00:00,Added,5
+22:15:58,Daniel,Pasta,301,1,0:00:03,Remote Delete,5
+22:15:58,Daniel,Juice,301,1,0:00:08,Remote Delete,5
+22:16:01,Rom 301,Toalett,301,1,0:00:00,Added,5
+22:16:04,Rom 301,Toalett,301,1,0:00:00,Increase Importance,4
+22:16:10,Rom 315,StansAlarm,315,1,0:00:00,Added,1
+22:16:15,Rom 315,Smerte,315,1,0:00:00,Added,3
+22:16:22,Daniel,Smerte,315,1,0:00:07,Remote Delete,3
+22:16:22,Daniel,StansAlarm,315,1,0:00:12,Remote Delete,1
+22:16:24,Rom 315,Betjening,315,1,0:00:00,Added,4
+22:16:27,Rom 315,Pasta,315,1,0:00:00,Added,5
+22:16:28,Rom 315,Smerte,315,1,0:00:00,Added,4
+22:16:31,Rom 315,Juice,315,1,0:00:00,Added,5
+22:16:33,Rom 315,Toalett,315,1,0:00:00,Added,4
+22:16:36,Rom 315,StansAlarm,315,1,0:00:00,Added,1
+22:16:43,Rom 313,Vann,313,1,0:00:00,Added,5
+22:16:52,Rom 305,Vann,305,1,0:00:00,Added,5
+22:16:57,Daniel,Vann,305,1,0:00:05,Remote Delete,5
+22:17:02,Rom 305,Vann,305,1,0:00:00,Added,5
+22:17:25,Default User,Vann,313,1,0:00:42,Occupied,5
+22:17:29,Default User,Vann,305,1,0:00:27,Delete,5
+22:17:30,Default User,Vann,313,1,0:00:47,Delete,5
+22:17:33,Default User,StansAlarm,315,1,0:00:57,Delete,1
+22:17:38,Rom 305,Juice,305,1,0:00:00,Added,5
+22:17:43,Default User,Juice,315,1,0:01:12,Delete,5
+22:17:44,Default User,Pasta,315,1,0:01:17,Delete,5
+22:18:01,Daniel,Juice,305,1,0:00:23,Remote Delete,5
+22:18:04,Default User,Toalett,301,1,0:02:03,Delete,4
+22:18:05,Default User,Betjening,315,1,0:01:41,Delete,4
+22:18:07,Default User,Smerte,315,1,0:01:39,Delete,4
+22:18:09,Default User,Toalett,315,1,0:01:36,Delete,4
+22:21:37,Rom 305,Betjening,305,1,0:00:00,Added,4
+22:21:40,Rom 305,StansAlarm,305,1,0:00:00,Added,1
+22:21:42,Rom 305,Smerte,305,1,0:00:00,Added,4
+22:21:46,Default User,StansAlarm,305,1,0:00:06,Delete,1
+22:21:48,Default User,Betjening,305,1,0:00:11,Delete,4
+22:21:49,Default User,Smerte,305,1,0:00:07,Delete,4
+22:21:51,Rom 305,Juice,305,1,0:00:00,Added,5
+22:21:52,Rom 305,Vann,305,1,0:00:00,Added,5
+22:21:53,Rom 305,Saft,305,1,0:00:00,Added,5
+22:21:54,Rom 305,Te,305,1,0:00:00,Added,5
+22:21:54,Rom 305,Kaffe,305,1,0:00:00,Added,5
+22:21:56,Daniel,Kaffe,305,1,0:00:02,Remote Delete,5
+22:21:56,Daniel,Te,305,1,0:00:02,Remote Delete,5
+22:21:56,Daniel,Saft,305,1,0:00:03,Remote Delete,5
+22:21:56,Daniel,Vann,305,1,0:00:04,Remote Delete,5
+22:21:56,Daniel,Juice,305,1,0:00:05,Remote Delete,5
+22:22:01,Rom 305,Hjelp,305,1,0:00:00,Added,3
+22:22:04,Rom 305,StansAlarm,305,1,0:00:00,Added,1
+22:22:09,Daniel,Hjelp,305,1,0:00:08,Remote Delete,3
+22:22:09,Daniel,StansAlarm,305,1,0:00:05,Remote Delete,1
+22:22:23,Rom 305,Smerte,305,1,0:00:00,Added,4
+22:22:24,Rom 305,Betjening,305,1,0:00:00,Added,4
+22:22:29,Rom 305,Te,305,1,0:00:00,Added,5
+22:22:30,Rom 305,Kylling,305,1,0:00:00,Added,5
+22:22:32,Rom 305,Toalett,305,1,0:00:00,Added,4
+22:22:34,Rom 305,StansAlarm,305,1,0:00:00,Added,1
+22:22:44,Daniel,Kylling,305,1,0:00:14,Remote Delete,5
+22:22:44,Daniel,Te,305,1,0:00:15,Remote Delete,5
+22:22:44,Daniel,Toalett,305,1,0:00:12,Remote Delete,4
+22:22:44,Daniel,Betjening,305,1,0:00:20,Remote Delete,4
+22:22:44,Daniel,Smerte,305,1,0:00:21,Remote Delete,4
+22:22:44,Daniel,StansAlarm,305,1,0:00:10,Remote Delete,1
+22:22:50,Rom 305,Hjelp,305,1,0:00:00,Added,5
+22:22:51,Rom 305,Hjelp,305,1,0:00:00,Increase Importance,3
+22:22:51,Rom 305,Drikke,305,1,0:00:00,Added,5
+22:22:53,Daniel,Drikke,305,1,0:00:02,Remote Delete,5
+22:22:53,Daniel,Hjelp,305,1,0:00:03,Remote Delete,3
+22:22:54,Rom 305,Hjelp,305,1,0:00:00,Added,3
+22:22:55,Rom 305,Drikke,305,1,0:00:00,Added,5
+22:23:07,Daniel,Drikke,305,1,0:00:12,Remote Delete,5
+22:23:07,Daniel,Hjelp,305,1,0:00:13,Remote Delete,3
+22:24:19,Rom 306,Smerte,306,1,0:00:00,Added,4
+22:24:22,Rom 306,Vann,306,1,0:00:00,Added,5
+22:24:31,Daniel,Vann,306,1,0:00:09,Remote Delete,5
+22:24:31,Daniel,Smerte,306,1,0:00:12,Remote Delete,4
