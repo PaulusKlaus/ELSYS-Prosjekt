@@ -442,3 +442,5 @@ Error: logEvent:Removed does not exist
 13:23:30 - Daniel slettet forespørsel med kort av type Pasta for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:06(T:M:S)
 13:23:30 - Daniel slettet forespørsel med kort av type Betjening for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:05(T:M:S)
 13:23:30 - Daniel slettet forespørsel med kort av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:03(T:M:S)
+14:02:54 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist

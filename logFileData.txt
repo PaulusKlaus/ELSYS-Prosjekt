@@ -443,3 +443,5 @@ Tid,Bruker,Oppgave,Rom,Seng,Totaltid,Loggtype,hastegrad
 13:23:30,Daniel,Pasta,301,1,0:00:06,Remote Delete,5
 13:23:30,Daniel,Betjening,301,1,0:00:05,Remote Delete,4
 13:23:30,Daniel,Smerte,301,1,0:00:03,Remote Delete,3
+14:02:54,Rom 301,Vann,301,1,0:00:00,Added,5
+14:02:56,Rom 301,Vann,301,1,0:00:02,Removed,5
