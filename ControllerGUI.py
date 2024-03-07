@@ -35,6 +35,7 @@ def useData(recievedData):
         isEqual = False
         update = True
         recievedData = recievedData.split(",")
+        print(f"recieved Data:{recievedData}")
         recivedDict ={"Rom":int(recievedData[0]),
                             "Seng":int(recievedData[1]),
                             "Hva":recievedData[2],
@@ -42,7 +43,30 @@ def useData(recievedData):
                             "Tid":cf.getCurrentTime(),
                             "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
                             "ID": 99}
-        if recievedData[3] != "0":         
+        print(f"hastegrad ={recievedData[3]}")
+        if  recievedData[3]=="-1":
+            print("Removing request")
+            for i in range(len(requests)-1, -1, -1):
+                if requests[i].get('Rom') == recivedDict.get('Rom') and requests[i].get('Seng') == recivedDict.get('Seng') and requests[i].get('Hva') == recivedDict.get('Hva'):
+                    cf.fileWrite("logFileData.txt", cf.logStringData(f"Rom {recivedDict.get('Rom')}", requests[i], "Removed", cf.getCurrentTime()))
+                    cf.fileWrite("logFileText.txt", cf.logStringText(f"Rom {recivedDict.get('Rom')}", requests[i], "Removed", cf.getCurrentTime()))
+                    requests.pop(i)
+                    print("Request removed")
+                    cf.sort_Hastegrad_ID_Time(requests)
+                    for i in menubuttons:
+                        i.pack_forget()
+                    for i in buttons:
+                        i.pack_forget()
+                    
+                    updateButtons()
+                    for i in buttons:
+                        i.pack(fill=tk.X)
+                    for i in range(len(romMerking)):
+                        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                            y=cf.roomPosition(requests[i].get('Rom'))[1])
+                    cf.print_requests(requests)
+            
+        elif recievedData[3] != "0":         
             for i in requests:
                 if i.get('Rom')== recivedDict.get('Rom') and i.get('Seng')== recivedDict.get('Seng') and i.get('Hva')== recivedDict.get('Hva'):
                     update = False
@@ -71,10 +95,9 @@ def useData(recievedData):
                 for i in buttons:
                     i.pack(fill=tk.X)
                 for i in range(len(romMerking)):
-                    print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-                    romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                                        y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
-                #cf.print_requests(requests)
+                    romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                        y=cf.roomPosition(requests[i].get('Rom'))[1])
+                cf.print_requests(requests)
         else:
             indexlist = []
             for index,i in enumerate(requests):
@@ -96,13 +119,13 @@ def useData(recievedData):
             for i in buttons:
                 i.pack(fill=tk.X)
             for i in range(len(romMerking)):
-                print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-                romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                                    y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
-            #cf.print_requests(requests)
+                romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                                    y=cf.roomPosition(requests[i].get('Rom'))[1])
+            cf.print_requests(requests)
 
     except:
         print("Data could not be used")
+        print("Here")
         pass
 def receive_data():
     global client
@@ -214,7 +237,7 @@ menubuttons = []
 def buttonFunction(buttonIndex):
     global currentButton
     currentButton = buttonIndex+1
-    print(f"currentButton is : {currentButton}")
+    print(currentButton)
     if requests[buttonIndex].get('Occupied'):
         button_texts[3]= "Fjern tilstedeværelse"
     else:
@@ -275,9 +298,8 @@ def changeOccupancy():
     for i in buttons:
         i.pack(fill = tk.X)
     for i in range(len(romMerking)):
-        print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-        romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
     return
 def get_lowest_hastegrad_requests(requests):
     lowest_hastegrad_requests = []
@@ -303,16 +325,11 @@ def updateButtons():
     global buttons
     global romMerking
     global lowest_hastegrad_requests
-    for label in romMerking:
+    for i, label in enumerate(romMerking):
         label.place_forget()
     buttons.clear()
     romMerking.clear()
-    
-    # Get the requests with the lowest hastegrad
-    lowest_hastegrad_requests = get_lowest_hastegrad_requests(requests)
-    print(f"Lowest hastegrad requests: {lowest_hastegrad_requests}")
     for index, i in enumerate(requests):
-        print(f"updating: {i}")
         buttons.append(tk.Button(left_frame,
                 command=lambda index=index: buttonFunction(index),
                 text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
@@ -321,7 +338,7 @@ def updateButtons():
                 pady=10,
                 padx=10))
     
-    for i in lowest_hastegrad_requests:
+    for i in get_lowest_hastegrad_requests(requests):
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
                 font=romMerkingFont,
@@ -354,9 +371,8 @@ def okHastegrad():
     for i in buttons:
         i.pack(fill = tk.X)
     for i in range(len(romMerking)):
-        print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-        romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])   
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])   
 def senkHastegrad():
     global requests
     
@@ -379,9 +395,8 @@ def senkHastegrad():
         i.pack_forget()
     updateButtons()
     for i in range(len(romMerking)):
-        print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-        romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
     for i in buttons:
         i.pack(fill = tk.X)
 def fjernRequest():
@@ -411,9 +426,8 @@ def fjernRequest():
     for i in buttons:
         i.pack(fill=tk.X)
     for i in range(len(romMerking)):
-        print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-        romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
+        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                            y=cf.roomPosition(requests[i].get('Rom'))[1])
 
 
 
@@ -462,13 +476,11 @@ for index, i in enumerate(requests):
              padx=romMerkingPadx,
              pady=romMerkingPady
              ))
-    updateButtons()
 for i in buttons:
     i.pack(fill = tk.X)
 for i in range(len(romMerking)):
-    print(f"x={cf.roomPosition(requests[i].get('Rom'))[0]} y={cf.roomPosition(requests[i].get('Rom'))[1]}")
-    romMerking[i].place(x=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[0],
-                        y=cf.roomPosition(lowest_hastegrad_requests[i].get('Rom'))[1])
+    romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
+                        y=cf.roomPosition(requests[i].get('Rom'))[1])
 receive_thread = threading.Thread(target=receive_data)
 receive_thread.start()
 root.mainloop()
