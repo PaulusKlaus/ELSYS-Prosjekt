@@ -444,3 +444,59 @@ Error: logEvent:Removed does not exist
 13:23:30 - Daniel slettet forespørsel med kort av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:03(T:M:S)
 14:02:54 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
 Error: logEvent:Removed does not exist
+14:39:05 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+10:54:27 - Default User markerte rom 305 seng 1 med hastegrad 3 som sykepleier ikke tilstede, etter tid: -1 day, 22:08:18(T:M:S)
+10:54:29 - Default User markerte rom 308 seng 1 med hastegrad 2 som sykepleier ikke tilstede, etter tid: -1 day, 21:19:20(T:M:S)
+10:54:31 - Default User markerte rom 315 seng 1 med hastegrad 5 som sykepleier ikke tilstede, etter tid: -1 day, 22:28:06(T:M:S)
+10:54:35 - Default User markerte rom 301 seng 1 med hastegrad 2 som sykepleier ikke tilstede, etter tid: 0:29:12(T:M:S)
+10:54:38 - Default User markerte rom 313 seng 1 med hastegrad 4 som sykepleier ikke tilstede, etter tid: -1 day, 22:28:13(T:M:S)
+10:54:46 - Default User markerte rom 307 seng 1 med hastegrad 5 som sykepleier ikke tilstede, etter tid: -1 day, 22:28:21(T:M:S)
+11:05:06 - Rom 301 la til forespørsel av type Juice for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:05:13 - Rom 301 la til forespørsel av type Te for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+Error: logEvent:Removed does not exist
+11:05:22 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:08:04 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:08:16 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:00(T:M:S)
+11:08:20 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:11:04 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:11:27 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:14:50 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:00(T:M:S)
+11:14:57 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:17:52 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:00(T:M:S)
+11:17:56 - Rom 301 økte hastegraden for forespørsel av type Smerte for rom 301 seng 1 til hastegrad 3, eter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:18:06 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:18:09 - Rom 301 økte hastegraden for forespørsel av type Toalett for rom 301 seng 1 til hastegrad 4, eter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:18:15 - Rom 301 la til forespørsel av type Hamburger for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:18:24 - Rom 301 la til forespørsel av type Pizza for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:19:21 - Rom 301 la til forespørsel av type Hamburger for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:19:25 - Rom 301 la til forespørsel av type Pizza for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:19:30 - Rom 301 la til forespørsel av type Juice for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:19:38 - Rom 301 la til forespørsel av type StansAlarm for rom 301 seng 1 med hastegrad 1 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:21:08 - Rom 301 la til forespørsel av type StansAlarm for rom 301 seng 1 med hastegrad 1 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:21:19 - Rom 301 la til forespørsel av type Hjelp for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:28:12 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:00(T:M:S)
+11:28:23 - Default User økte hastegraden for forespørsel av type Smerte for rom 301 seng 1 til hastegrad 2, eter tid: 0:00:11(T:M:S)
+11:28:25 - Default User slettet forespørsel manuelt av type Smerte for rom 301 seng 1 med hastegrad 2 etter tid: 0:00:13(T:M:S)
+11:28:33 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:28:54 - Rom 313 la til forespørsel av type Pasta for rom 313 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:29:06 - Rom 313 la til forespørsel av type Betjening for rom 313 seng 1 med hastegrad 4 etter tid: 0:00:00(T:M:S)
+11:29:42 - Default User markerte rom 313 seng 1 med hastegrad 4 som sykepleier tilstede, etter tid: 0:00:36(T:M:S)
+11:29:57 - Rom 313 la til forespørsel av type Juice for rom 313 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+11:44:40 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)
+Error: logEvent:Removed does not exist
+11:44:55 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:00(T:M:S)

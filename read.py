@@ -18,8 +18,12 @@ block_addrs = [8, 9, 10]
 
 GPIO.setwarnings(False)  # Suppress GPIO warnings
 id, text = read(trailer_block, key, block_addrs)
-while True: 
+ 
+def getCardId():
+    global id
+    functionID = None
     while not id:
         id, text = read(trailer_block, key, block_addrs)
-        print(id)
-        id = None
+    functionID = id
+    id = None
+    return functionID
