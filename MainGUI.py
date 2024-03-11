@@ -244,6 +244,10 @@ def returnButton():
             mainAdminMenu()
         elif currentMenu == "ChangeRoom"or currentMenu == "ChangeBed":
             romOrBed()
+        elif currentMenu == "mainEasyMenu":
+            mainEasyMenu()
+        elif currentMenu == "mainMediumMenu":
+            mainMediumMenu()
         else:
             print("Something went wrong")
     
