@@ -6,6 +6,7 @@ from tkinter import Menu
 import threading
 import time
 import read as RFID
+
 scaler = 480/800
 screen_width = 715
 screen_height = 450
@@ -17,6 +18,7 @@ returnCorrectionHeight = 15
 padding = 0
 clientEnable = True
 acceptedCards =[15590086982]
+lastCardScanned = 0
 currentMenu = "MainMenu"
 currentMainMenu = "MainMenu"
 currentCard = 123
@@ -673,27 +675,51 @@ def changeBed():
     createReturnBtn(getButtonSize(2,2),(2,2))
 
 def addApprovedCard():
+    global lastCardScanned
+    lastCardScanned = 0
+    append = True
     showPopup("Hold kortet mot leseren")
-    card = RFID.getCardId()
-    if card not in acceptedCards:
-        acceptedCards.append(card)
-        showPopup(f"ID kort lagt til")
-        returnButton()
+    start_time = time.time()
+
+    while lastCardScanned == 0:
+        if time.time() - start_time > 10:
+            append = False
+            break
+    if append:       
+        if lastCardScanned not in acceptedCards:
+            acceptedCards.append(lastCardScanned)
+            showPopup(f"ID kort lagt til")
+            returnButton()
+        else:
+            showPopup(f"ID kort allerede lagt til","#F3D739")
+            returnButton()
     else:
-        showPopup(f"ID kort allerede lagt til","#F3D739")
+        showPopup(f"Ingen kort scannet","#F3D739")
         returnButton()
 
 def removeApprovedCard():
+    global lastCardScanned
+    lastCardScanned = 0
+    remove = True
+
     showPopup("Hold kortet mot leseren")
-    card = RFID.getCardId()
-    try:
-        acceptedCards.remove(card)
-        showPopup(f"ID kort fjernet","#EC5757")
+    start_time = time.time()
+
+    while lastCardScanned == 0:
+        if time.time() - start_time > 10:
+            remove = False
+            break
+    if remove:
+        try:
+            acceptedCards.remove(lastCardScanned)
+            showPopup(f"ID kort fjernet","#EC5757")
+            returnButton()
+        except:
+            showPopup(f"ID kort ikke funnet","#F3D739")
+            returnButton()
+    else:
+        showPopup(f"Ingen kort scannet","#F3D739")
         returnButton()
-    except:
-        showPopup(f"ID kort ikke funnet","#F3D739")
-        returnButton()
-  
 def addOrRemoveCard():
     for widget in root.winfo_children():
         widget.destroy()
@@ -1110,8 +1136,8 @@ def MainMenu():
 MainMenu()
 
 def useRFID():
+    global lastCardScanned
     read = True
-    last_card = None
     start_time = time.time()
     card = 1
     while True:
@@ -1124,6 +1150,7 @@ def useRFID():
         
         if read:
             card = RFID.getCardId()
+            lastCardScanned = card
             start_time = time.time()
             print(f"Card read: {card}")
             if card in acceptedCards:
@@ -1131,7 +1158,7 @@ def useRFID():
                 mainNurseMenu()
             else:
                 print("Card denied")
-            # Rest of your code for processing the scanned card
+    
 RFIDthread = threading.Thread(target=useRFID)
 RFIDthread.start()
 
