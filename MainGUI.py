@@ -5,6 +5,7 @@ import socket
 from tkinter import Menu
 import threading
 import time
+import os
 import read as RFID
 
 scaler = 480/800
@@ -15,14 +16,17 @@ titleWidth = 34
 returnCorrectionWidth3 = 70
 returnCorrectionWidth2 = 45
 returnCorrectionHeight = 15
+timeLastPressed = 0
+inNurseMenu = False
 padding = 0
-clientEnable = True
-acceptedCards =[15590086982]
+clientEnable = False
+acceptedCards =[184266225316,646484204159]
 lastCardScanned = 0
+lastUser = 0
 currentMenu = "MainMenu"
 currentMainMenu = "MainMenu"
 currentCard = 123
-user = "Daniel"
+user = ["Daniel"]
 requestsRoom = []
 def ChangeUser(new_user):
     global user
@@ -58,6 +62,8 @@ def getButtonString(hva,hastegrad):
                 newHva = "Smerte"
     elif hva == "Haster" or hva == "Haster ikke":
             newHva = "Toalett"
+    elif hva == "Trenger hjelp nå" or hva == "Trenger hjelp senere":
+        newHva = "Hjelp"
     if isRequestInRoom(rom, seng, newHva, hastegrad):
         if hva == "Mye smerte" or hva == "Litt smerte" or hva == "Haster" or hva == "Haster ikke":
             if hva == "Mye smerte" or hva == "Litt smerte":
@@ -65,6 +71,9 @@ def getButtonString(hva,hastegrad):
             elif hva == "Haster" or hva == "Haster ikke":
                 hva = "Toalett"
             return f"Fjern betjening\n{hva}"
+        if hva == "Trenger hjelp nå" or hva == "Trenger hjelp senere":
+            hva = "Hjelp"
+            return f"Fjern\n{hva} ønske"
         else:
             return f"Fjern\n{hva} ønske"
     elif hva == "Mye smerte":
@@ -190,10 +199,11 @@ def sendRequest(request, hastegrad):
                         print("Hastegrad endret")
                         remove = False
                         show = "sent"
+                        i['Hastegrad'] = receivedDict.get('Hastegrad')
                         if clientEnable != True:
                             showSent()
-                            returnButton
-                        i['Hastegrad'] = receivedDict.get('Hastegrad')
+                            returnButton()
+                        
                     isEqual = True
             if not isEqual:
                 requestsRoom.append(receivedDict)
@@ -223,6 +233,8 @@ def sendRequest(request, hastegrad):
             showRemoved()
             returnButton()
 def returnButton():
+        print(f"CurrentMenu: {currentMenu}")
+        print(f"CurrentMainMenu: {currentMainMenu}")
         if currentMenu == "MainMenu":
             MainMenu()
             print("Something went wrong")
@@ -237,16 +249,16 @@ def returnButton():
                 MainMenu()
             else:
                 print("Something went wrong")
-            
+           
         elif currentMenu == "MainAdminMenu":
             mainNurseMenu()
         elif currentMenu == "ChangeDifficulty" or currentMenu == "RomOrBed" or currentMenu == "AddOrRemoveCard":
             mainAdminMenu()
         elif currentMenu == "ChangeRoom"or currentMenu == "ChangeBed":
-            romOrBed()
-        elif currentMenu == "mainEasyMenu":
+            mainAdminMenu()
+        elif currentMenu == "EasyMenu":
             mainEasyMenu()
-        elif currentMenu == "mainMediumMenu":
+        elif currentMenu == "MediumMenu":
             mainMediumMenu()
         else:
             print("Something went wrong")
@@ -268,6 +280,8 @@ def createReturnBtn(btn_size = (button_height,button_width),pos = (2,3)):
     return
 
 def Smerte():
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -306,6 +320,8 @@ def Smerte():
     return
 
 def Drikke():
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -378,6 +394,8 @@ def Drikke():
 
     createReturnBtn(getButtonSize(3,2,True),(2,3))
 def toalett():
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -414,6 +432,8 @@ def toalett():
     createReturnBtn(getButtonSize(2,2,True),(2,2))
     return
 def mat():
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -484,6 +504,10 @@ def mat():
     createReturnBtn(getButtonSize(3,2,True),(2,3))
     return
 def changeRoom():
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -621,6 +645,10 @@ def changeRoom():
     r313.grid(row = 3, column = 3, padx=padding, pady=padding)
     r315.grid(row = 3, column = 4, padx=padding, pady=padding)
 def romOrBed():
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -648,12 +676,22 @@ def romOrBed():
     rom.grid(row = 1, column = 1, padx=padding, pady=padding)
     bed.grid(row = 1, column = 2, padx=padding, pady=padding)
     createReturnBtn(getButtonSize(2,2),(2,2))
-
 def changeBed():
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
     currentMenu = "ChangeBed"
+    title = tk.Label(root,
+                     text = "Velg Seng:",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    title.grid(row=0, column = 1, columnspan=4)
+
     bed1 = tk.Button(root,
                 text = "Seng 1",
                 bg="#7A3B39",
@@ -662,8 +700,8 @@ def changeBed():
                 compound="c",
                 font=button_font,
                 command=lambda: setBed(1),
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     bed2 = tk.Button(root,
                 text = "Seng 2",
                 bg="#7A3B39",
@@ -672,12 +710,11 @@ def changeBed():
                 compound="c",
                 font=button_font,
                 command=lambda: setBed(2),
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     bed1.grid(row = 1, column = 1, padx=padding, pady=padding)
     bed2.grid(row = 1, column = 2, padx=padding, pady=padding)
-    createReturnBtn(getButtonSize(2,2),(2,2))
-
+    createReturnBtn(getButtonSize(2,2,True),(2,2))
 def addApprovedCard():
     global lastCardScanned
     lastCardScanned = 0
@@ -686,12 +723,15 @@ def addApprovedCard():
     start_time = time.time()
 
     while lastCardScanned == 0:
-        if time.time() - start_time > 10:
+        if time.time() - start_time > 5:
             append = False
             break
+        time.sleep(0.5)
     if append:       
         if lastCardScanned not in acceptedCards:
             acceptedCards.append(lastCardScanned)
+            enterUsername()
+            inNurseMenu = True
             showPopup(f"ID kort lagt til")
             returnButton()
         else:
@@ -700,35 +740,126 @@ def addApprovedCard():
     else:
         showPopup(f"Ingen kort scannet","#F3D739")
         returnButton()
+userSaved = False
+def saveUsername(username):
+    global user
+    global userSaved
+    userSaved = True
+    user.append(username)
+def createButton(root,key,row,col,command,width =0.8/10):
+    button = tk.Button(root,
+                text = key,
+                bg="#7BCAE4",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=command)
+    xpos = 0.05 + (col)*(0.8/10)
+    ypos = 0.5 + (row)*(0.8/5)
+    height = 0.8/5
+    button.place(relx=xpos, rely=ypos, relwidth=width, relheight=height)
 
+currentName = ""
+def buttonCommand(key,entry):
+    global currentName
+    print("Button pressed:", key)  # Add this line for debugging
+    if key == "back":
+        currentName = currentName[:-1]
+    else:
+        currentName += key
+    entry.delete(0, tk.END)  # Clear the current text in the entry widget
+    entry.insert(0, currentName)  # Insert the updated current name
+    root.update()  # Update the root window to ensure label is drawn before the main loop continues
+
+def enterUsername():
+    global inNurseMenu
+    global currentName
+    global userSaved
+    
+    currentName = ""
+    inNurseMenu = False
+    userSaved = False
+    
+    top_frame = tk.Frame(root, bg="#71AFED")
+    top_frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
+    
+    username_entry = tk.Entry(top_frame, font=("Helvetica", 20))
+    username_entry.place(relx=0.2, rely=0.05, relwidth=0.6, relheight=0.2)
+    
+    submit = tk.Button(top_frame, text="Lagre", font=("Helvetica", 20),
+                       bg="#ffffff", fg="#000000",
+                       command=lambda: saveUsername(username_entry.get()))
+    submit.place(relx=0.825, rely=0.075, relwidth=0.15, relheight=0.15)
+    
+    row1 = ["Q","W","E","R","T","Y","U","I","O","P","Å"]
+    for col, key in enumerate(row1):
+        createButton(top_frame, key, 0, col, lambda k=key: buttonCommand(k,username_entry))
+
+    row2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ø", "Æ"]
+    for col, key in enumerate(row2):
+        createButton(top_frame, key, 1, col, lambda k=key: buttonCommand(k,username_entry))
+
+    row31 = ["Z", "X", "C"]
+    for col, key in enumerate(row31):
+        createButton(top_frame, key, 2, col, lambda k=key: buttonCommand(k,username_entry))
+
+    createButton(top_frame, " ", 2, 3, lambda k=" ": buttonCommand(k,username_entry), 0.8 / 10 * 4)
+
+    row32 = ["V", "B", "N", "M"]
+    for col, key in enumerate(row32, start=7):
+        createButton(top_frame, key, 2, col, lambda k=key: buttonCommand(k,username_entry))
+    
+    #backspace
+    button = tk.Button(top_frame, text="<--", bg="#7BCAE4", fg=buttonTextColor,
+                       image=pixelVirtual, compound="c", font=button_font,
+                       command=lambda: buttonCommand("back",username_entry))
+    button.place(relx=0.05 + 8*(0.8/10), rely=0.5-0.8/5, relwidth=(0.8/10)*3, relheight=0.8/5)
+    
+    root.update()  # Update the root window to ensure label is drawn before the main loop continues
+    submit.wait_variable(userSaved)
 def removeApprovedCard():
     global lastCardScanned
     lastCardScanned = 0
     remove = True
-
-    showPopup("Hold kortet mot leseren")
-    start_time = time.time()
-
-    while lastCardScanned == 0:
-        if time.time() - start_time > 10:
-            remove = False
-            break
-    if remove:
-        try:
-            acceptedCards.remove(lastCardScanned)
-            showPopup(f"ID kort fjernet","#EC5757")
-            returnButton()
-        except:
-            showPopup(f"ID kort ikke funnet","#F3D739")
-            returnButton()
-    else:
-        showPopup(f"Ingen kort scannet","#F3D739")
+    if len(acceptedCards) == 1:
+        showPopup(f"Kan ikke fjerne siste kort","#D33D26")
         returnButton()
+    else:
+        showPopup("Hold kortet mot leseren")
+        start_time = time.time()
+
+        while lastCardScanned == 0:
+            if time.time() - start_time > 5:
+                remove = False
+                break
+            time.sleep(0.5)
+        if remove:
+            try:
+                acceptedCards.remove(lastCardScanned)
+                showPopup(f"ID kort fjernet","#EC5757")
+                returnButton()
+            except:
+                showPopup(f"ID kort ikke funnet","#F3D739")
+                returnButton()
+        else:
+            showPopup(f"Ingen kort scannet","#F3D739")
+            returnButton()
 def addOrRemoveCard():
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
     currentMenu = "AddOrRemoveCard"
+    title = tk.Label(root,
+                     text = "Legg til eller fjern kort",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    title.grid(row=0, column = 1, columnspan=4)
     addCard = tk.Button(root,
                 text = "Legg til kort",
                 bg="#7BCAE4",
@@ -737,8 +868,8 @@ def addOrRemoveCard():
                 compound="c",
                 font=button_font,
                 command=addApprovedCard,
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     removeCard = tk.Button(root,
                 text = "Fjern kort",
                 bg="#DE817D",
@@ -747,14 +878,18 @@ def addOrRemoveCard():
                 compound="c",
                 font=button_font,
                 command=removeApprovedCard,
-                height= getButtonSize(2,2)[0],
-                width=  getButtonSize(2,2)[1])
+                height= getButtonSize(2,2,True)[0],
+                width=  getButtonSize(2,2,True)[1])
     addCard.grid(row = 1, column = 1, padx=padding, pady=padding)
     removeCard.grid(row = 1, column = 2, padx=padding, pady=padding)
-    createReturnBtn(getButtonSize(2,2),(2,2))
-
+    createReturnBtn(getButtonSize(2,2,True),(2,2))
+def quitFunc():
+    root.quit()
 def mainAdminMenu():
-
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -767,42 +902,69 @@ def mainAdminMenu():
     title.grid(row=0, column = 1, columnspan=4)
 
     changeRoomButton = tk.Button(root,
-                text = "Endre rom/seng",
+                text = "Endre rom",
                 bg="#7BCAE4",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=romOrBed,
-                height= getButtonSize(2,2,True)[0],
-                width=  getButtonSize(2,2,True)[1])
+                command=changeRoom,
+                height= getButtonSize(3,2,True)[0],
+                width=  getButtonSize(3,2,True)[1])
     changeBedButton = tk.Button(root,
-                text = "Legg til/fjern kort",
+                text = "Endre seng",
+                bg="#DE817D",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=changeBed,
+                height= getButtonSize(3,2,True)[0],
+                width=  getButtonSize(3,2,True)[1])
+    addRemoveCard = tk.Button(root,
+                text = "Legg til/\nfjern kort",
                 bg="#DE817D",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
                 command=addOrRemoveCard,
-                height= getButtonSize(2,2,True)[0],
-                width=  getButtonSize(2,2,True)[1])
+                height= getButtonSize(3,2,True)[0],
+                width=  getButtonSize(3,2,True)[1])
     changeDifficultyButton = tk.Button(root,
-                text = "Endre Vanskelighetsgrad",
+                text = "Endre\nvanskelighetsgrad",
                 bg="#EAC471",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
-                font=button_font,
+                font=("Helvetica", 23),
                 command=changeDifficulty,
-                height= getButtonSize(2,2,True)[0],
-                width= getButtonSize(2,2,True)[1])
+                height= getButtonSize(3,2,True)[0],
+                width= getButtonSize(3,2,True)[1])
+    closeProgram = tk.Button(root,
+                text = "Lukk program",
+                bg="#FF5733",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=quitFunc,
+                height= getButtonSize(3,2,True)[0],
+                width=  getButtonSize(3,2,True)[1])
     
     changeRoomButton.grid(row = 1, column = 1, padx=padding, pady=padding)
     changeBedButton.grid(row = 1, column = 2, padx=padding, pady=padding)
+    addRemoveCard.grid(row = 1, column = 3, padx=padding, pady=padding)
     changeDifficultyButton.grid(row = 2, column = 1, padx=padding, pady=padding)
-    createReturnBtn(getButtonSize(2,2,True),(2,2))
+    closeProgram.grid(row = 2, column = 2, padx=padding, pady=padding)
+
+    createReturnBtn(getButtonSize(3,2,True),(2,3))
     return
 def changeDifficulty():
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -910,7 +1072,10 @@ def changeDifficulty():
     createReturnBtn(getButtonSize(row,col),(col,row))
     return"""
 def mainNurseMenu():
-
+    global inNurseMenu
+    inNurseMenu = True
+    global timeLastPressed
+    timeLastPressed = time.time()
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -959,9 +1124,9 @@ def mainNurseMenu():
     stansAlarm.grid(row = 2, column = 1, padx=padding, pady=padding)
     createReturnBtn(getButtonSize(2,2,True),(2,2))
     return
-
 def mainEasyMenu():
-
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -1002,7 +1167,8 @@ def mainEasyMenu():
     btn2.grid(row = 1, column = 2, padx=padding, pady=padding)
     #btn6.grid(row = 2, column = 2, padx=padding, pady=padding)
 def mainMediumMenu():
-
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     global currentMenu
@@ -1020,7 +1186,7 @@ def mainMediumMenu():
                     height = getButtonSize(2,2)[0],
                     width = getButtonSize(2,2,True)[1])
     btn2 = tk.Button(root,
-                     text = getButtonString("Trenger hjelp nå",5),
+                     text = getButtonString("Trenger hjelp senere",5),
                      bg = "#E0D025",
                      fg = buttonTextColor,
                      image=pixelVirtual,
@@ -1053,9 +1219,9 @@ def mainMediumMenu():
     btn2.grid(row = 1, column = 2, padx=padding, pady=padding)
     btn3.grid(row = 2, column = 1, padx=padding, pady=padding)
     btn4.grid(row = 2, column = 2, padx=padding, pady=padding)
-
 def MainMenu():
-
+    global inNurseMenu
+    inNurseMenu = False
     for widget in root.winfo_children():
         widget.destroy()
     
@@ -1138,9 +1304,19 @@ def MainMenu():
 
 
 MainMenu()
-
+def timeout():
+    global timeLastPressed
+    global currentMenu
+    global inNurseMenu
+    while True:
+        if time.time() - timeLastPressed > 10 and inNurseMenu:
+            currentMenu = "MainNurseMenu"
+            print("Timeout Nurse Menu")
+            returnButton()
+        time.sleep(1)
 def useRFID():
     global lastCardScanned
+    global lastUser
     read = True
     start_time = time.time()
     card = 1
@@ -1158,6 +1334,7 @@ def useRFID():
             start_time = time.time()
             print(f"Card read: {card}")
             if card in acceptedCards:
+                lastUser = acceptedCards.index(lastCardScanned)
                 print("card accepted")
                 mainNurseMenu()
             else:
@@ -1166,6 +1343,8 @@ def useRFID():
 RFIDthread = threading.Thread(target=useRFID)
 RFIDthread.start()
 
+timeoutThread = threading.Thread(target=timeout)
+timeoutThread.start()
 
 # Start the GUI
 if clientEnable:

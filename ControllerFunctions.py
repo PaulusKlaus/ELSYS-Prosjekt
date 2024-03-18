@@ -97,14 +97,19 @@ def logStringText(user, request,logEvent,time):
     elif logEvent == "Unoccupied":
         return f"{time} - {user} markerte rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} som sykepleier ikke tilstede, etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     elif logEvent == "Added":
-        return f"{time} - {user} la til forespørsel av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+        return f"{time} - {user} la til forespørsel av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']}"
+    elif logEvent == "Room Delete":
+        return f"{time} - Rom {request['Rom']}, Seng {request['Seng']} angret forespørsel av type {request['Hva']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     elif logEvent == "Remote Delete":
         return f"{time} - {user} slettet forespørsel med kort av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     else:
         return f"Error: logEvent:{logEvent} does not exist"
     
 def logStringData(user, request,logEvent,time):
-    return f"{time},{user},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
+    if logEvent == "Room Delete":
+        return f"{time},Rom {request['Rom']} Seng {request['Seng']},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
+    else:
+        return f"{time},{user},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
 
 def getCurrentTime():
     current_time = datetime.datetime.now().strftime("%H:%M:%S")

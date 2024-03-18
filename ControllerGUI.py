@@ -48,8 +48,8 @@ def useData(recievedData):
             print("Removing request")
             for i in range(len(requests)-1, -1, -1):
                 if requests[i].get('Rom') == recivedDict.get('Rom') and requests[i].get('Seng') == recivedDict.get('Seng') and requests[i].get('Hva') == recivedDict.get('Hva'):
-                    cf.fileWrite("logFileData.txt", cf.logStringData(f"Rom {recivedDict.get('Rom')}", requests[i], "Removed", cf.getCurrentTime()))
-                    cf.fileWrite("logFileText.txt", cf.logStringText(f"Rom {recivedDict.get('Rom')}", requests[i], "Removed", cf.getCurrentTime()))
+                    cf.fileWrite("logFileData.txt", cf.logStringData(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
+                    cf.fileWrite("logFileText.txt", cf.logStringText(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
                     requests.pop(i)
                     print("Request removed")
                     cf.sort_Hastegrad_ID_Time(requests)
