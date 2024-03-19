@@ -746,6 +746,7 @@ def saveUsername(username):
     global userSaved
     userSaved = True
     user.append(username)
+    print(f"Usernames: {user}")
 def createButton(root,key,row,col,command,width =0.8/10):
     button = tk.Button(root,
                 text = key,
@@ -766,8 +767,10 @@ def buttonCommand(key,entry):
     print("Button pressed:", key)  # Add this line for debugging
     if key == "back":
         currentName = currentName[:-1]
-    else:
+    elif currentName == "":
         currentName += key
+    else:
+        currentName += key.lower()
     entry.delete(0, tk.END)  # Clear the current text in the entry widget
     entry.insert(0, currentName)  # Insert the updated current name
     root.update()  # Update the root window to ensure label is drawn before the main loop continues
