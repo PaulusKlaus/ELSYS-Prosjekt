@@ -1,9 +1,100 @@
-09:43:20 - Rom 301, Seng 1 angret forespørsel av type Pasta med hastegrad 5 etter tid: 0:00:14(T:M:S)
-09:43:23 - Rom 301 la til forespørsel av type Pasta for rom 301 seng 1 med hastegrad 5 klokka: 09:43:23(T:M:S)
-09:45:46 - Daniel slettet forespørsel med kort av type Pasta for rom 301 seng 1 med hastegrad 5 etter tid: 0:02:23(T:M:S)
-09:45:57 - Rom 301 la til forespørsel av type Pasta for rom 301 seng 1 med hastegrad 5 klokka: 09:45:57(T:M:S)
-09:45:59 - Rom 301 la til forespørsel av type Fisk for rom 301 seng 1 med hastegrad 5 klokka: 09:45:59(T:M:S)
-09:46:01 - Rom 301 la til forespørsel av type Hamburger for rom 301 seng 1 med hastegrad 5 klokka: 09:46:01(T:M:S)
-09:46:05 - Daniel slettet forespørsel med kort av type Hamburger for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:04(T:M:S)
-09:46:05 - Daniel slettet forespørsel med kort av type Fisk for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:06(T:M:S)
-09:46:05 - Daniel slettet forespørsel med kort av type Pasta for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:08(T:M:S)
+12:19:42 - Rom 301 la til forespørsel av type Juice for rom 301 seng 1 med hastegrad 5
+12:19:50 - Rom 301 la til forespørsel av type Kylling for rom 301 seng 1 med hastegrad 5
+12:19:54 - Sondre slettet forespørsel med kort av type Kylling for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:04(T:M:S)
+12:19:54 - Sondre slettet forespørsel med kort av type Juice for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:12(T:M:S)
+12:20:02 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5
+12:20:05 - Sondre la til forespørsel av type StansAlarm for rom 301 seng 1 med hastegrad 1
+12:20:09 - Sondre slettet forespørsel med kort av type StansAlarm for rom 301 seng 1 med hastegrad 1 etter tid: 0:00:04(T:M:S)
+12:20:12 - Sondre slettet forespørsel med kort av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:10(T:M:S)
+12:32:27 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5
+12:32:37 - Default User slettet forespørsel manuelt av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:10(T:M:S)
+12:32:45 - Rom 301 la til forespørsel av type Juice for rom 301 seng 1 med hastegrad 5
+12:34:00 - Rom 301, Seng 1 angret forespørsel av type Juice med hastegrad 5 etter tid: 0:01:15(T:M:S)
+12:40:28 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5
+12:40:37 - Default User slettet forespørsel manuelt av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:09(T:M:S)
+12:40:50 - Rom 301 la til forespørsel av type Juice for rom 301 seng 1 med hastegrad 5
+12:40:54 - Default User slettet forespørsel manuelt av type Juice for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:04(T:M:S)
+12:40:57 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:40:59 - Default User slettet forespørsel manuelt av type Betjening for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:02(T:M:S)
+12:42:19 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:42:22 - Default User slettet forespørsel manuelt av type Betjening for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:03(T:M:S)
+12:44:23 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:44:27 - Default User slettet forespørsel manuelt av type Betjening for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:04(T:M:S)
+12:45:24 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:45:27 - Default User slettet forespørsel manuelt av type Betjening for rom 301 seng 1 med hastegrad 4 etter tid: 0:00:03(T:M:S)
+12:45:32 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5
+12:45:37 - Default User slettet forespørsel manuelt av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:05(T:M:S)
+12:46:45 - Daniel la til forespørsel av type StansAlarm for rom 301 seng 1 med hastegrad 1
+12:46:47 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 3
+12:46:53 - Default User slettet forespørsel manuelt av type Smerte for rom 301 seng 1 med hastegrad 3 etter tid: 0:00:06(T:M:S)
+12:46:59 - Default User slettet forespørsel manuelt av type StansAlarm for rom 301 seng 1 med hastegrad 1 etter tid: 0:00:14(T:M:S)
+12:47:02 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5
+12:48:38 - Rom 301 la til forespørsel av type Hjelp for rom 301 seng 1 med hastegrad 3
+12:48:41 - Rom 301, Seng 1 angret forespørsel av type Hjelp med hastegrad 3 etter tid: 0:00:03(T:M:S)
+12:48:43 - Rom 301 la til forespørsel av type Hjelp for rom 301 seng 1 med hastegrad 5
+12:48:46 - Rom 301, Seng 1 angret forespørsel av type Hjelp med hastegrad 5 etter tid: 0:00:03(T:M:S)
+12:48:51 - Eivind slettet forespørsel med kort av type Vann for rom 301 seng 1 med hastegrad 5 etter tid: 0:01:49(T:M:S)
+12:49:19 - Rom 302 la til forespørsel av type Pizza for rom 302 seng 2 med hastegrad 5
+12:49:20 - Rom 302 la til forespørsel av type Betjening for rom 302 seng 2 med hastegrad 4
+12:49:23 - Rom 302, Seng 2 angret forespørsel av type Betjening med hastegrad 4 etter tid: 0:00:03(T:M:S)
+12:49:26 - Rom 302 la til forespørsel av type Betjening for rom 302 seng 2 med hastegrad 4
+12:49:30 - Rom 302, Seng 2 angret forespørsel av type Betjening med hastegrad 4 etter tid: 0:00:04(T:M:S)
+12:49:34 - Default User slettet forespørsel manuelt av type Pizza for rom 302 seng 2 med hastegrad 5 etter tid: 0:00:15(T:M:S)
+12:50:15 - Rom 302 la til forespørsel av type Toalett for rom 302 seng 2 med hastegrad 5
+12:51:08 - Rom 302 la til forespørsel av type Vann for rom 302 seng 2 med hastegrad 5
+12:51:10 - Rom 302 la til forespørsel av type Kaffe for rom 302 seng 2 med hastegrad 5
+12:51:12 - Rom 302, Seng 2 angret forespørsel av type Toalett med hastegrad 5 etter tid: 0:00:57(T:M:S)
+12:51:17 - Rom 302 la til forespørsel av type Pasta for rom 302 seng 2 med hastegrad 5
+12:51:32 - Eivind slettet forespørsel med kort av type Pasta for rom 302 seng 2 med hastegrad 5 etter tid: 0:00:15(T:M:S)
+12:51:32 - Eivind slettet forespørsel med kort av type Kaffe for rom 302 seng 2 med hastegrad 5 etter tid: 0:00:22(T:M:S)
+12:51:32 - Eivind slettet forespørsel med kort av type Vann for rom 302 seng 2 med hastegrad 5 etter tid: 0:00:24(T:M:S)
+12:51:50 - Rom 302 la til forespørsel av type Te for rom 302 seng 2 med hastegrad 5
+12:51:53 - Eivind la til forespørsel av type StansAlarm for rom 302 seng 2 med hastegrad 1
+12:51:56 - Rom 302 la til forespørsel av type Saft for rom 302 seng 2 med hastegrad 5
+12:57:54 - Eivind slettet forespørsel med kort av type StansAlarm for rom 302 seng 2 med hastegrad 1 etter tid: 0:06:01(T:M:S)
+12:59:18 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:59:20 - Rom 301 la til forespørsel av type Pasta for rom 301 seng 1 med hastegrad 5
+12:59:22 - Rom 301, Seng 1 angret forespørsel av type Betjening med hastegrad 4 etter tid: 0:00:04(T:M:S)
+12:59:24 - Rom 301 la til forespørsel av type Betjening for rom 301 seng 1 med hastegrad 4
+12:59:27 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 4
+12:59:29 - Rom 301 økte hastegraden for forespørsel av type Smerte for rom 301 seng 1 til hastegrad 3, eter tid: 0:00:00(T:M:S)
+12:59:31 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5
+12:59:37 - Rom 301, Seng 1 angret forespørsel av type Betjening med hastegrad 4 etter tid: 0:00:13(T:M:S)
+12:59:39 - Rom 301, Seng 1 angret forespørsel av type Toalett med hastegrad 5 etter tid: 0:00:08(T:M:S)
+12:59:41 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 5
+12:59:46 - Rom 301, Seng 1 angret forespørsel av type Smerte med hastegrad 3 etter tid: 0:00:19(T:M:S)
+12:59:50 - Rom 301, Seng 1 angret forespørsel av type Pasta med hastegrad 5 etter tid: 0:00:30(T:M:S)
+12:59:53 - Rom 301 økte hastegraden for forespørsel av type Toalett for rom 301 seng 1 til hastegrad 4, eter tid: 0:00:00(T:M:S)
+12:59:56 - Rom 301, Seng 1 angret forespørsel av type Toalett med hastegrad 4 etter tid: 0:00:15(T:M:S)
+13:00:05 - Rom 301 la til forespørsel av type Pizza for rom 301 seng 1 med hastegrad 5
+13:00:09 - Rom 301, Seng 1 angret forespørsel av type Pizza med hastegrad 5 etter tid: 0:00:04(T:M:S)
+14:01:54 - Default User senket hastegraden for forespørsel av type ALARM for rom 303 seng 2 til hastegrad 3, eter tid: 3:36:31(T:M:S)
+14:05:00 - Default User slettet forespørsel manuelt av type ALARM for rom 301 seng 1 med hastegrad 2 etter tid: 3:39:37(T:M:S)
+14:05:02 - Default User slettet forespørsel manuelt av type ALARM for rom 303 seng 2 med hastegrad 2 etter tid: 3:39:39(T:M:S)
+14:05:05 - Default User slettet forespørsel manuelt av type Mat for rom 308 seng 1 med hastegrad 2 etter tid: 0:29:56(T:M:S)
+14:08:36 - Default User senket hastegraden for forespørsel av type Mat for rom 308 seng 1 til hastegrad 3, eter tid: 0:33:27(T:M:S)
+14:13:08 - Default User slettet forespørsel manuelt av type Mat for rom 308 seng 1 med hastegrad 2 etter tid: 0:37:59(T:M:S)
+14:13:12 - Default User slettet forespørsel manuelt av type Vann for rom 306 seng 2 med hastegrad 3 etter tid: 1:56:47(T:M:S)
+14:13:14 - Default User slettet forespørsel manuelt av type Vann for rom 315 seng 1 med hastegrad 5 etter tid: 1:46:49(T:M:S)
+14:13:32 - Default User slettet forespørsel manuelt av type Spørsmål for rom 307 seng 1 med hastegrad 5 etter tid: 1:47:07(T:M:S)
+14:13:33 - Default User slettet forespørsel manuelt av type Spørsmål for rom 309 seng 1 med hastegrad 5 etter tid: 1:47:08(T:M:S)
+14:13:37 - Default User slettet forespørsel manuelt av type Vann for rom 302 seng 1 med hastegrad 5 etter tid: 1:47:12(T:M:S)
+14:14:36 - Default User slettet forespørsel manuelt av type Vann for rom 311 seng 2 med hastegrad 4 etter tid: 1:51:13(T:M:S)
+14:14:38 - Default User slettet forespørsel manuelt av type Vann for rom 302 seng 2 med hastegrad 4 etter tid: 1:51:15(T:M:S)
+14:15:52 - Rom 301 la til forespørsel av type Smerte for rom 301 seng 1 med hastegrad 4
+14:15:55 - Rom 301 la til forespørsel av type Hamburger for rom 301 seng 1 med hastegrad 5
+14:16:06 - Rom 301, Seng 1 angret forespørsel av type Smerte med hastegrad 4 etter tid: 0:00:14(T:M:S)
+14:16:10 - Rom 301 la til forespørsel av type Toalett for rom 301 seng 1 med hastegrad 4
+14:16:13 - Rom 301 la til forespørsel av type Pasta for rom 301 seng 1 med hastegrad 5
+14:16:15 - Rom 301, Seng 1 angret forespørsel av type Pasta med hastegrad 5 etter tid: 0:00:02(T:M:S)
+14:16:17 - Rom 301, Seng 1 angret forespørsel av type Hamburger med hastegrad 5 etter tid: 0:00:22(T:M:S)
+14:16:36 - Rom 301, Seng 1 angret forespørsel av type Toalett med hastegrad 4 etter tid: 0:00:26(T:M:S)
+14:16:42 - Rom 301 la til forespørsel av type Pasta for rom 301 seng 1 med hastegrad 5
+14:16:44 - Rom 301 la til forespørsel av type Saft for rom 301 seng 1 med hastegrad 5
+14:16:46 - Rom 301 la til forespørsel av type Hamburger for rom 301 seng 1 med hastegrad 5
+14:16:49 - Rom 301 la til forespørsel av type Kaffe for rom 301 seng 1 med hastegrad 5
+14:17:01 - Default User slettet forespørsel manuelt av type Pasta for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:19(T:M:S)
+14:17:02 - Default User slettet forespørsel manuelt av type Kaffe for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:13(T:M:S)
+14:17:03 - Default User slettet forespørsel manuelt av type Hamburger for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:17(T:M:S)
+14:17:04 - Default User slettet forespørsel manuelt av type Saft for rom 301 seng 1 med hastegrad 5 etter tid: 0:00:20(T:M:S)
+14:17:22 - Rom 301 la til forespørsel av type Vann for rom 301 seng 1 med hastegrad 5

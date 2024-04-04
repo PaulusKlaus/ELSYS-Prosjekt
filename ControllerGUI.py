@@ -9,6 +9,7 @@ import socket
 import threading
 
 #Defined colors and functions
+clientEnabled = True
 romMerkingPadx = 20
 romMerkingPady = 2
 romMerkingFont = ("Impact",80)
@@ -29,7 +30,8 @@ def sendData(data):
     return
 def sendRequestBT(request,function):
     message = f"{function},{request.get('Rom')},{request.get('Seng')},{request.get('Hva')},{request.get('Hastegrad'),}"
-    sendData(message)
+    if clientEnabled:  
+        sendData(message)
 def useData(recievedData):
     try:
         isEqual = False
@@ -48,8 +50,13 @@ def useData(recievedData):
             print("Removing request")
             for i in range(len(requests)-1, -1, -1):
                 if requests[i].get('Rom') == recivedDict.get('Rom') and requests[i].get('Seng') == recivedDict.get('Seng') and requests[i].get('Hva') == recivedDict.get('Hva'):
-                    cf.fileWrite("logFileData.txt", cf.logStringData(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
-                    cf.fileWrite("logFileText.txt", cf.logStringText(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
+                    print(f"Hastegrad: {recivedDict.get('Hastegrad')}")
+                    if requests[i].get('Hastegrad') == 1:
+                        cf.fileWrite("logFileData.txt", cf.logStringData(recievedData[4], requests[i], "Remote Delete", cf.getCurrentTime()))
+                        cf.fileWrite("logFileText.txt", cf.logStringText(recievedData[4], requests[i], "Remote Delete", cf.getCurrentTime()))
+                    else:
+                        cf.fileWrite("logFileData.txt", cf.logStringData(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
+                        cf.fileWrite("logFileText.txt", cf.logStringText(f"Rom {recivedDict.get('Rom')}", requests[i], "Room Delete", cf.getCurrentTime()))
                     requests.pop(i)
                     print("Request removed")
                     cf.sort_Hastegrad_ID_Time(requests)
@@ -80,8 +87,12 @@ def useData(recievedData):
                     
             if not isEqual:
                 requests.append(recivedDict)
-                cf.fileWrite("logFileData.txt",cf.logStringData(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
-                cf.fileWrite("logFileText.txt",cf.logStringText(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
+                if recievedData[3] == "1":
+                    cf.fileWrite("logFileData.txt",cf.logStringData(recievedData[4],recivedDict,"Added",cf.getCurrentTime()))
+                    cf.fileWrite("logFileText.txt",cf.logStringText(recievedData[4],recivedDict,"Added",cf.getCurrentTime()))
+                else:
+                    cf.fileWrite("logFileData.txt",cf.logStringData(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
+                    cf.fileWrite("logFileText.txt",cf.logStringText(f"Rom {recivedDict.get('Rom')}",recivedDict,"Added",cf.getCurrentTime()))
             else:
                 print("Request already in list")
             if update:
@@ -203,7 +214,7 @@ left_frame.grid(row=0, column=0, rowspan=2, padx=int(max_height*0.01), pady=int(
 rightTop_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg='grey')
 rightTop_frame.grid(row=0, column=1, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
-rightBottom_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg='grey')
+rightBottom_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg=windowBackgroundColor)
 rightBottom_frame.grid(row=1, column=1, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
 # Configure row and column weights to distribute space
@@ -234,6 +245,68 @@ buttons = []
 romMerking = []
 menubuttons = []
 
+
+
+def sendFoodOrder(bgcolor = "#123456",textcolor = "white",textFont = ("Consolas",18)):
+    rightBottomLeft_frame = Frame(rightBottom_frame,bg=bgcolor)
+    rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4875,relheight = 1)
+    #FROKOST
+    frokostLabel = tk.Label(rightBottomLeft_frame, text="Frokost", font=textFont,bg=bgcolor,fg=textcolor)
+    frokostLabel.place(relx=0.05, rely=0.0, relwidth=0.9, relheight=0.1)
+
+    room0Entry = tk.Entry(rightBottomLeft_frame, font=textFont)
+    room0Entry.place(relx=0.05, rely=0.1, relwidth=0.65, relheight=0.2)
+
+    submit0Button = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=textFont,
+                            bg=menuButtonColor)
+                            #command=lambda: sendFoodOrderButton(roomEntry.get()))
+    submit0Button.place(relx=0.75, rely=0.1, relwidth=0.2, relheight=0.2)
+    #MIDDAG
+    middagLabel = tk.Label(rightBottomLeft_frame, text="Middag", font=textFont,bg=bgcolor,fg=textcolor)
+    middagLabel.place(relx=0.05, rely=0.3, relwidth=0.9, relheight=0.1)
+
+    roomEntry1 = tk.Entry(rightBottomLeft_frame, font=textFont)
+    roomEntry1.place(relx=0.05, rely=0.4, relwidth=0.65, relheight=0.2)
+
+    submitButton1 = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=textFont,
+                            bg=menuButtonColor)
+                            #command=lambda: sendFoodOrderButton(roomEntry.get()))
+    submitButton1.place(relx=0.75, rely=0.4, relwidth=0.2, relheight=0.2)
+    #KVELDS
+    kveldsLabel = tk.Label(rightBottomLeft_frame, text="Kvelds", font=textFont,bg=bgcolor,fg=textcolor)
+    kveldsLabel.place(relx=0.05, rely=0.6, relwidth=0.9, relheight=0.1)
+
+    roomEntry2 = tk.Entry(rightBottomLeft_frame, font=textFont)
+    roomEntry2.place(relx=0.05, rely=0.7, relwidth=0.65, relheight=0.2)
+
+    submitButton2 = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=textFont,
+                            bg=menuButtonColor)
+                            #command=lambda: sendFoodOrderButton(roomEntry.get()))
+    submitButton2.place(relx=0.75, rely=0.7, relwidth=0.2, relheight=0.2)
+sendFoodOrder()
+def showFoodOrders(bgcolor = "grey",textcolor = "#000000",textFont = ("Consolas",18)):
+    rightBottomRight_frame = Frame(rightBottom_frame,bg=bgcolor)
+    rightBottomRight_frame.place(relx= 0.5125,rely = 0,relwidth = 0.4875,relheight = 1)
+    foodStuff = ["Juice","Vann","Saft","Kaffe","Te","Hamburger","Pizza","Kylling","Fisk","Pasta","Drikke","Mat"]
+    foodRequests = []
+    for i in requests:
+        if i.get('Hva') in foodStuff:
+            foodRequests.append(i)
+    for index, i in enumerate(foodRequests):
+        foodButton = tk.Button(rightBottomRight_frame,
+                            text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
+                            font=textFont,
+                            bg = cf.color(i.get("Hastegrad")),
+                            fg=textcolor)
+        foodButton.place(relx=0.0, rely=0+index*0.1, relwidth=1, relheight=0.1)
+
+showFoodOrders()
 def buttonFunction(buttonIndex):
     global currentButton
     currentButton = buttonIndex+1
@@ -325,6 +398,10 @@ def updateButtons():
     global buttons
     global romMerking
     global lowest_hastegrad_requests
+    for widget in rightBottom_frame.winfo_children():
+        widget.destroy()
+    showFoodOrders()
+    sendFoodOrder()
     for i, label in enumerate(romMerking):
         label.place_forget()
     buttons.clear()
@@ -402,7 +479,8 @@ def senkHastegrad():
 def fjernRequest():
     global requests
     global currentButton
-    
+    if clientEnabled:
+        sendData(f"Remote Remove,{requests[currentButton-1].get('Rom')},{requests[currentButton-1].get('Seng')},{requests[currentButton-1].get('Hva')},{requests[currentButton-1].get('Hastegrad')}")
     #log changes
     cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Delete",cf.getCurrentTime()))
     cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Delete",cf.getCurrentTime()))
@@ -481,8 +559,9 @@ for i in buttons:
 for i in range(len(romMerking)):
     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                         y=cf.roomPosition(requests[i].get('Rom'))[1])
-receive_thread = threading.Thread(target=receive_data)
-receive_thread.start()
+if clientEnabled:
+    receive_thread = threading.Thread(target=receive_data)
+    receive_thread.start()
 root.mainloop()
 
 
