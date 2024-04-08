@@ -16,9 +16,10 @@ romMerkingFont = ("Impact",80)
 max_width = 1800 #Defines the maximum width of the window
 max_height = int((max_width/16)*9) #calculates the height of the window relation 16:9
 pageTitle = "Romoversikt" #Defines the title of the window
-button_texts = ["Fjern", "Øke Hastighetsgrad", "Senk hastighetsgrad", "Feil!"]
+button_texts = ["Fjern", "↑ (Hastegrad)", "↓ (Hastegrad)", "Feil!"]
 windowBackgroundColor = "#bfd1e0"
-menuButtonColor = "#437EB8"
+menuButtonColor = ["#B0B0B0","#B0B0B0","#B0B0B0","#B0B0B0"]
+buttonColor = "#437EB8"
 currentUser = "Default User"
 lowest_hastegrad_requests = []
 def sendData(data):
@@ -60,14 +61,9 @@ def useData(recievedData):
                     requests.pop(i)
                     print("Request removed")
                     cf.sort_Hastegrad_ID_Time(requests)
-                    for i in menubuttons:
-                        i.pack_forget()
-                    for i in buttons:
-                        i.pack_forget()
                     
                     updateButtons()
-                    for i in buttons:
-                        i.pack(fill=tk.X)
+                    
                     for i in range(len(romMerking)):
                         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                             y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -97,14 +93,10 @@ def useData(recievedData):
                 print("Request already in list")
             if update:
                 cf.sort_Hastegrad_ID_Time(requests)
-                for i in menubuttons:
-                    i.pack_forget()
-                for i in buttons:
-                    i.pack_forget()
+                
                 
                 updateButtons()
-                for i in buttons:
-                    i.pack(fill=tk.X)
+                
                 for i in range(len(romMerking)):
                     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                         y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -121,14 +113,9 @@ def useData(recievedData):
                 cf.fileWrite("logFileText.txt",cf.logStringText(recievedData[4],requests[indexlist[i]],"Remote Delete",cf.getCurrentTime()))
                 print(f"Removing:{requests.pop(indexlist[i])}")
             cf.sort_Hastegrad_ID_Time(requests)
-            for i in menubuttons:
-                i.pack_forget()
-            for i in buttons:
-                i.pack_forget()
-                
+            
             updateButtons()
-            for i in buttons:
-                i.pack(fill=tk.X)
+            
             for i in range(len(romMerking)):
                 romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                     y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -217,6 +204,10 @@ rightTop_frame.grid(row=0, column=1, padx=int(max_height*0.01), pady=int(max_hei
 rightBottom_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg=windowBackgroundColor)
 rightBottom_frame.grid(row=1, column=1, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
+rightBottomRight_frame = Frame(rightBottom_frame,bg="grey")
+rightBottomRight_frame.place(relx= 0.5125,rely = 0,relwidth = 0.4875,relheight = 1)
+rightBottomLeft_frame = Frame(rightBottom_frame,bg="#123456")
+rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4875,relheight = 1)
 # Configure row and column weights to distribute space
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
@@ -244,12 +235,13 @@ index = 0
 buttons = []
 romMerking = []
 menubuttons = []
+fasteRom = [301,305,311]
+alleRom = [301,302,303,304,305,306,307,308,309,310,311,312]
 
 
 
-def sendFoodOrder(bgcolor = "#123456",textcolor = "white",textFont = ("Consolas",18)):
-    rightBottomLeft_frame = Frame(rightBottom_frame,bg=bgcolor)
-    rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4875,relheight = 1)
+"""def sendFoodOrder(textcolor = "white",textFont = ("Consolas",18)):
+
     #FROKOST
     frokostLabel = tk.Label(rightBottomLeft_frame, text="Frokost", font=textFont,bg=bgcolor,fg=textcolor)
     frokostLabel.place(relx=0.05, rely=0.0, relwidth=0.9, relheight=0.1)
@@ -260,7 +252,7 @@ def sendFoodOrder(bgcolor = "#123456",textcolor = "white",textFont = ("Consolas"
     submit0Button = tk.Button(rightBottomLeft_frame,
                             text="Send",
                             font=textFont,
-                            bg=menuButtonColor)
+                            bg=buttonColor)
                             #command=lambda: sendFoodOrderButton(roomEntry.get()))
     submit0Button.place(relx=0.75, rely=0.1, relwidth=0.2, relheight=0.2)
     #MIDDAG
@@ -273,7 +265,7 @@ def sendFoodOrder(bgcolor = "#123456",textcolor = "white",textFont = ("Consolas"
     submitButton1 = tk.Button(rightBottomLeft_frame,
                             text="Send",
                             font=textFont,
-                            bg=menuButtonColor)
+                            bg=buttonColor)
                             #command=lambda: sendFoodOrderButton(roomEntry.get()))
     submitButton1.place(relx=0.75, rely=0.4, relwidth=0.2, relheight=0.2)
     #KVELDS
@@ -286,13 +278,195 @@ def sendFoodOrder(bgcolor = "#123456",textcolor = "white",textFont = ("Consolas"
     submitButton2 = tk.Button(rightBottomLeft_frame,
                             text="Send",
                             font=textFont,
-                            bg=menuButtonColor)
+                            bg=buttonColor)
                             #command=lambda: sendFoodOrderButton(roomEntry.get()))
-    submitButton2.place(relx=0.75, rely=0.7, relwidth=0.2, relheight=0.2)
+    submitButton2.place(relx=0.75, rely=0.7, relwidth=0.2, relheight=0.2)"""
+Valgt = "Frokost"
+changeButtonText = "Bytt til kvelds"
+topColor = "#73F7C6"
+bottomColor = "#4E7869"
+def changebuttonfunction():
+    global Valgt
+    global changeButtonText
+    global topColor
+    global bottomColor
+    if Valgt == "Frokost":
+        Valgt = "Kvelds"
+        changeButtonText = "Bytt til frokost"
+        topColor = "#4E7869"
+        bottomColor = "#73F7C6"
+    else:
+        Valgt = "Frokost"
+        changeButtonText = "Bytt til kvelds"
+        topColor = "#73F7C6"
+        bottomColor = "#4E7869"
+    frokostKveldsOrder()
+def frokostKveldsOrder():
+
+    for i in rightBottomLeft_frame.winfo_children():
+        i.destroy()
+    fkLabel = tk.Label(rightBottomLeft_frame, text=Valgt, font=("Consolas",18),bg=topColor,fg="black")
+    fkLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
+    changeButton = tk.Button(rightBottomLeft_frame,text=changeButtonText,font=("Consolas",18),bg=bottomColor,command=changebuttonfunction)
+    changeButton.place(relx=0.2, rely=0.14, relwidth=0.6, relheight=0.1)
+    fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste rom:", font=("Consolas",18),bg="#F84545",fg="black")
+    fasteLabel.place(relx=0.02, rely=0.26, relwidth=0.96, relheight=0.1)
+    for index,rom in enumerate(fasteRom):
+        x = index
+        y = 0
+        if index > 5:
+            x = index-6
+            y = 1
+        romLabel = tk.Label(rightBottomLeft_frame, text=f"{rom}", font=("Consolas",18),bg="#F84545",fg="black")
+        romLabel.place(relx=0.02+0.16333*x, rely=0.38+0.176*y, relwidth=0.14333, relheight=0.156)
+    submitButton = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=("Consolas",18),
+                            bg="#437EB8",
+                            command=lambda: print(lunsjEntry.get()))
+    submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
+    returnButton = tk.Button(rightBottomLeft_frame,
+                            text="↵",
+                            font=("Consolas",50),
+                            bg="#949A9F",
+                            command=sendFoodOrder)
+    returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+def lunsjOrder():
+    for i in rightBottomLeft_frame.winfo_children():
+        i.destroy()
+    lunsjLabel = tk.Label(rightBottomLeft_frame, text="Lunsj", font=("Consolas",18),bg="#73F7C6",fg="black")
+    lunsjLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
+    lunsjEntryLabel = tk.Label(rightBottomLeft_frame, text="Dagens lunsj:", font=("Consolas",18),bg="#73F7C6",fg="black")
+    lunsjEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.3, relheight=0.1)
+    lunsjEntry = tk.Entry(rightBottomLeft_frame, font=("Consolas",18))
+    lunsjEntry.place(relx=0.32, rely=0.14, relwidth=0.66, relheight=0.1)
+    fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste rom:", font=("Consolas",18),bg="#F84545",fg="black")
+    fasteLabel.place(relx=0.02, rely=0.26, relwidth=0.96, relheight=0.1)
+    for index,rom in enumerate(fasteRom):
+        x = index
+        y = 0
+        if index > 5:
+            x = index-6
+            y = 1
+        romLabel = tk.Label(rightBottomLeft_frame, text=f"{rom}", font=("Consolas",18),bg="#F84545",fg="black")
+        romLabel.place(relx=0.02+0.16333*x, rely=0.38+0.176*y, relwidth=0.14333, relheight=0.156)
+    submitButton = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=("Consolas",18),
+                            bg="#437EB8",
+                            command=lambda: print(lunsjEntry.get()))
+    submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
+    returnButton = tk.Button(rightBottomLeft_frame,
+                            text="↵",
+                            font=("Consolas",50),
+                            bg="#949A9F",
+                            command=sendFoodOrder)
+    returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+def middagOrder():
+    for i in rightBottomLeft_frame.winfo_children():
+        i.destroy()
+    middagLabel = tk.Label(rightBottomLeft_frame, text="Middag", font=("Consolas",18),bg="#F0AB44",fg="black")
+    middagLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
+    middagEntryLabel = tk.Label(rightBottomLeft_frame, text="Dagens middag:", font=("Consolas",18),bg="#F0AB44",fg="black")
+    middagEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.3, relheight=0.1)
+    middagEntry = tk.Entry(rightBottomLeft_frame, font=("Consolas",18))
+    middagEntry.place(relx=0.32, rely=0.14, relwidth=0.66, relheight=0.1)
+    fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste rom:", font=("Consolas",18),bg="#F84545",fg="black")
+    fasteLabel.place(relx=0.02, rely=0.26, relwidth=0.96, relheight=0.1)
+    for index,rom in enumerate(fasteRom):
+        x = index
+        y = 0
+        if index > 5:
+            x = index-6
+            y = 1
+        romLabel = tk.Label(rightBottomLeft_frame, text=f"{rom}", font=("Consolas",18),bg="#F84545",fg="black")
+        romLabel.place(relx=0.02+0.16333*x, rely=0.38+0.176*y, relwidth=0.14333, relheight=0.156)
+    submitButton = tk.Button(rightBottomLeft_frame,
+                            text="Send",
+                            font=("Consolas",18),
+                            bg="#437EB8",
+                            command=lambda: print(middagEntry.get()))
+    submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
+    returnButton = tk.Button(rightBottomLeft_frame,
+                            text="↵",
+                            font=("Consolas",50),
+                            bg="#949A9F",
+                            command=sendFoodOrder)
+    returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+def fasteButtonFunction(rom):
+    global fasteRom
+    if rom in fasteRom:
+        fasteRom.remove(rom)
+        print(f"Removed faste rom:{rom}")
+        cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,{"Rom":rom},"Faste Removed",cf.getCurrentTime()))
+        cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,{"Rom":rom},"Faste Removed",cf.getCurrentTime()))
+    else:
+        fasteRom.append(rom)
+        print(f"Added faste rom:{rom}")
+        cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
+        cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
+    fasteOrder()
+
+def fasteOrder():
+    for i in rightBottomLeft_frame.winfo_children():
+        i.destroy()
+    fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste", font=("Consolas",18),bg="#F84545",fg="black")
+    fasteLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
+    romLabel = []
+    for rom in alleRom:
+        buttonColor = "#7AEE56"
+        buttonText = f"Legg til\n{rom}"
+        if rom in fasteRom:
+            buttonText = f"Fjern rom:\n{rom}"
+            buttonColor = "#F84545"
+        romLabel.append(tk.Button(rightBottomLeft_frame, text=buttonText, font=("Consolas",18),bg=buttonColor,fg="black",command=lambda rom=rom:fasteButtonFunction(rom)))
+    x = 0
+    y = 0
+    for romLabels in romLabel:
+        if x > 3:
+            x -=4
+            y += 1
+        #print(f"x:{x}, y:{y}")
+        romLabels.place(relx=0.02+0.24*x, rely=0.14+0.2*y, relwidth=0.24, relheight=0.2)
+        x += 1
+    returnButton = tk.Button(rightBottomLeft_frame,
+                            text="↵",
+                            font=("Consolas",50),
+                            bg="#949A9F",
+                            command=sendFoodOrder)
+    returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+def sendFoodOrder(textFont = ("Consolas",30)):
+    #FROKOST
+    for i in rightBottomLeft_frame.winfo_children():
+        i.destroy()
+    frokostButton = tk.Button(rightBottomLeft_frame,
+                            text="Frokost/\nKvelds",
+                            font=textFont,
+                            bg="#59D8E8",
+                            command=frokostKveldsOrder)
+    lunsjButton = tk.Button(rightBottomLeft_frame,
+                            text="Lunsj",
+                            font=textFont,
+                            bg="#73F7C6",
+                            command=lunsjOrder)
+    middagButton = tk.Button(rightBottomLeft_frame,
+                            text="Middag",
+                            font=textFont,
+                            bg="#F0AB44",
+                            command=middagOrder)
+    fasteButton = tk.Button(rightBottomLeft_frame,
+                            text="Faste",
+                            font=textFont,
+                            bg="#DF513E",
+                            command=fasteOrder)
+    frokostButton.place(relx=0.01, rely=0.01, relwidth=0.485, relheight=0.485)
+    lunsjButton.place(relx=0.505, rely=0.01, relwidth=0.485, relheight=0.485)
+    middagButton.place(relx=0.01, rely=0.505, relwidth=0.485, relheight=0.485)
+    fasteButton.place(relx=0.505, rely=0.505, relwidth=0.485, relheight=0.485)
 sendFoodOrder()
-def showFoodOrders(bgcolor = "grey",textcolor = "#000000",textFont = ("Consolas",18)):
-    rightBottomRight_frame = Frame(rightBottom_frame,bg=bgcolor)
-    rightBottomRight_frame.place(relx= 0.5125,rely = 0,relwidth = 0.4875,relheight = 1)
+
+def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",18)):
+
     foodStuff = ["Juice","Vann","Saft","Kaffe","Te","Hamburger","Pizza","Kylling","Fisk","Pasta","Drikke","Mat"]
     foodRequests = []
     for i in requests:
@@ -312,34 +486,31 @@ def buttonFunction(buttonIndex):
     currentButton = buttonIndex+1
     print(currentButton)
     if requests[buttonIndex].get('Occupied'):
-        button_texts[3]= "Fjern tilstedeværelse"
+        button_texts[3]= "Fjern faste"
     else:
         button_texts[3]= "Legg til tilstedeværelse"
-    menubuttons[-1].pack_forget()
     menubuttons.pop(-1)
     
     menubuttons.append(tk.Button(left_frame,
                             text=button_texts[3],
                             font=("Consolas", 14),
-                            bg=menuButtonColor,
-                            command = changeOccupancy,
-                            padx =5,
-                            pady =5))
+                            bg=menuButtonColor[3],
+                            command = changeOccupancy))
     # Forget all previously packed buttons and menu buttons
-    for i in menubuttons:
-        i.pack_forget()
-    for i in buttons:
-        i.pack_forget()
-    
-    # Pack the buttons in the left frame
-    for index, i in enumerate(buttons):
-        i.pack(fill=tk.X, side=tk.TOP, expand=False)  # Adjusted parameters
+    for i in left_frame.winfo_children():
+        i.place_forget()
+    popdown = 0
+    for index,button in enumerate(buttons):
+        button.place(relx=0.0, rely=(popdown+index)*0.05, relwidth=1, relheight=0.05)
         if index == buttonIndex:
-            #print(f"index:{index}  Button index: {buttonIndex}")
-            # Pack the menu buttons under the pressed button
-            for button in menubuttons:
-                button.pack(side=tk.TOP, fill=tk.X, expand=False)  # Adjusted parameters
-    
+            """for index2,button2 in enumerate(menubuttons):
+                popdown=2
+                button2.place(relx=0.25*index2, rely=(popdown+index)*0.05, relwidth=0.25, relheight=0.05)"""
+            popdown = 2
+            menubuttons[0].place(relx=0.0, rely=(index+1)*0.05, relwidth=0.5, relheight=0.05)
+            menubuttons[1].place(relx=0.5, rely=(index+1)*0.05, relwidth=0.5, relheight=0.05)
+            menubuttons[3].place(relx=0.0, rely=(index+2)*0.05, relwidth=0.5, relheight=0.05)
+            menubuttons[2].place(relx=0.5, rely=(index+2)*0.05, relwidth=0.5, relheight=0.05)
 
     
     #print("Button pressed")
@@ -363,13 +534,9 @@ def changeOccupancy():
         #log changes
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
-    for i in menubuttons:
-        i.pack_forget()
-    for i in buttons:
-        i.pack_forget()
+    
     updateButtons()
-    for i in buttons:
-        i.pack(fill = tk.X)
+    
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -398,6 +565,9 @@ def updateButtons():
     global buttons
     global romMerking
     global lowest_hastegrad_requests
+    for i in left_frame.winfo_children():
+        i.place_forget()
+    
     for widget in rightBottom_frame.winfo_children():
         widget.destroy()
     showFoodOrders()
@@ -423,7 +593,9 @@ def updateButtons():
                 fg = cf.color(i.get('Hastegrad')),
                 padx=romMerkingPadx,
                 pady=romMerkingPady
-                )) 
+                ))
+        for index,button in enumerate(buttons):
+            button.place(relx=0.0, rely=index*0.05, relwidth=1, relheight=0.05)
 def okHastegrad():
 
     global requests
@@ -440,13 +612,9 @@ def okHastegrad():
                 
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
     cf.sort_Hastegrad_ID_Time(requests)
-    for i in menubuttons:
-        i.pack_forget()
-    for i in buttons:
-        i.pack_forget()
+    
     updateButtons()
-    for i in buttons:
-        i.pack(fill = tk.X)
+    
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])   
@@ -458,7 +626,7 @@ def senkHastegrad():
         print(f"currnetbutton = {currentButton}")
         if i.get('ID')== currentButton:
             print(f"hastegrad = {i.get('Hastegrad')}")
-            if i.get('Hastegrad')!= 4:
+            if i.get('Hastegrad')!= 5:
                 #log changes
                 requests[index]['Hastegrad']= i.get('Hastegrad')+1
                 cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,requests[currentButton-1],"Decrease Importance",cf.getCurrentTime()))
@@ -466,16 +634,12 @@ def senkHastegrad():
                 
                 print(f"Hastegrad endret til {requests[index].get('Hastegrad')}")
     cf.sort_Hastegrad_ID_Time(requests)
-    for i in menubuttons:
-        i.pack_forget()
-    for i in buttons:
-        i.pack_forget()
+    
     updateButtons()
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
-    for i in buttons:
-        i.pack(fill = tk.X)
+    
 def fjernRequest():
     global requests
     global currentButton
@@ -495,14 +659,9 @@ def fjernRequest():
         currentButton = min(currentButton, len(requests))
     
     # Clear and update buttons and romMerking
-    for i in menubuttons:
-        i.pack_forget()
-    for i in buttons:
-        i.pack_forget()
     
     updateButtons()
-    for i in buttons:
-        i.pack(fill=tk.X)
+
     for i in range(len(romMerking)):
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -512,31 +671,23 @@ def fjernRequest():
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[0],
                             font=("Consolas", 14),
-                            bg=menuButtonColor,
-                            command = fjernRequest,
-                            padx =5,
-                            pady =5))
+                            bg=menuButtonColor[0],
+                            command = fjernRequest))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[1],
                             font=("Consolas", 14),
-                            bg=menuButtonColor,
-                            command = okHastegrad,
-                            padx =5,
-                            pady =5))
+                            bg=menuButtonColor[1],
+                            command = okHastegrad))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[2],
                             font=("Consolas", 14),
-                            bg=menuButtonColor,
-                            command = senkHastegrad,
-                            padx =5,
-                            pady =5))
+                            bg=menuButtonColor[2],
+                            command = senkHastegrad))
 menubuttons.append(tk.Button(left_frame,
                             text=button_texts[3],
                             font=("Consolas", 14),
-                            bg=menuButtonColor,
-                            command = changeOccupancy,
-                            padx =5,
-                            pady =5))
+                            bg=menuButtonColor[3],
+                            command = changeOccupancy))
 
 for index, i in enumerate(requests):
     buttons.append(tk.Button(left_frame,
@@ -554,8 +705,8 @@ for index, i in enumerate(requests):
              padx=romMerkingPadx,
              pady=romMerkingPady
              ))
-for i in buttons:
-    i.pack(fill = tk.X)
+for index,button in enumerate(buttons):
+    button.place(relx=0.0, rely=index*0.05, relwidth=1, relheight=0.05)
 for i in range(len(romMerking)):
     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                         y=cf.roomPosition(requests[i].get('Rom'))[1])

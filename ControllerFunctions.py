@@ -102,12 +102,18 @@ def logStringText(user, request,logEvent,time):
         return f"{time} - Rom {request['Rom']}, Seng {request['Seng']} angret forespørsel av type {request['Hva']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
     elif logEvent == "Remote Delete":
         return f"{time} - {user} slettet forespørsel med kort av type {request['Hva']} for rom {request['Rom']} seng {request['Seng']} med hastegrad {request['Hastegrad']} etter tid: {timeDifference(request['Tid'],time)}(T:M:S)"
+    elif logEvent == "Faste Added":
+        return f"{time} - {user} la til faste for rom {request['Rom']}"
+    elif logEvent == "Faste Removed":
+        return f"{time} - {user} fjernet faste for rom {request['Rom']}"
     else:
         return f"Error: logEvent:{logEvent} does not exist"
     
 def logStringData(user, request,logEvent,time):
     if logEvent == "Room Delete":
         return f"{time},Rom {request['Rom']} Seng {request['Seng']},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
+    elif logEvent == "Faste Added" or logEvent == "Faste Removed":
+        return f"{time},{user},,{request['Rom']},,,{logEvent},"
     else:
         return f"{time},{user},{request['Hva']},{request['Rom']},{request['Seng']},{timeDifference(request['Tid'],time)},{logEvent},{request['Hastegrad']}"
 
