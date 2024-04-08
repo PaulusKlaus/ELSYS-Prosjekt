@@ -55,3 +55,82 @@
 11:28:41 - Default User fjernet faste for rom 311
 11:28:42 - Default User la til faste for rom 303
 11:28:43 - Default User la til faste for rom 307
+11:57:07 - Default User la til faste for rom 307
+11:57:08 - Default User la til faste for rom 306
+11:57:08 - Default User la til faste for rom 310
+11:58:41 - Default User la til faste for rom 312
+11:58:44 - Default User la til faste for rom 302
+11:58:45 - Default User la til faste for rom 306
+11:58:46 - Default User fjernet faste for rom 306
+11:58:46 - Default User fjernet faste for rom 302
+11:58:47 - Default User fjernet faste for rom 301
+11:58:47 - Default User fjernet faste for rom 305
+11:58:49 - Default User fjernet faste for rom 311
+11:58:49 - Default User fjernet faste for rom 312
+11:58:51 - Default User la til faste for rom 303
+11:58:51 - Default User la til faste for rom 306
+11:58:53 - Default User fjernet faste for rom 306
+11:58:53 - Default User fjernet faste for rom 303
+11:58:55 - Default User la til faste for rom 304
+11:58:56 - Default User fjernet faste for rom 304
+11:58:57 - Default User la til faste for rom 304
+11:58:58 - Default User fjernet faste for rom 304
+11:58:59 - Default User la til faste for rom 307
+11:58:59 - Default User fjernet faste for rom 307
+11:59:24 - Default User senket hastegraden for forespørsel av type Vann for rom 311 seng 2 til hastegrad 5, eter tid: -1 day, 23:36:01(T:M:S)
+11:59:39 - Default User økte hastegraden for forespørsel av type Vann for rom 306 seng 2 til hastegrad 2, eter tid: -1 day, 23:43:14(T:M:S)
+12:06:40 - Default User fjernet faste for rom 311
+12:06:41 - Default User fjernet faste for rom 305
+12:06:41 - Default User fjernet faste for rom 301
+12:06:42 - Default User la til faste for rom 301
+12:06:45 - Default User la til faste for rom 302
+12:06:47 - Default User fjernet faste for rom 302
+12:06:49 - Default User la til faste for rom 302
+12:06:50 - Default User la til faste for rom 303
+12:06:50 - Default User la til faste for rom 304
+12:06:51 - Default User fjernet faste for rom 302
+12:06:52 - Default User fjernet faste for rom 303
+12:06:52 - Default User fjernet faste for rom 304
+12:06:54 - Default User la til faste for rom 305
+12:06:54 - Default User la til faste for rom 309
+12:06:56 - Default User la til faste for rom 303
+12:06:56 - Default User la til faste for rom 306
+12:06:57 - Default User la til faste for rom 310
+12:06:57 - Default User la til faste for rom 311
+12:06:58 - Default User la til faste for rom 307
+12:06:58 - Default User la til faste for rom 308
+12:06:58 - Default User la til faste for rom 312
+12:06:59 - Default User la til faste for rom 304
+12:09:34 - Default User fjernet faste for rom 311
+12:09:35 - Default User fjernet faste for rom 301
+12:09:36 - Default User fjernet faste for rom 305
+12:09:40 - Default User la til faste for rom 301
+12:09:40 - Default User la til faste for rom 302
+12:09:41 - Default User la til faste for rom 303
+12:09:43 - Default User la til faste for rom 304
+12:09:45 - Default User la til faste for rom 305
+12:09:46 - Default User la til faste for rom 306
+12:09:47 - Default User la til faste for rom 307
+12:09:48 - Default User la til faste for rom 308
+12:09:51 - Default User la til faste for rom 309
+12:09:59 - Default User la til faste for rom 310
+12:10:00 - Default User fjernet faste for rom 310
+12:10:01 - Default User la til faste for rom 310
+12:10:01 - Default User fjernet faste for rom 310
+12:10:52 - Default User la til faste for rom 315
+12:10:54 - Default User la til faste for rom 308
+12:10:54 - Default User la til faste for rom 307
+12:10:54 - Default User la til faste for rom 313
+12:10:55 - Default User la til faste for rom 309
+12:10:55 - Default User la til faste for rom 306
+12:10:56 - Default User la til faste for rom 302
+12:10:56 - Default User la til faste for rom 303
+12:10:57 - Default User la til faste for rom 304
+12:12:09 - Default User fjernet faste for rom 301
+12:12:10 - Default User la til faste for rom 301
+12:12:11 - Default User fjernet faste for rom 311
+12:12:12 - Default User la til faste for rom 311
+12:12:14 - Default User fjernet faste for rom 311
+12:12:14 - Default User fjernet faste for rom 305
+12:12:15 - Default User fjernet faste for rom 301
+12:12:15 - Default User la til faste for rom 307

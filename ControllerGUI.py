@@ -236,7 +236,7 @@ buttons = []
 romMerking = []
 menubuttons = []
 fasteRom = [301,305,311]
-alleRom = [301,302,303,304,305,306,307,308,309,310,311,312]
+alleRom = [301,302,303,304,305,306,307,308,309,311,313,315]
 
 
 
@@ -323,7 +323,7 @@ def frokostKveldsOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=lambda: print(lunsjEntry.get()))
+                            command=lambda: print("frokost/kvelds"))
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -406,10 +406,16 @@ def fasteButtonFunction(rom):
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
     fasteOrder()
-
+fasteDots = []
+for index,i in enumerate(fasteRom):
+    fasteDots.append(tk.Label(rightTop_frame, text="◉", font=("Consolas",20),bg="#fbfafa",fg="#FF0000"))
+    fasteDots[index].place(x=cf.roomPosition(i)[0]+18,y=cf.roomPosition(i)[1]+140)
 def fasteOrder():
     for i in rightBottomLeft_frame.winfo_children():
         i.destroy()
+    for i in fasteDots:
+        i.destroy()
+    fasteDots.clear()
     fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste", font=("Consolas",18),bg="#F84545",fg="black")
     fasteLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
     romLabel = []
@@ -435,6 +441,10 @@ def fasteOrder():
                             bg="#949A9F",
                             command=sendFoodOrder)
     returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+
+    for index,i in enumerate(fasteRom):
+        fasteDots.append(tk.Label(rightTop_frame, text="◉", font=("Consolas",20),bg="#fbfafa",fg="#FF0000"))
+        fasteDots[index].place(x=cf.roomPosition(i)[0]+18,y=cf.roomPosition(i)[1]+140)
 def sendFoodOrder(textFont = ("Consolas",30)):
     #FROKOST
     for i in rightBottomLeft_frame.winfo_children():
@@ -486,7 +496,7 @@ def buttonFunction(buttonIndex):
     currentButton = buttonIndex+1
     print(currentButton)
     if requests[buttonIndex].get('Occupied'):
-        button_texts[3]= "Fjern faste"
+        button_texts[3]= "Fjern tistedeværelse"
     else:
         button_texts[3]= "Legg til tilstedeværelse"
     menubuttons.pop(-1)
