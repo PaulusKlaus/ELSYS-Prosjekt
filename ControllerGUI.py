@@ -46,7 +46,7 @@ def useData(recievedData):
                             "Tid":cf.getCurrentTime(),
                             "Occupied":cf.is_room_occupied(requests,int(recievedData[0])),
                             "ID": 99}
-        print(f"hastegrad ={recievedData[3]}")
+        print(f"hastegrad = {recievedData[3]}")
         if  recievedData[3]=="-1":
             print("Removing request")
             for i in range(len(requests)-1, -1, -1):
@@ -61,9 +61,9 @@ def useData(recievedData):
                     requests.pop(i)
                     print("Request removed")
                     cf.sort_Hastegrad_ID_Time(requests)
-                    
+                    print("before funcion 1")
                     updateButtons()
-                    
+                    print("after funcion 1")
                     for i in range(len(romMerking)):
                         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                             y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -94,9 +94,9 @@ def useData(recievedData):
             if update:
                 cf.sort_Hastegrad_ID_Time(requests)
                 
-                
+                print("before funcion 2")
                 updateButtons()
-                
+                print("after funcion 2")
                 for i in range(len(romMerking)):
                     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                         y=cf.roomPosition(requests[i].get('Rom'))[1])
@@ -113,18 +113,21 @@ def useData(recievedData):
                 cf.fileWrite("logFileText.txt",cf.logStringText(recievedData[4],requests[indexlist[i]],"Remote Delete",cf.getCurrentTime()))
                 print(f"Removing:{requests.pop(indexlist[i])}")
             cf.sort_Hastegrad_ID_Time(requests)
-            
+            print("before funcion 3")
             updateButtons()
-            
+            print("after funcion 3")
             for i in range(len(romMerking)):
                 romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                                     y=cf.roomPosition(requests[i].get('Rom'))[1])
             cf.print_requests(requests)
 
-    except:
+
+    except Exception as e:
+        print(f"Exception: {e}")
         print("Data could not be used")
         print("Here")
         pass
+
 def receive_data():
     global client
     server = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
@@ -323,7 +326,7 @@ def frokostKveldsOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=lambda: print("frokost/kvelds"))
+                            command=sendFoodOrder)
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -354,7 +357,7 @@ def lunsjOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=lambda: print(lunsjEntry.get()))
+                            command=sendFoodOrder)
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -385,7 +388,7 @@ def middagOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=lambda: print(middagEntry.get()))
+                            command=sendFoodOrder)
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -476,7 +479,8 @@ def sendFoodOrder(textFont = ("Consolas",30)):
 sendFoodOrder()
 
 def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",18)):
-
+    for i in rightBottomRight_frame.winfo_children():
+        i.destroy()
     foodStuff = ["Juice","Vann","Saft","Kaffe","Te","Hamburger","Pizza","Kylling","Fisk","Pasta","Drikke","Mat"]
     foodRequests = []
     for i in requests:
@@ -578,8 +582,6 @@ def updateButtons():
     for i in left_frame.winfo_children():
         i.place_forget()
     
-    for widget in rightBottom_frame.winfo_children():
-        widget.destroy()
     showFoodOrders()
     sendFoodOrder()
     for i, label in enumerate(romMerking):

@@ -134,3 +134,153 @@
 12:12:14,Default User,,305,,,Faste Removed,
 12:12:15,Default User,,301,,,Faste Removed,
 12:12:15,Default User,,307,,,Faste Added,
+10:08:44,Default User,,301,,,Faste Removed,
+10:08:44,Default User,,305,,,Faste Removed,
+10:08:45,Default User,,311,,,Faste Removed,
+10:08:46,Default User,,303,,,Faste Added,
+10:08:47,Default User,,306,,,Faste Added,
+10:09:39,Default User,,304,,,Faste Added,
+10:09:39,Default User,,308,,,Faste Added,
+10:09:40,Default User,,307,,,Faste Added,
+10:09:41,Default User,,303,,,Faste Removed,
+10:09:41,Default User,,304,,,Faste Removed,
+10:09:42,Default User,,308,,,Faste Removed,
+10:09:44,Default User,,307,,,Faste Removed,
+10:09:45,Default User,,306,,,Faste Removed,
+10:11:05,Rom 301,Pasta,301,1,0:00:00,Added,5
+10:11:08,Rom 301 Seng 1,Pasta,301,1,0:00:03,Room Delete,5
+10:11:11,Rom 301,Smerte,301,1,0:00:00,Added,3
+10:12:08,Rom 301,Smerte,301,1,0:00:00,Added,3
+10:17:45,Rom 301,Vann,301,1,0:00:00,Added,5
+10:20:39,Rom 301,Vann,301,1,0:00:00,Added,5
+10:22:16,Rom 301,Vann,301,1,0:00:00,Added,5
+10:23:33,Rom 301,Vann,301,1,0:00:00,Added,5
+10:26:21,Rom 301,Juice,301,1,0:00:00,Added,5
+10:26:24,Rom 301,Pasta,301,1,0:00:00,Added,5
+10:26:28,Default User,Pasta,301,1,0:00:04,Delete,5
+10:26:30,Default User,Juice,301,1,0:00:09,Delete,5
+10:36:35,Rom 301,Vann,301,1,0:00:00,Added,5
+10:37:37,Rom 301,Smerte,301,1,0:00:00,Added,3
+10:38:09,Rom 301,Betjening,301,1,0:00:00,Added,4
+10:38:14,Rom 301 Seng 1,Betjening,301,1,0:00:05,Room Delete,4
+10:38:47,Rom 301,Betjening,301,1,0:00:00,Added,4
+10:38:53,Rom 301 Seng 1,Betjening,301,1,0:00:06,Room Delete,4
+10:38:56,Rom 301,Betjening,301,1,0:00:00,Added,4
+10:39:22,Rom 301,Toalett,301,1,0:00:00,Added,4
+10:39:32,Rom 301 Seng 1,Toalett,301,1,0:00:10,Room Delete,4
+10:39:45,Default User,Smerte,301,1,0:02:08,Delete,3
+10:39:45,Rom 301,Smerte,301,1,0:00:00,Added,4
+10:40:00,Rom 301,Smerte,301,1,0:00:00,Increase Importance,3
+10:40:59,Daniel,Vann,301,1,0:04:24,Remote Delete,5
+10:40:59,Daniel,Betjening,301,1,0:02:03,Remote Delete,4
+10:40:59,Daniel,Smerte,301,1,0:01:14,Remote Delete,3
+10:46:14,Rom 301,Juice,301,1,0:00:00,Added,5
+10:46:43,Default User,Juice,301,1,0:00:29,Increase Importance,4
+10:46:59,Rom 301,Smerte,301,1,0:00:00,Added,3
+10:47:13,Rom 301,Betjening,301,1,0:00:00,Added,4
+10:47:22,Rom 301,Pizza,301,1,0:00:00,Added,5
+10:48:22,Default User,,307,,,Faste Added,
+10:48:24,Default User,,306,,,Faste Added,
+10:48:24,Default User,,306,,,Faste Removed,
+10:48:25,Default User,,307,,,Faste Removed,
+11:15:08,Rom 301,Juice,301,1,0:00:00,Added,5
+11:21:07,Rom 301,Vann,301,1,0:00:00,Added,5
+11:22:35,Rom 301,Vann,301,1,0:00:00,Added,5
+11:22:37,Rom 301 Seng 1,Vann,301,1,0:00:02,Room Delete,5
+11:22:39,Rom 301,Betjening,301,1,0:00:00,Added,4
+11:22:42,Rom 301 Seng 1,Betjening,301,1,0:00:03,Room Delete,4
+11:22:45,Rom 301,Vann,301,1,0:00:00,Added,5
+11:22:51,Default User,Vann,301,1,0:00:06,Occupied,5
+11:22:53,Default User,Vann,301,1,0:00:08,Unoccupied,5
+11:22:54,Default User,Vann,301,1,0:00:09,Occupied,5
+11:22:56,Default User,Vann,301,1,0:00:11,Unoccupied,5
+11:22:59,Default User,Vann,301,1,0:00:14,Increase Importance,4
+11:23:01,Default User,Vann,301,1,0:00:16,Increase Importance,3
+11:23:02,Default User,Vann,301,1,0:00:17,Decrease Importance,4
+11:23:03,Default User,Vann,301,1,0:00:18,Decrease Importance,5
+11:23:04,Default User,Vann,301,1,0:00:19,Delete,5
+11:23:14,Rom 301,Smerte,301,1,0:00:00,Added,3
+11:23:16,Rom 301,Vann,301,1,0:00:00,Added,5
+11:23:18,Rom 301,Toalett,301,1,0:00:00,Added,5
+11:23:21,Rom 301 Seng 1,Smerte,301,1,0:00:07,Room Delete,3
+11:23:23,Rom 301,Te,301,1,0:00:00,Added,5
+11:23:25,Rom 301,Saft,301,1,0:00:00,Added,5
+11:23:26,Rom 301,Fisk,301,1,0:00:00,Added,5
+11:23:27,Rom 301,Smerte,301,1,0:00:00,Added,3
+11:23:29,Rom 301,Pizza,301,1,0:00:00,Added,5
+11:23:30,Rom 301 Seng 1,Fisk,301,1,0:00:04,Room Delete,5
+11:23:32,Rom 301,Pasta,301,1,0:00:00,Added,5
+11:23:34,Rom 301 Seng 1,Pizza,301,1,0:00:05,Room Delete,5
+11:23:35,Rom 301 Seng 1,Pasta,301,1,0:00:03,Room Delete,5
+11:23:53,Default User,,311,,,Faste Removed,
+11:23:53,Default User,,305,,,Faste Removed,
+11:23:54,Default User,,301,,,Faste Removed,
+11:23:55,Default User,,315,,,Faste Added,
+11:23:56,Default User,,307,,,Faste Added,
+11:23:56,Default User,,306,,,Faste Added,
+11:24:23,Rom 301,Juice,301,1,0:00:00,Added,5
+11:24:42,Daniel,Juice,301,1,0:00:19,Remote Delete,5
+11:24:42,Daniel,Saft,301,1,0:01:17,Remote Delete,5
+11:24:42,Daniel,Te,301,1,0:01:19,Remote Delete,5
+11:24:42,Daniel,Toalett,301,1,0:01:24,Remote Delete,5
+11:24:42,Daniel,Vann,301,1,0:01:26,Remote Delete,5
+11:24:42,Daniel,Smerte,301,1,0:01:15,Remote Delete,3
+11:26:25,Default User,,311,,,Faste Removed,
+11:26:26,Default User,,305,,,Faste Removed,
+11:26:27,Default User,,301,,,Faste Removed,
+11:26:32,Default User,,307,,,Faste Added,
+11:26:32,Default User,,306,,,Faste Added,
+11:26:33,Default User,,311,,,Faste Added,
+11:26:33,Default User,,313,,,Faste Added,
+11:26:33,Default User,,315,,,Faste Added,
+11:26:39,Rom 301,Vann,301,1,0:00:00,Added,5
+11:26:41,Rom 301,Toalett,301,1,0:00:00,Added,5
+11:26:59,Rom 301,Smerte,301,1,0:00:00,Added,3
+11:27:05,Daniel,Smerte,301,1,0:00:06,Decrease Importance,4
+11:27:08,Rom 301 Seng 1,Smerte,301,1,0:00:09,Room Delete,4
+11:27:15,Rom 301,Smerte,301,1,0:00:00,Added,3
+11:27:18,Daniel,Smerte,301,1,0:00:03,Decrease Importance,4
+11:27:20,Rom 301 Seng 1,Smerte,301,1,0:00:05,Room Delete,4
+11:27:32,Rom 301 Seng 1,Toalett,301,1,0:00:51,Room Delete,5
+11:27:34,Rom 301,Toalett,301,1,0:00:00,Added,4
+11:27:38,Rom 301 Seng 1,Toalett,301,1,0:00:04,Room Delete,4
+11:27:41,Rom 301,Pasta,301,1,0:00:00,Added,5
+11:27:45,Rom 301 Seng 1,Pasta,301,1,0:00:04,Room Delete,5
+11:30:16,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:17,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:18,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:19,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:20,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:21,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:22,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:23,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:24,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:25,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:26,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:27,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:28,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:30,Rom 301 Seng 1,SOS,301,1,0:00:02,Room Delete,2
+11:30:31,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:32,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:33,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:34,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:35,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:36,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:37,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:38,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:39,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:40,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:41,Rom 301,SOS,301,1,0:00:00,Added,2
+11:30:42,Rom 301 Seng 1,SOS,301,1,0:00:01,Room Delete,2
+11:30:43,Rom 301,SOS,301,1,0:00:00,Added,2
+11:31:09,Rom 301,SOS,301,1,0:00:00,Added,2
+11:31:37,Rom 301 Seng 1,SOS,301,1,0:00:28,Room Delete,2
+11:31:39,Rom 301,SOS,301,1,0:00:00,Added,2
+11:31:46,Rom 301,Betjening,301,1,0:00:00,Added,4
+11:31:51,Rom 301 Seng 1,Betjening,301,1,0:00:05,Room Delete,4
+11:34:18,Rom 301,SOS,301,1,0:00:00,Added,2
+11:34:22,Rom 301 Seng 1,SOS,301,1,0:00:04,Room Delete,2
+11:34:24,Rom 301,SOS,301,1,0:00:00,Added,2
+11:34:27,Rom 301 Seng 1,SOS,301,1,0:00:03,Room Delete,2
+11:34:37,Rom 301,SOS,301,1,0:00:00,Added,2
+11:34:47,Default User,SOS,301,1,0:00:10,Delete,2
