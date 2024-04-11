@@ -19,25 +19,25 @@ returnCorrectionHeight = 15
 timeLastPressed = 0
 inNurseMenu = False
 padding = 0
-clientEnable = False
-acceptedCards =[184266225316,646484204159]
+clientEnable = True
+acceptedCards =[184266225316,584161695581]
 lastCardScanned = 0
 lastUser = 0
 currentMenu = "MainMenu"
 currentMainMenu = "MainMenu"
-currentCard = 123
-user = ["Daniel"]
+user = ["Daniel","Eivind"]
 requestsRoom = []
-def ChangeUser(new_user):
-    global user
-    user = new_user
-    print("User changed to: " + user)
-    return
-
 def useData(data):
     data = data.split(",")
     print(f"data is : {data}")
     indexlist = []
+    if data[0]=="Remote Remove":
+        try:
+            requestsRoom.remove({"Rom": int(data[1]), "Seng": int(data[2]), "Hva": data[3], "Hastegrad": int(data[4])})
+            showPopup(f"Fjernet forespørsel\n{data[3]} trådløst","#F55454")
+            returnButton()
+        except Exception as e:
+            print(f"Could not remove: {e}")
     for index,i in enumerate(requestsRoom):
         #print(f"{data[0] == 'Remove'} {i.get('Rom') == int(data[1])} { i.get('Seng') == int(data[2])}")
         if data[0] == "Remove" and i.get('Rom') == int(data[1]) and i.get('Seng') == int(data[2]):
@@ -180,7 +180,7 @@ def sendRequest(request, hastegrad):
     remove = True
     show = ""
     global root  # Assuming root is a global variable
-    message = f"{rom},{seng},{request},{hastegrad},{user}"
+    message = f"{rom},{seng},{request},{hastegrad},{user[lastUser]}"
     if hastegrad != 0:
         try:
             isEqual = False
@@ -214,7 +214,7 @@ def sendRequest(request, hastegrad):
             elif remove:
                 print(f"Removing request: {receivedDict}")
                 requestsRoom.remove(receivedDict)
-                message = f"{rom},{seng},{request},-1,{user}"
+                message = f"{rom},{seng},{request},-1,{user[lastUser]}"
                 show = "removed"
                 if clientEnable != True:
                     showRemoved()
@@ -232,6 +232,7 @@ def sendRequest(request, hastegrad):
         elif show == "removed":
             showRemoved()
             returnButton()
+    print(f"Requests: {requestsRoom}")
 def returnButton():
         print(f"CurrentMenu: {currentMenu}")
         print(f"CurrentMainMenu: {currentMainMenu}")
@@ -729,11 +730,8 @@ def addApprovedCard():
         time.sleep(0.5)
     if append:       
         if lastCardScanned not in acceptedCards:
-            acceptedCards.append(lastCardScanned)
-            enterUsername()
             inNurseMenu = True
-            showPopup(f"ID kort lagt til")
-            returnButton()
+            enterUsername()
         else:
             showPopup(f"ID kort allerede lagt til","#F3D739")
             returnButton()
@@ -746,7 +744,11 @@ def saveUsername(username):
     global userSaved
     userSaved = True
     user.append(username)
-    print(f"Usernames: {user}")
+    acceptedCards.append(lastCardScanned)
+    showPopup(f"ID kort lagt til")
+    returnButton()
+    print(f"Cards: {acceptedCards}")
+    print(f"Users: {user}")
 def createButton(root,key,row,col,command,width =0.8/10):
     button = tk.Button(root,
                 text = key,
@@ -773,8 +775,7 @@ def buttonCommand(key,entry):
         currentName += key.lower()
     entry.delete(0, tk.END)  # Clear the current text in the entry widget
     entry.insert(0, currentName)  # Insert the updated current name
-    root.update()  # Update the root window to ensure label is drawn before the main loop continues
-
+    root.update()
 def enterUsername():
     global inNurseMenu
     global currentName
@@ -1143,9 +1144,9 @@ def mainEasyMenu():
                     image=pixelVirtual,
                     compound="c",
                     command=lambda: sendRequest("Hjelp",3),
-                    font = button_font,
-                    height = getButtonSize(2,1)[0],
-                    width = getButtonSize(2,1,True)[1])
+                    font = button_font)
+                    #height = getButtonSize(2,1)[0]+padding*2,
+                    #width = getButtonSize(2,1,True)[1])
     btn2 = tk.Button(root,
                      text = getButtonString("Trenger hjelp senere",5),
                      bg = "#E0D025",
@@ -1153,9 +1154,9 @@ def mainEasyMenu():
                      image=pixelVirtual,
                      compound="c",
                      command =lambda: sendRequest("Hjelp",5),
-                     font = button_font,
-                     height = getButtonSize(2,1)[0],
-                     width = getButtonSize(2,1,True)[1])
+                     font = button_font)
+                     #height = getButtonSize(2,1)[0]+padding*2,
+                     #width = getButtonSize(2,1,True)[1])
     """btn6 = tk.Button(root,
                      text = "Sykepleiermeny",
                      bg = "#D87E7E",
@@ -1166,8 +1167,8 @@ def mainEasyMenu():
                      command = mainNurseMenu,
                      height = getButtonSize(2,1)[0],
                      width = getButtonSize(2,1,True)[1])"""
-    btn1.grid(row = 1, column = 1, padx=padding, pady=padding)
-    btn2.grid(row = 1, column = 2, padx=padding, pady=padding)
+    btn1.place(relx=0,rely=0,relwidth=0.5,relheight=1)
+    btn2.place(relx=0.5,rely=0,relwidth=0.5,relheight=1)
     #btn6.grid(row = 2, column = 2, padx=padding, pady=padding)
 def mainMediumMenu():
     global inNurseMenu
@@ -1218,6 +1219,7 @@ def mainMediumMenu():
                         command = lambda:sendRequest("Mat",5),
                         height = getButtonSize(2,2)[0],
                         width = getButtonSize(2,2,True)[1])
+    
     btn1.grid(row = 1, column = 1, padx=padding, pady=padding)
     btn2.grid(row = 1, column = 2, padx=padding, pady=padding)
     btn3.grid(row = 2, column = 1, padx=padding, pady=padding)
@@ -1282,23 +1284,23 @@ def MainMenu():
                    command = mat,
                    height = button_height,
                    width = button_width)
-    """b6 = tk.Button(root,
-                     text = "Sykepleiermeny",
-                     bg = "#D87E7E",
+    b6 = tk.Button(root,
+                     text = getButtonString("SOS",2),
+                     bg = "#FF0000",
                      fg = buttonTextColor,
                      image=pixelVirtual ,
                      compound="c",
                      font=button_font,
-                     command = mainNurseMenu,
+                     command =lambda: sendRequest("SOS",2),
                      height = button_height,
-                     width = button_width) """
+                     width = button_width)
     
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
     b2.grid(row = 1, column = 2, padx=padding, pady=padding)
     b3.grid(row = 1, column = 3, padx=padding, pady=padding)
     b4.grid(row = 2, column = 1, padx=padding, pady=padding)
     b5.grid(row = 2, column = 2, padx=padding, pady=padding)
-    #b6.grid(row = 2, column = 3, padx=padding, pady=padding)
+    b6.grid(row = 2, column = 3, padx=padding, pady=padding)
     
     # Create return btn
     #createReturnBtn()
