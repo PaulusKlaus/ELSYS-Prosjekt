@@ -1,29 +1,26 @@
-import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
+ import RPi.GPIO as GPIO
+ from mfrc522 import SimpleMFRC522
 
-def read(trailer_block, key, block_addrs):
+# Function to read the card id and data
+def read():
     try:
-        reader = SimpleMFRC522()
-        id, data = reader.read()
-        return id, data
+        reader = SimpleMFRC522() # Create an object of the class SimpleMFRC522
+        id, data = reader.read() # Read the card id and data
+        return id, data 
     except Exception as e:
         print("An error occurred:", e)
         return None, None
     finally:
-        GPIO.cleanup()
-
-trailer_block = 11
-key = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]
-block_addrs = [8, 9, 10]
+        GPIO.cleanup() # Clean up the GPIO pins
 
 GPIO.setwarnings(False)  # Suppress GPIO warnings
-id, text = read(trailer_block, key, block_addrs)
- 
+
+# Function to get the card id
 def getCardId():
     global id
     functionID = None
     while not id:
-        id, text = read(trailer_block, key, block_addrs)
+        id = read()
     functionID = id
     id = None
     return functionID
