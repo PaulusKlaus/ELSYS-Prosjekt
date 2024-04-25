@@ -3,3 +3,5 @@ Brukerenhet screenshots
 logFileText.txt
 logFileData.txt
 test.py
+__pycache__
+.vscode
