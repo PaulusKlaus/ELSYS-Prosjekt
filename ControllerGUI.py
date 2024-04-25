@@ -223,7 +223,7 @@ filemenu.add_command(label="Palina",command=lambda: setUser("Palina"))
 menubar.add_cascade(label="Brukervalg",font=("Arial",18), menu=filemenu)
 root.config(menu=menubar)
 
-image_path = "romLayout.png"  
+image_path = r"images\romLayout.png"  
 image = PhotoImage(file=image_path)
 image_label = Label(rightTop_frame, image=image, bg='grey')
 
