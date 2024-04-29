@@ -68,9 +68,6 @@ def useData(recievedData):
                     print("before funcion 1")
                     updateButtons()
                     print("after funcion 1")
-                    for i in range(len(romMerking)):
-                        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                                            y=cf.roomPosition(requests[i].get('Rom'))[1])
                     cf.print_requests(requests)
             
         elif recievedData[3] != "0":         
@@ -101,9 +98,6 @@ def useData(recievedData):
                 print("before funcion 2")
                 updateButtons()
                 print("after funcion 2")
-                for i in range(len(romMerking)):
-                    romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                                        y=cf.roomPosition(requests[i].get('Rom'))[1])
                 cf.print_requests(requests)
         else:
             indexlist = []
@@ -120,9 +114,6 @@ def useData(recievedData):
             print("before funcion 3")
             updateButtons()
             print("after funcion 3")
-            for i in range(len(romMerking)):
-                romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                                    y=cf.roomPosition(requests[i].get('Rom'))[1])
             cf.print_requests(requests)
 
 
@@ -187,7 +178,11 @@ requests.append({"Rom":302,"Seng":1, "Hva":"Vann", "Hastegrad":5, "Tid":"12:26:2
 requests.append({"Rom":309,"Seng":1, "Hva":"Spørsmål", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 10})
 requests.append({"Rom":315,"Seng":1, "Hva":"Vann", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 11})
 requests.append({"Rom":307,"Seng":1, "Hva":"Spørsmål", "Hastegrad":5, "Tid":"12:26:25","Occupied":True, "ID": 12})
-requests.append({"Rom":303,"Seng":2, "Hva":"ALARM", "Hastegrad":2, "Tid":"10:25:23","Occupied":True, "ID": 13})"""
+requests.append({"Rom":303,"Seng":2, "Hva":"ALARM", "Hastegrad":2, "Tid":"10:25:23","Occupied":True, "ID": 13})
+requests.append({"Rom":301,"Seng":1, "Hva":"SOS", "Hastegrad":2, "Tid":"10:25:23","Occupied":False, "ID": 1})
+requests.append({"Rom":301,"Seng":1, "Hva":"Smerte", "Hastegrad":3, "Tid":"12:46:09" ,"Occupied":False,"ID": 2})
+requests.append({"Rom":301,"Seng":1, "Hva":"Betjening", "Hastegrad":4, "Tid":"13:35:09","Occupied":False, "ID": 3})
+requests.append({"Rom":301,"Seng":1, "Hva":"Skive m/brunost", "Hastegrad":5, "Tid":"12:23:23","Occupied":False, "ID": 4})"""
 #print("UNSORTED:  ")
 #cf.print_requests(requests)
 cf.sort_Hastegrad_ID_Time(requests)
@@ -216,10 +211,9 @@ rightBottom_frame.grid(row=1, column=1, padx=int(max_height*0.01), pady=int(max_
 
 # Adds food menu
 rightBottomRight_frame = Frame(rightBottom_frame,bg="grey")
-rightBottomRight_frame.place(relx= 0.5125,rely = 0,relwidth = 0.4875,relheight = 1)
+rightBottomRight_frame.place(relx= 0.4625,rely = 0,relwidth = 0.5375,relheight = 1)
 rightBottomLeft_frame = Frame(rightBottom_frame,bg="#123456")
-rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4875,relheight = 1)
-
+rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4375,relheight = 1)
 # Configure row and column weights to distribute space
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
@@ -237,7 +231,7 @@ filemenu.add_command(label="Palina",command=lambda: setUser("Palina"))
 menubar.add_cascade(label="Brukervalg",font=("Arial",18), menu=filemenu)
 root.config(menu=menubar)
 
-image_path = "romLayout.png"  
+image_path = r"images\romLayout.png"  
 image = PhotoImage(file=image_path)
 image_label = Label(rightTop_frame, image=image, bg='grey') # Create a label with the image
 image_label.pack(fill=tk.BOTH, expand=True) # Fill the entire frame with the image
@@ -246,7 +240,7 @@ index = 0
 buttons = []
 romMerking = []
 menubuttons = []
-fasteRom = [301,305,311]
+fasteRom = []
 alleRom = [301,302,303,304,305,306,307,308,309,311,313,315]
 
 
@@ -314,8 +308,9 @@ def changebuttonfunction():
         topColor = "#73F7C6"
         bottomColor = "#4E7869"
     frokostKveldsOrder()
-
-# Set up the menu for a breakfast and evening order
+def sendOrder(data):
+    sendData(data)
+    sendFoodOrder()
 def frokostKveldsOrder():
 
     for i in rightBottomLeft_frame.winfo_children():
@@ -338,7 +333,7 @@ def frokostKveldsOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=sendFoodOrder)
+                            command=lambda: sendOrder(f"MatPopup,{Valgt}"))
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -354,9 +349,9 @@ def lunsjOrder():
     lunsjLabel = tk.Label(rightBottomLeft_frame, text="Lunsj", font=("Consolas",18),bg="#73F7C6",fg="black")
     lunsjLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
     lunsjEntryLabel = tk.Label(rightBottomLeft_frame, text="Dagens lunsj:", font=("Consolas",18),bg="#73F7C6",fg="black")
-    lunsjEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.3, relheight=0.1)
+    lunsjEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.35, relheight=0.1)
     lunsjEntry = tk.Entry(rightBottomLeft_frame, font=("Consolas",18))
-    lunsjEntry.place(relx=0.32, rely=0.14, relwidth=0.66, relheight=0.1)
+    lunsjEntry.place(relx=0.37, rely=0.14, relwidth=0.61, relheight=0.1)
     fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste rom:", font=("Consolas",18),bg="#F84545",fg="black")
     fasteLabel.place(relx=0.02, rely=0.26, relwidth=0.96, relheight=0.1)
     for index,rom in enumerate(fasteRom):
@@ -371,7 +366,7 @@ def lunsjOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=sendFoodOrder)
+                            command=lambda: sendOrder(f"MatPopup,Lunsj,{lunsjEntry.get()}"))
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -387,9 +382,9 @@ def middagOrder():
     middagLabel = tk.Label(rightBottomLeft_frame, text="Middag", font=("Consolas",18),bg="#F0AB44",fg="black")
     middagLabel.place(relx=0.02, rely=0.02, relwidth=0.96, relheight=0.1)
     middagEntryLabel = tk.Label(rightBottomLeft_frame, text="Dagens middag:", font=("Consolas",18),bg="#F0AB44",fg="black")
-    middagEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.3, relheight=0.1)
+    middagEntryLabel.place(relx=0.02, rely=0.14, relwidth=0.35, relheight=0.1)
     middagEntry = tk.Entry(rightBottomLeft_frame, font=("Consolas",18))
-    middagEntry.place(relx=0.32, rely=0.14, relwidth=0.66, relheight=0.1)
+    middagEntry.place(relx=0.37, rely=0.14, relwidth=0.61, relheight=0.1)
     fasteLabel = tk.Label(rightBottomLeft_frame, text="Faste rom:", font=("Consolas",18),bg="#F84545",fg="black")
     fasteLabel.place(relx=0.02, rely=0.26, relwidth=0.96, relheight=0.1)
     for index,rom in enumerate(fasteRom):
@@ -404,7 +399,7 @@ def middagOrder():
                             text="Send",
                             font=("Consolas",18),
                             bg="#437EB8",
-                            command=sendFoodOrder)
+                            command=lambda: sendOrder(f"MatPopup,Middag,{middagEntry.get()}"))
     submitButton.place(relx=0.2, rely=0.75, relwidth=0.55, relheight=0.2)
     returnButton = tk.Button(rightBottomLeft_frame,
                             text="↵",
@@ -418,11 +413,14 @@ def fasteButtonFunction(rom):
     global fasteRom
     if rom in fasteRom:
         fasteRom.remove(rom)
+        sendData(f"MatPopup,{rom},RemoveFaste")
         print(f"Removed faste rom:{rom}")
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,{"Rom":rom},"Faste Removed",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,{"Rom":rom},"Faste Removed",cf.getCurrentTime()))
     else:
         fasteRom.append(rom)
+        fasteRom.sort()
+        sendData(f"MatPopup,{rom},AddFaste")
         print(f"Added faste rom:{rom}")
         cf.fileWrite("logFileText.txt",cf.logStringText(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,{"Rom":rom},"Faste Added",cf.getCurrentTime()))
@@ -498,19 +496,24 @@ def sendFoodOrder(textFont = ("Consolas",30)):
     fasteButton.place(relx=0.505, rely=0.505, relwidth=0.485, relheight=0.485)
 sendFoodOrder()
 
-
-# Show food orders in the food order section
-def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",18)):
+def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",16)):
     for i in rightBottomRight_frame.winfo_children():
         i.destroy()
-    foodStuff = ["Juice","Vann","Saft","Kaffe","Te","Hamburger","Pizza","Kylling","Fisk","Pasta","Drikke","Mat"]
+    foodStuff = ["Juice","Vann","Saft","Kaffe","Te","Skive m/ost","Skive m/skinke","Skive m/egg","Skive m/syltetøy","Skive m/brunost","Drikke","Mat","Middag","Lunsj"]
+    foodStuff2 = ["Brødskive","Knekkebrød","Rundstykke","Ost","Skinke","Egg","Majones","Syltetøy","Brunost"]
     foodRequests = []
     for i in requests:
         if i.get('Hva') in foodStuff:
             foodRequests.append(i)
+        else:
+            hvaList = i.get('Hva').split(".")
+            for j in hvaList:
+                if j in foodStuff2:
+                    foodRequests.append(i)
+                    break
     for index, i in enumerate(foodRequests):
         foodButton = tk.Button(rightBottomRight_frame,
-                            text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
+                            text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske {i.get('Hva'):8} {i.get('Tid'):8}",
                             font=textFont,
                             bg = cf.color(i.get("Hastegrad")),
                             fg=textcolor)
@@ -575,10 +578,6 @@ def changeOccupancy():
         cf.fileWrite("logFileData.txt",cf.logStringData(currentUser,requests[currentButton-1],"Occupied",cf.getCurrentTime()))
     
     updateButtons()
-    
-    for i in range(len(romMerking)):
-        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(requests[i].get('Rom'))[1])
     return
 
 
@@ -593,7 +592,6 @@ def get_lowest_hastegrad_requests(requests):
         else:
             if hastegrad < room_hastegrad_map[room]:
                 room_hastegrad_map[room] = hastegrad
-    
     for request in requests:
         room = request.get('Rom')
         hastegrad = request.get('Hastegrad')
@@ -618,13 +616,13 @@ def updateButtons():
     for index, i in enumerate(requests):
         buttons.append(tk.Button(left_frame,
                 command=lambda index=index: buttonFunction(index),
-                text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
-                font=("Consolas",18),
+                text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske {i.get('Hva'):8} {i.get('Tid'):8}",
+                font=("Consolas",16),
                 bg = cf.color(i.get("Hastegrad")),
                 pady=10,
                 padx=10))
     
-    for i in get_lowest_hastegrad_requests(requests):
+    for index,i in enumerate(get_lowest_hastegrad_requests(requests)):
         romMerking.append(tk.Label(rightTop_frame,
                 text="!",
                 font=romMerkingFont,
@@ -633,8 +631,11 @@ def updateButtons():
                 padx=romMerkingPadx,
                 pady=romMerkingPady
                 ))
+        romMerking[index].place(x=cf.roomPosition(i.get('Rom'))[0],
+                            y=cf.roomPosition(i.get('Rom'))[1])
         for index,button in enumerate(buttons):
             button.place(relx=0.0, rely=index*0.05, relwidth=1, relheight=0.05)
+
 def okHastegrad():
 
     global requests
@@ -653,10 +654,7 @@ def okHastegrad():
     cf.sort_Hastegrad_ID_Time(requests)
     
     updateButtons()
-    
-    for i in range(len(romMerking)):
-        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(requests[i].get('Rom'))[1])   
+      
 def senkHastegrad():
     global requests
     
@@ -675,9 +673,7 @@ def senkHastegrad():
     cf.sort_Hastegrad_ID_Time(requests)
     
     updateButtons()
-    for i in range(len(romMerking)):
-        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(requests[i].get('Rom'))[1])
+
     
 def fjernRequest():
     global requests
@@ -701,9 +697,6 @@ def fjernRequest():
     
     updateButtons()
 
-    for i in range(len(romMerking)):
-        romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                            y=cf.roomPosition(requests[i].get('Rom'))[1])
 
 
 
@@ -727,12 +720,12 @@ menubuttons.append(tk.Button(left_frame,
                             font=("Consolas", 14),
                             bg=menuButtonColor[3],
                             command = changeOccupancy))
-
+"""
 for index, i in enumerate(requests):
     buttons.append(tk.Button(left_frame,
               command=lambda index=index: buttonFunction(index),
               text=f"Rom: {i.get('Rom'):3} Seng: {i.get('Seng'):1} Ønsker: {i.get('Hva'):8} Tid: {i.get('Tid'):8}",
-              font=("Consolas",18),
+              font=("Consolas",16),
               bg = cf.color(i.get("Hastegrad")),
               pady=10,
               padx=10))
@@ -748,7 +741,8 @@ for index,button in enumerate(buttons):
     button.place(relx=0.0, rely=index*0.05, relwidth=1, relheight=0.05)
 for i in range(len(romMerking)):
     romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
-                        y=cf.roomPosition(requests[i].get('Rom'))[1])
+                        y=cf.roomPosition(requests[i].get('Rom'))[1])"""
+updateButtons()
 if clientEnabled:
     receive_thread = threading.Thread(target=receive_data)
     receive_thread.start()

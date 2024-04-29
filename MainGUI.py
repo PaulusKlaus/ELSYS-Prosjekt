@@ -7,7 +7,7 @@ import threading
 import time
 import os
 import read as RFID
-
+import RPi.GPIO as GPIO
 scaler = 480/800
 screen_width = 715
 screen_height = 450
@@ -20,6 +20,7 @@ timeLastPressed = 0
 inNurseMenu = False
 padding = 0
 clientEnable = True
+faste = False
 acceptedCards =[184266225316,584161695581]
 lastCardScanned = 0
 lastUser = 0
@@ -27,10 +28,52 @@ currentMenu = "MainMenu"
 currentMainMenu = "MainMenu"
 user = ["Daniel","Eivind"]
 requestsRoom = []
+def SOSbuttonFunction():
+    
+    while True:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(26, GPIO.IN)
+        if GPIO.input(26) == GPIO.HIGH:
+            sendRequest("SOS",2)
+            print("SOS button pressed")
+            SOSpopup()
+            time.sleep(1)
+        else:
+            time.sleep(0.1)
 def useData(data):
+    global faste
     data = data.split(",")
     print(f"data is : {data}")
     indexlist = []
+    
+    if data[0] == "MatPopup":
+        if data[1] == "Middag":
+            if faste != True:
+                showPopupFood(f"Dagens middag er:\n{data[2]}","#F0AB44","Middag")
+            
+        elif data[1] == "Lunsj":
+            if faste != True:
+                showPopupFood(f"Dagens lunsj er:\n{data[2]}","#73F7C6","Lunsj")
+            
+        elif data[1] == "Frokost":
+            if faste != True:
+                showPopupFood(f"Frokost","#73F7C6","Frokost")
+        elif data[1] == "Kvelds":
+            if faste != True:
+                showPopupFood(f"Kveldsmat","#4E7869","Kvelds")
+        elif int(data[1]) == rom:
+            if data[2] == "AddFaste":
+                faste = True
+                print(f"Faste: {faste}")
+                showPopup(f"Faste lagt til\nav sykepleier","#F55454")
+                returnButton()
+            elif data[2] == "RemoveFaste":
+                faste = False
+                print(f"Faste: {faste}")
+                showPopup(f"Faste fjernet\nav sykepleier","#F55454")
+                returnButton()
+        else:
+            print("Could not use data 1")
     if data[0]=="Remote Remove":
         try:
             requestsRoom.remove({"Rom": int(data[1]), "Seng": int(data[2]), "Hva": data[3], "Hastegrad": int(data[4])})
@@ -64,6 +107,10 @@ def getButtonString(hva,hastegrad):
             newHva = "Toalett"
     elif hva == "Trenger hjelp nå" or hva == "Trenger hjelp senere":
         newHva = "Hjelp"
+    elif hva in ["Skive med\nost","Skive med\nskinke","Skive med\negg","Skive med\nsyltetøy","Skive med\nbrunost"]:
+        matList1 = ["Skive med\nost","Skive med\nskinke","Skive med\negg","Skive med\nsyltetøy","Skive med\nbrunost"]
+        matList2 = ["Skive m/ost","Skive m/skinke","Skive m/egg","Skive m/syltetøy","Skive m/brunost"]
+        newHva = matList2[matList1.index(hva)]
     if isRequestInRoom(rom, seng, newHva, hastegrad):
         if hva == "Mye smerte" or hva == "Litt smerte" or hva == "Haster" or hva == "Haster ikke":
             if hva == "Mye smerte" or hva == "Litt smerte":
@@ -132,8 +179,6 @@ def setBed(sengNumber):
     root.title(f"Inlogget som rom {rom} seng {seng}")
     mainAdminMenu()
     return
-
-
 #add image file
 pixelVirtual = tk.PhotoImage(width=1, height=1)
 returnIm = tk.PhotoImage(file = r"images/return.png")
@@ -143,6 +188,67 @@ button_height = int(screen_height/2)-padding*4
 button_width = int(screen_width/3)-padding*4
 
 print(f"Button height: {button_height}, Button width: {button_width}")
+def showPopupFood(Text,Color="lightblue",Hva = "Mat"):
+    top_frame = tk.Frame(root,bg=Color)
+    top_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+    foodLabel = tk.Label(top_frame,
+                        text=Text,
+                        font=button_font,
+                        bg=Color,
+                        fg="#000000")
+    foodLabel.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.2)
+    ynlabel = tk.Label(top_frame,
+                        text="Ønsker du dette?",
+                        font=button_font,
+                        bg=Color,
+                        fg="#000000")
+    ynlabel.place(relx=0.1, rely=0.3, relwidth=0.8, relheight=0.2)
+    if Hva == "Frokost" or Hva =="Kvelds":
+        yes = tk.Button(top_frame,
+                        text = "Ja",
+                        bg="#7BCAE4",
+                        fg = "#000000",
+                        font=button_font,
+                        command=matBestilling)
+        no = tk.Button(top_frame,
+                        text = "Nei",
+                        bg="#7BCAE4",
+                        fg = "#000000",
+                        font=button_font,
+                        command=returnButton)
+    else:
+        yes = tk.Button(top_frame,
+                        text = "Ja",
+                        bg="#7BCAE4",
+                        fg = "#000000",
+                        font=button_font,
+                        command=lambda: sendRequest(Hva,5))
+        no = tk.Button(top_frame,
+                        text = "Nei",
+                        bg="#7BCAE4",
+                        fg = "#000000",
+                        font=button_font,
+                        command=returnButton)
+    yes.place(relx=0.1, rely=0.6, relwidth=0.3, relheight=0.2)
+    no.place(relx=0.6, rely=0.6, relwidth=0.3, relheight=0.2)
+    root.update()  # Update the root window to ensure label is drawn before the main loop continues
+    #time.sleep(1)  # Wait for 1 seconds
+def SOSpopup(Color ="#FF0000"):
+    top_frame = tk.Frame(root,bg=Color)
+    top_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+    SOSLabel = tk.Label(top_frame,
+                        text="Du har trykket på\nSOS knappen!\n\nHvis du trykket feil, trykk AVBRYT",
+                        font=button_font,
+                        bg=Color,
+                        fg="#000000")
+    SOSLabel.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.4)
+    abortButton = tk.Button(top_frame,
+                        text = "AVBRYT",
+                        bg="#CA4747",
+                        fg = "#000000",
+                        font=button_font,
+                        command=lambda: sendRequest("SOS",99))
+    abortButton.place(relx=0.2, rely=0.7, relwidth=0.6, relheight=0.2)
 
 def getButtonSize(col, row, tiltle = False):
     if tiltle:
@@ -178,6 +284,11 @@ def showPopup(Text,Color="lightblue"):
     time.sleep(1)  # Wait for 1 seconds
 def sendRequest(request, hastegrad):
     remove = True
+    if hastegrad == 2 and request == "SOS":
+        remove = False
+    elif request == "SOS":
+        remove = True
+        hastegrad = 2
     show = ""
     global root  # Assuming root is a global variable
     message = f"{rom},{seng},{request},{hastegrad},{user[lastUser]}"
@@ -226,11 +337,13 @@ def sendRequest(request, hastegrad):
         show = "removed"
     if clientEnable:
         sendData(message)
-        if show == "sent":
+        if show == "sent" and request != "SOS":
             showSent()
             returnButton()
-        elif show == "removed":
+        elif show == "removed" and request != "SOS":
             showRemoved()
+            returnButton()
+        elif show == "removed":
             returnButton()
     print(f"Requests: {requestsRoom}")
 def returnButton():
@@ -447,53 +560,254 @@ def mat():
     title.grid(row=0, column = 1, columnspan=4)
 
     m1 = tk.Button(root,
-                text = getButtonString("Hamburger",5),
+                text = getButtonString("Skive med\nost",5),
                 bg="#7A3B39",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Hamburger",5),
+                command=lambda: sendRequest("Skive m/ost",5),
                 height= getButtonSize(3,2,True)[0],
                 width=  getButtonSize(3,2,True)[1])
     m2 = tk.Button(root,
-                text = getButtonString("Pizza",5),
+                text = getButtonString("Skive med\nskinke",5),
                 bg="#F8B422",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Pizza",5),
+                command=lambda: sendRequest("Skive m/skinke",5),
                 height= getButtonSize(3,2,True)[0],
                 width= getButtonSize(3,2,True)[1])
     m3 = tk.Button(root,
-                text = getButtonString("Kylling",5),
+                text = getButtonString("Skive med\negg",5),
                 bg="#E2A156",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Kylling",5),
+                command=lambda: sendRequest("Skive m/egg",5),
                 height= getButtonSize(3,2,True)[0],
                 width= getButtonSize(3,2,True)[1])
     m4 = tk.Button(root,
-                text = getButtonString("Fisk",5),
+                text = getButtonString("Skive med\nsyltetøy",5),
                 bg="#3A86F7",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Fisk",5),
+                command=lambda: sendRequest("Skive m/syltetøy",5),
                 height= getButtonSize(3,2,True)[0],
                 width= getButtonSize(3,2,True)[1])
     m5 = tk.Button(root,
-                text = getButtonString("Pasta",5),
+                text = getButtonString("Skive med\nbrunost",5),
                 bg="#E8DC9D",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",
                 font=button_font,
-                command=lambda: sendRequest("Pasta",5),
+                command=lambda: sendRequest("Skive m/brunost",5),
+                height= getButtonSize(3,2,True)[0],
+                width= getButtonSize(3,2,True)[1])
+    
+    m1.grid(row = 1, column = 1, padx=padding, pady=padding)
+    m2.grid(row = 1, column = 2, padx=padding, pady=padding)
+    m3.grid(row = 1, column = 3, padx=padding, pady=padding)
+    m4.grid(row = 2, column = 1, padx=padding, pady=padding)
+    m5.grid(row = 2, column = 2, padx=padding, pady=padding)
+    createReturnBtn(getButtonSize(3,2,True),(2,3))
+    return
+def AddOrRemoveMat(alternativ):
+    global bestilling
+    
+    if alternativ in bestilling:
+        bestilling.remove(alternativ)
+    elif alternativ in ["Brødskive","Knekkebrød","Rundstykke"]:
+        for i in bestilling:
+            if i in ["Brødskive","Knekkebrød","Rundstykke"]:
+                bestilling.remove(i)
+        bestilling.append(alternativ)
+    else:
+        bestilling.append(alternativ)
+    print(f"Bestilling: {bestilling}")
+    matBestilling()
+
+def getTextMat(alternativ):
+    global bestilling
+    if alternativ in bestilling:
+        return f"Fjern {alternativ}"
+    else:
+        return f"{alternativ}"
+bestillinger = []
+bestilling = []
+def sendTextMat():
+    global bestillinger
+    global bestilling
+    bestillinger.append(bestilling)
+    bestilling = []
+    if bestillinger[-1] == []:
+        bestillinger.pop(-1)
+    print(f"Bestillinger: {bestillinger}")
+    for i in bestillinger:
+        print(f"Sender: {','.join(i)}")
+        sendRequest('.'.join(i),5)
+    bestillinger = []
+    returnButton()
+def newOrderFunction():
+    global bestilling
+    global bestillinger
+    bestillinger.append(bestilling)
+    bestilling = []
+    matBestilling()
+def removeOrderFunction(bestilling):
+    global bestillinger
+    bestillinger.remove(bestilling)
+    matBestilling()
+def matBestilling(textfont = ("Helvetica", 14)):
+    global bestillinger
+    global bestilling
+    print(f"Bestillinger1: {bestillinger}")
+    global inNurseMenu
+    inNurseMenu = False
+    for widget in root.winfo_children():
+        widget.destroy()
+    title = tk.Label(root,
+                        text = "                              Matbestilling                    Trykk for å fjerne",
+                        font=title_font,
+                        bg=bacground_color,
+                        fg="#ffffff")
+    title.place(relx=0, rely=0, relwidth=1, relheight=0.1)
+    left_frame = tk.Frame(root,bg=bacground_color)
+    left_frame.place(relx=0, rely=0.1, relwidth=0.333, relheight=0.9)
+    middle_frame = tk.Frame(root,bg=bacground_color)
+    middle_frame.place(relx=0.333, rely=0.1, relwidth=0.333, relheight=0.9)
+    right_frame = tk.Frame(root,bg=bacground_color)
+    right_frame.place(relx=0.666, rely=0.1, relwidth=0.333, relheight=0.9)
+    bunnAlternativ = ["Brødskive","Knekkebrød","Rundstykke"]
+    colorsBunn = ["#FF8D2F","#FAAC64","#FEBB7C"]
+    for index,i in enumerate(bunnAlternativ):   
+        bunn = tk.Button(left_frame,
+                        text = getTextMat(i),
+                        bg=colorsBunn[index],
+                        fg = buttonTextColor,
+                        font=button_font,
+                        command= lambda i=i: AddOrRemoveMat(i))
+        bunn.place(relx=0,rely=0+(1/len(bunnAlternativ))*index,relwidth=1,relheight=1/len(bunnAlternativ))
+    paaleggAlternativ = ["Majones","Smør","Ost","Brunost","Skinke","Egg","Syltetøy"]
+    colorsPaalegg = ["#F7E75C","#FFEDA6","#FFEA00","#C97633","#FF88B4","#FFFDDF","#FF2020"]
+    for index,i in enumerate(paaleggAlternativ):
+        paalegg = tk.Button(middle_frame,
+                        text = getTextMat(i),
+                        bg=colorsPaalegg[index],
+                        fg = buttonTextColor,
+                        font=button_font,
+                        command= lambda i=i: AddOrRemoveMat(i))
+        paalegg.place(relx=0,rely=0+(1/len(paaleggAlternativ))*index,relwidth=1,relheight=1/len(paaleggAlternativ))
+    newOrder = tk.Button(right_frame,
+                        text = "Legg til",
+                        bg="#BABABA",
+                        fg = buttonTextColor,
+                        font=button_font,
+                        command=lambda: newOrderFunction())
+    newOrder.place(relx=0,rely=(1/7)*5,relwidth=1,relheight=1/7)
+    sendOrder = tk.Button(right_frame,
+                        text = "Send bestilling",
+                        bg="#51FF44",
+                        fg = buttonTextColor,
+                        font=button_font,
+                        command= sendTextMat)
+    sendOrder.place(relx=0,rely=(1/7)*6,relwidth=1,relheight=1/7)
+    if len(bestillinger) > 5:
+        for index,i in enumerate(bestillinger):
+            if len(i) <= 3:
+                bestillingText = ",".join(i)
+            elif len(i) <= 6:
+                bestillingText = ",".join(i[:3])+"\n"+",".join(i[3:])
+            else:
+                bestillingText = ",".join(i[:3])+"\n"+",".join(i[3:6])+"\n"+",".join(i[6:])
+            orders = tk.Button(right_frame,
+                                text = bestillingText,
+                                bg="#FFC75F",
+                                fg="#000000",
+                                border=1,
+                                font=textfont,
+                                command=lambda i = i: removeOrderFunction(i))
+            orders.place(relx=0,rely=0+(((1/7)*5)/len(bestillinger))*index,relwidth=1,relheight=((1/7)*5)/len(bestillinger))
+    else:
+        for index,i in enumerate(bestillinger):
+            if len(i) <= 3:
+                bestillingText = ",".join(i)
+            elif len(i) <= 6:
+                bestillingText = ",".join(i[:3])+"\n"+",".join(i[3:])
+            else:
+                bestillingText = ",".join(i[:3])+"\n"+",".join(i[3:6])+"\n"+",".join(i[6:])
+            orders = tk.Button(right_frame,
+                                text = bestillingText,
+                                bg="#FFC75F",
+                                fg="#000000",
+                                font=textfont,
+                                command=lambda i = i: removeOrderFunction(i))
+            orders.place(relx=0,rely=0+(0.7/5)*index,relwidth=1,relheight=0.7/5)
+def matFrokostKvelds():
+    global inNurseMenu
+    inNurseMenu = False
+    for widget in root.winfo_children():
+        widget.destroy()
+    title = tk.Label(root,
+                     text = "Matbestilling",
+                     font=title_font,
+                     bg=bacground_color,
+                     fg="#ffffff")
+    title.grid(row=0, column = 1, columnspan=4)
+
+    m1 = tk.Button(root,
+                text = getButtonString("Skive med\nost",5),
+                bg="#7A3B39",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=lambda: sendRequest("Skive m/ost",5),
+                height= getButtonSize(3,2,True)[0],
+                width=  getButtonSize(3,2,True)[1])
+    m2 = tk.Button(root,
+                text = getButtonString("Skive med\nskinke",5),
+                bg="#F8B422",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=lambda: sendRequest("Skive m/skinke",5),
+                height= getButtonSize(3,2,True)[0],
+                width= getButtonSize(3,2,True)[1])
+    m3 = tk.Button(root,
+                text = getButtonString("Skive med\negg",5),
+                bg="#E2A156",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=lambda: sendRequest("Skive m/egg",5),
+                height= getButtonSize(3,2,True)[0],
+                width= getButtonSize(3,2,True)[1])
+    m4 = tk.Button(root,
+                text = getButtonString("Skive med\nsyltetøy",5),
+                bg="#3A86F7",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=lambda: sendRequest("Skive m/syltetøy",5),
+                height= getButtonSize(3,2,True)[0],
+                width= getButtonSize(3,2,True)[1])
+    m5 = tk.Button(root,
+                text = getButtonString("Skive med\nbrunost",5),
+                bg="#E8DC9D",
+                fg = buttonTextColor,
+                image=pixelVirtual,
+                compound="c",
+                font=button_font,
+                command=lambda: sendRequest("Skive m/brunost",5),
                 height= getButtonSize(3,2,True)[0],
                 width= getButtonSize(3,2,True)[1])
     
@@ -1222,8 +1536,9 @@ def mainMediumMenu():
     
     btn1.grid(row = 1, column = 1, padx=padding, pady=padding)
     btn2.grid(row = 1, column = 2, padx=padding, pady=padding)
-    btn3.grid(row = 2, column = 1, padx=padding, pady=padding)
-    btn4.grid(row = 2, column = 2, padx=padding, pady=padding)
+    if faste != True:
+        btn3.grid(row = 2, column = 1, padx=padding, pady=padding)
+        btn4.grid(row = 2, column = 2, padx=padding, pady=padding)
 def MainMenu():
     global inNurseMenu
     inNurseMenu = False
@@ -1284,7 +1599,7 @@ def MainMenu():
                    command = mat,
                    height = button_height,
                    width = button_width)
-    b6 = tk.Button(root,
+    """b6 = tk.Button(root,
                      text = getButtonString("SOS",2),
                      bg = "#FF0000",
                      fg = buttonTextColor,
@@ -1293,14 +1608,15 @@ def MainMenu():
                      font=button_font,
                      command =lambda: sendRequest("SOS",2),
                      height = button_height,
-                     width = button_width)
+                     width = button_width)"""
     
     b1.grid(row = 1, column = 1, padx=padding, pady=padding)
-    b2.grid(row = 1, column = 2, padx=padding, pady=padding)
-    b3.grid(row = 1, column = 3, padx=padding, pady=padding)
-    b4.grid(row = 2, column = 1, padx=padding, pady=padding)
-    b5.grid(row = 2, column = 2, padx=padding, pady=padding)
-    b6.grid(row = 2, column = 3, padx=padding, pady=padding)
+    b3.grid(row = 1, column = 2, padx=padding, pady=padding)
+    b4.grid(row = 1, column = 3, padx=padding, pady=padding)
+    if faste != True:
+        b2.grid(row = 2, column = 1, padx=padding, pady=padding)
+        b5.grid(row = 2, column = 2, padx=padding, pady=padding)
+    #b6.grid(row = 2, column = 3, padx=padding, pady=padding)
     
     # Create return btn
     #createReturnBtn()
@@ -1351,6 +1667,8 @@ RFIDthread.start()
 timeoutThread = threading.Thread(target=timeout)
 timeoutThread.start()
 
+buttonThread = threading.Thread(target=SOSbuttonFunction)
+buttonThread.start()
 # Start the GUI
 if clientEnable:
     receive_thread = threading.Thread(target=receive_data)
