@@ -13,7 +13,7 @@
 ### Brukerenhet
 
 * **Raspberry pi 3B+** - Denne kjører alt av programvare og er tilkoblet skjerm, knapp og RFID scanner.
-* **RPi 7" Touch display** - skjerm som er koblet til Rpi i brukerenhet. Kobles til ved to kabler for 5v og GND, og en båndkablel til DSI porten. 
+* **RPi 7" Touch display** - skjerm som er koblet til Rpi i brukerenhet. Kobles til ved to kabler for 5v og GND, og en båndkablel til DSI porten.
 * **MRFC522** -  Tilkoblet RFID scanner, bruker (SPI) protokoll for å "prate" sammen med Rpi.
 * **Momentary Push Button -** Knapp som benyttes til SOS modus på brukerenhet. Koblet til GPIO pin på Rpi
 
@@ -23,11 +23,12 @@ Under vises oppkobling av brukerenhet:
 
 ### Styreenhet
 
-* **Standar PC -** Her benyttes pc av typen Lenovo legion, men det er mulig og benytte andre pc-er så lenge de har mulighet for blåtann komunikasjon. 
+* **Standar PC -** Her benyttes pc av typen Lenovo legion, men det er mulig og benytte andre pc-er så lenge de har mulighet for blåtann komunikasjon.
 
 ## Programvare
 
 ### Biblotek
+
 Her ligger kode for både brukerenhet, og styreenhet.
 All kode er skrevet i python, og bruker føgende biblotek:
 
@@ -40,7 +41,7 @@ All kode er skrevet i python, og bruker føgende biblotek:
 
 ### Kodefiler
 
-* **ControllerGUI -** Hovedfil som kjøres på styreenhet. Tilpasset til å kjøre på fullskjerm og må kjøres før MainGUI på brukerenhet.
-* **ControllerFunctions -** inneholder funksjoner som kjøres i Controller GUI, som bl.a. sortering av rom retrunering av farer og posisjon til rom.
-* **MainGUI** - Kjøres på brukerenhet og inneholder tk inter funksjoner for oppretting av bruker interface.
+* **StyreenhetGUI -** Hovedfil som kjøres på styreenhet. Tilpasset til å kjøre på fullskjerm og må kjøres før MainGUI på brukerenhet.
+* **StyreenhetFunctions -** inneholder funksjoner som kjøres i Controller GUI, som bl.a. sortering av rom retrunering av farer og posisjon til rom.
+* **BrukerenhetGUI** - Kjøres på brukerenhet og inneholder tk inter funksjoner for oppretting av bruker interface.
 * **read** - inneholder funksjoner for lesing av RFID kort. includeres som RFID i MainGUI.
