@@ -2,10 +2,8 @@
 import tkinter as tk
 import tkinter.font as tkFont
 import socket
-from tkinter import Menu
 import threading
 import time
-import os
 import read as RFID
 import RPi.GPIO as GPIO
 scaler = 480/800
