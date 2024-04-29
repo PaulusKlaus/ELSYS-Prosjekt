@@ -3,7 +3,7 @@ from tkinter import Frame
 from tkinter import PhotoImage
 from tkinter import Label
 import time as t
-import ControllerFunctions as cf
+import StyreenhetFunctions as cf
 from tkinter import Menu
 import socket
 import threading
