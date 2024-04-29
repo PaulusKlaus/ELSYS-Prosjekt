@@ -22,13 +22,17 @@ menuButtonColor = ["#B0B0B0","#B0B0B0","#B0B0B0","#B0B0B0"]
 buttonColor = "#437EB8"
 currentUser = "Default User"
 lowest_hastegrad_requests = []
+
+# Sends data to the "Styreenhet"
 def sendData(data):
     try:
-        client.send(data.encode('utf-8'))
+        client.send(data.encode('utf-8')) 
     except OSError as e:
         print("Error sending data")
         pass
     return
+
+# Sends a help request to the "Styreenhet"
 def sendRequestBT(request,function):
     message = f"{function},{request.get('Rom')},{request.get('Seng')},{request.get('Hva')},{request.get('Hastegrad'),}"
     if clientEnabled:  
@@ -198,26 +202,31 @@ root.attributes('-fullscreen',True)
 root.geometry(str(max_width) + "x" + str(max_height))
 root["background"] = windowBackgroundColor
 
+# Adds alerts
 left_frame = Frame(root, width=int(max_width*0.4 - 2*max_height*0.01), height=int(max_height - 2*max_height*0.01), bg='grey')
 left_frame.grid(row=0, column=0, rowspan=2, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
+# Adds room layout
 rightTop_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg='grey')
 rightTop_frame.grid(row=0, column=1, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
+# Adds food orders
 rightBottom_frame = Frame(root, width=int(max_width*0.6 - 2*max_height*0.01), height=int(max_height*0.5 - 2*max_height*0.01), bg=windowBackgroundColor)
 rightBottom_frame.grid(row=1, column=1, padx=int(max_height*0.01), pady=int(max_height*0.01), sticky="nsew")
 
+# Adds food menu
 rightBottomRight_frame = Frame(rightBottom_frame,bg="grey")
 rightBottomRight_frame.place(relx= 0.5125,rely = 0,relwidth = 0.4875,relheight = 1)
 rightBottomLeft_frame = Frame(rightBottom_frame,bg="#123456")
 rightBottomLeft_frame.place(relx= 0,rely = 0,relwidth = 0.4875,relheight = 1)
+
 # Configure row and column weights to distribute space
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 root.grid_columnconfigure(0, weight=1)
 root.grid_columnconfigure(1, weight=1)
 
-
+# Create a menu of users
 menubar = Menu(root)
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="Amalie",command=lambda: setUser("Amalie"))
@@ -230,9 +239,8 @@ root.config(menu=menubar)
 
 image_path = "romLayout.png"  
 image = PhotoImage(file=image_path)
-image_label = Label(rightTop_frame, image=image, bg='grey')
-
-image_label.pack(fill=tk.BOTH, expand=True)
+image_label = Label(rightTop_frame, image=image, bg='grey') # Create a label with the image
+image_label.pack(fill=tk.BOTH, expand=True) # Fill the entire frame with the image
 currentButton = 0
 index = 0 
 buttons = []
@@ -288,6 +296,8 @@ Valgt = "Frokost"
 changeButtonText = "Bytt til kvelds"
 topColor = "#73F7C6"
 bottomColor = "#4E7869"
+
+# Change the food options
 def changebuttonfunction():
     global Valgt
     global changeButtonText
@@ -304,6 +314,8 @@ def changebuttonfunction():
         topColor = "#73F7C6"
         bottomColor = "#4E7869"
     frokostKveldsOrder()
+
+# Set up the menu for a breakfast and evening order
 def frokostKveldsOrder():
 
     for i in rightBottomLeft_frame.winfo_children():
@@ -334,6 +346,8 @@ def frokostKveldsOrder():
                             bg="#949A9F",
                             command=sendFoodOrder)
     returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+ 
+ # Setup for a lunch order      
 def lunsjOrder():
     for i in rightBottomLeft_frame.winfo_children():
         i.destroy()
@@ -365,6 +379,8 @@ def lunsjOrder():
                             bg="#949A9F",
                             command=sendFoodOrder)
     returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+    
+# Setup for a dinner order
 def middagOrder():
     for i in rightBottomLeft_frame.winfo_children():
         i.destroy()
@@ -396,6 +412,8 @@ def middagOrder():
                             bg="#949A9F",
                             command=sendFoodOrder)
     returnButton.place(relx=0.8, rely=0.75, relwidth=0.15, relheight=0.2)
+
+# Set fasting rooms
 def fasteButtonFunction(rom):
     global fasteRom
     if rom in fasteRom:
@@ -448,6 +466,8 @@ def fasteOrder():
     for index,i in enumerate(fasteRom):
         fasteDots.append(tk.Label(rightTop_frame, text="◉", font=("Consolas",20),bg="#fbfafa",fg="#FF0000"))
         fasteDots[index].place(x=cf.roomPosition(i)[0]+18,y=cf.roomPosition(i)[1]+140)
+
+# Arrange buttons in the food menu section
 def sendFoodOrder(textFont = ("Consolas",30)):
     #FROKOST
     for i in rightBottomLeft_frame.winfo_children():
@@ -478,6 +498,8 @@ def sendFoodOrder(textFont = ("Consolas",30)):
     fasteButton.place(relx=0.505, rely=0.505, relwidth=0.485, relheight=0.485)
 sendFoodOrder()
 
+
+# Show food orders in the food order section
 def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",18)):
     for i in rightBottomRight_frame.winfo_children():
         i.destroy()
@@ -495,6 +517,7 @@ def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",18)):
         foodButton.place(relx=0.0, rely=0+index*0.1, relwidth=1, relheight=0.1)
 
 showFoodOrders()
+
 def buttonFunction(buttonIndex):
     global currentButton
     currentButton = buttonIndex+1
@@ -529,6 +552,8 @@ def buttonFunction(buttonIndex):
     
     #print("Button pressed")
     return
+
+
 def changeOccupancy():
     global requests
     global currentButton
@@ -555,6 +580,8 @@ def changeOccupancy():
         romMerking[i].place(x=cf.roomPosition(requests[i].get('Rom'))[0],
                             y=cf.roomPosition(requests[i].get('Rom'))[1])
     return
+
+
 def get_lowest_hastegrad_requests(requests):
     lowest_hastegrad_requests = []
     room_hastegrad_map = {}
@@ -726,7 +753,3 @@ if clientEnabled:
     receive_thread = threading.Thread(target=receive_data)
     receive_thread.start()
 root.mainloop()
-
-
-
-
