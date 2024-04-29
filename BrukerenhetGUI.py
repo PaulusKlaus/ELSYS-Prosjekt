@@ -90,7 +90,7 @@ def useData(data):
 
 if clientEnable:
     client = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-    client.connect(("38:d5:7a:7d:5d:2e", 4))
+    client.connect(("38:d5:7a:7d:5d:2e", 4)) # bluetooth address of server computer (Change for your computer both here and in "brukerenhetGUI.py")
 def isRequestInRoom(rom, seng, hva, hastegrad):
     request = {"Rom": rom, "Seng": seng, "Hva": hva, "Hastegrad": hastegrad}
     for req in requestsRoom:
