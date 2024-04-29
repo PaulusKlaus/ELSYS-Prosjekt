@@ -8,18 +8,6 @@
 
 ![1714380057578](image/README/1714380057578.png)
 
-## Biblotek
-
-Her ligger kode for både brukerenhet, og styreenhet.
-All kode er skrevet i python, og bruker føgende biblotek:
-
-- **Tkinter** - for UI
-- **Socket** - for Bluethooth komunikasjon
-- **Thread** - for å kunne kjøre flere prosesser samtidig
-- **Time** - for å bruke rett tid
-- **SimpleMFRC522** - for NFC-leser til kortscanning
-- **RPi GPIO** - for tilkobling av GPIO pins på Rpi
-
 ## Maskinvare
 
 ### Brukerenhet
@@ -38,6 +26,19 @@ Under vises oppkobling av brukerenhet:
 * **Standar PC -** Her benyttes pc av typen Lenovo legion, men det er mulig og benytte andre pc-er så lenge de har mulighet for blåtann komunikasjon. 
 
 ## Programvare
+
+### Biblotek
+Her ligger kode for både brukerenhet, og styreenhet.
+All kode er skrevet i python, og bruker føgende biblotek:
+
+- **Tkinter** - for UI
+- **Socket** - for Bluethooth komunikasjon
+- **Thread** - for å kunne kjøre flere prosesser samtidig
+- **Time** - for å bruke rett tid
+- **SimpleMFRC522** - for NFC-leser til kortscanning
+- **RPi GPIO** - for tilkobling av GPIO pins på
+
+### Kodefiler
 
 * **ControllerGUI -** Hovedfil som kjøres på styreenhet. Tilpasset til å kjøre på fullskjerm og må kjøres før MainGUI på brukerenhet.
 * **ControllerFunctions -** inneholder funksjoner som kjøres i Controller GUI, som bl.a. sortering av rom retrunering av farer og posisjon til rom.
