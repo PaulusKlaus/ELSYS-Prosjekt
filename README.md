@@ -45,3 +45,7 @@ All kode er skrevet i python, og bruker føgende biblotek:
 * **StyreenhetFunctions -** inneholder funksjoner som kjøres i Controller GUI, som bl.a. sortering av rom retrunering av farer og posisjon til rom.
 * **BrukerenhetGUI** - Kjøres på brukerenhet og inneholder tk inter funksjoner for oppretting av bruker interface.
 * **read** - inneholder funksjoner for lesing av RFID kort. includeres som RFID i MainGUI.
+
+## 3D Modell
+
+Filene for 3D Modell finnes i mappen "3D Modell" her er filen "brukerenhet.stl" fullstendig modell av brukerenheten uten elektronikk, men resterende filer er slik de er printet individuellt, delene er deretter sammensatt i ettertid.
