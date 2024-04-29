@@ -1241,7 +1241,7 @@ def mainAdminMenu():
                 width=  getButtonSize(3,2,True)[1])
     addRemoveCard = tk.Button(root,
                 text = "Legg til/\nfjern kort",
-                bg="#DE817D",
+                bg="#A7C88A",
                 fg = buttonTextColor,
                 image=pixelVirtual,
                 compound="c",

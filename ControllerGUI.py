@@ -496,7 +496,7 @@ def showFoodOrders(textcolor = "#000000",textFont = ("Consolas",16)):
                     break
     for index, i in enumerate(foodRequests):
         foodButton = tk.Button(rightBottomRight_frame,
-                            text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske {i.get('Hva'):8} {i.get('Tid'):8}",
+                            text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske: {i.get('Hva'):8} {i.get('Tid'):8}",
                             font=textFont,
                             bg = cf.color(i.get("Hastegrad")),
                             fg=textcolor)
@@ -594,7 +594,7 @@ def updateButtons():
     for index, i in enumerate(requests):
         buttons.append(tk.Button(left_frame,
                 command=lambda index=index: buttonFunction(index),
-                text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske {i.get('Hva'):8} {i.get('Tid'):8}",
+                text=f"Rom {i.get('Rom'):3},{i.get('Seng'):1} Ønske: {i.get('Hva'):8} {i.get('Tid'):8}",
                 font=("Consolas",16),
                 bg = cf.color(i.get("Hastegrad")),
                 pady=10,
